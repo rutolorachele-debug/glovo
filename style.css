@@ -1,0 +1,2371 @@
+/* ==========================================================================
+   Glovo Retos — Tokens de la Design Library de Figma
+   (fileKey H5DGyN0ChB7o7d4lQ0aXUj). No inventar valores fuera de esta lista.
+   ========================================================================== */
+
+:root {
+  /* Color — Background */
+  --color-bg-default: #ffffff;
+  --color-bg-secondary: #e6e6e6;
+  --color-bg-tertiary: #f5f5f5;
+  --color-bg-brand: #171717;
+  --color-bg-brand-hover: #2c2c2c;
+  --color-bg-brand-pressed: #383838;
+  --color-bg-brand-secondary: #00a082;
+  --color-bg-success: #d7fcdd;
+  --color-bg-danger: #d52c20;
+  --color-bg-warning: #fff4e5;
+
+  /* Color — Content (texto/iconos) */
+  --color-content-default: #111111;
+  --color-content-secondary: #383838;
+  --color-content-tertiary: #444444;
+  --color-content-disabled: #b3b3b3;
+  --color-content-brand: #00a082;
+  --color-content-success: #025300;
+  --color-content-danger: #bc251a;
+  --color-content-warning: #b04507;
+  --color-content-onbrand: #ffffff;
+
+  /* Color — Border */
+  --color-border-default: #d9d9d9;
+  --color-border-secondary: #f5f5f5;
+  --color-border-brand: #cbeae2;
+  --color-border-success: #91d194;
+  --color-border-danger-strong: #f04033;
+
+  /* Primitivo Gray/500 de la Design Library, sin alias semántico propio */
+  --color-neutral-500: #757575;
+
+  /* Spacing (escala resuelta de la library, no redondear) */
+  --space-0: 0px;
+  --space-1: 10px;
+  --space-2: 12px;
+  --space-3: 14px;
+  --space-4: 16px;
+  --space-5: 18px;
+  --space-6: 32px;
+
+  /* Radius */
+  --radius-none: 0px;
+  --radius-xsm: 10px;
+  --radius-md: 12px;
+  --radius-pill: 24px;
+  --radius-lg: 36px;
+  --radius-full: 9999px;
+
+  /* Typography */
+  --font-family-base: "Noto Sans", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--color-bg-tertiary);
+  font-family: var(--font-family-base);
+  color: var(--color-content-default);
+}
+
+button {
+  font-family: var(--font-family-base);
+}
+
+/* Type scale — heading/* usa peso bold/extrabold (sustituye al eje ancho
+   SemiCondensed/Display de la library, no disponible en la fuente web) */
+.text-heading-xlg {
+  font-size: 32px;
+  line-height: 42px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.text-heading-lg {
+  font-size: 30px;
+  line-height: 40px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.text-heading-md {
+  font-size: 28px;
+  line-height: 38px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.text-heading-sm {
+  font-size: 22px;
+  line-height: 32px;
+  font-weight: 800;
+  margin: 0;
+}
+
+/* heading/xsm de la Design Library: distinto de heading/sm (Bold 700, no ExtraBold 800; lineHeight 30, no 32) */
+.text-heading-xsm {
+  font-size: 22px;
+  line-height: 30px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.text-body-lg {
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 400;
+  margin: 0;
+}
+
+/* body/lg-display-bold de la Design Library: mismo tamaño que text-body-lg pero peso 700 */
+.text-body-lg-bold {
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* body/lg-semibold de la Design Library: mismo tamaño que text-body-lg pero peso 600 */
+.text-body-lg-semibold {
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 600;
+  margin: 0;
+  text-align: center;
+}
+
+.text-body-md {
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.text-body-sm {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.text-body-xs {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* ==========================================================================
+   Layout — contenedor tipo móvil
+   ========================================================================== */
+
+.app {
+  max-width: 420px;
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0 auto;
+  background: var(--color-bg-default);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.08);
+}
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.screen[hidden] {
+  display: none;
+}
+
+/* Slide-in de entrada para transiciones puntuales (ver navegarConSlideIn en el script) */
+@keyframes screen-slide-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.screen-slide-in {
+  animation: screen-slide-in 300ms ease-out;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--color-border-secondary);
+}
+
+.fake-statusbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2) var(--space-4) 0;
+  font-family: var(--font-family-base);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-content-default);
+}
+
+.fake-statusbar-icons {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+4
+.fake-statusbar-dots {
+  letter-spacing: 1px;
+}
+
+.fake-statusbar-battery {
+  flex-shrink: 0;
+}
+
+.topbar-back {
+  border: none;
+  background: none;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--color-content-default);
+  cursor: pointer;
+  padding: var(--space-1);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.topbar-back:hover {
+  background: var(--color-bg-tertiary);
+}
+
+.topbar-title {
+  flex: 1;
+}
+
+.topbar-settings {
+  border: none;
+  background: none;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--color-content-default);
+  cursor: pointer;
+  padding: var(--space-1);
+  border-radius: var(--radius-md);
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.topbar-settings:hover {
+  background: var(--color-bg-tertiary);
+}
+
+.content {
+  flex: 1;
+  padding: var(--space-6) var(--space-4) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.footer {
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+#detalle-footer[hidden] {
+  display: none;
+}
+
+#detalle-precio-chip[hidden] {
+  display: none;
+}
+
+/* ==========================================================================
+   Botones
+   ========================================================================== */
+
+.btn {
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: var(--space-3) var(--space-4);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  width: 100%;
+  transition: transform 0.1s ease;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  background: var(--color-bg-brand);
+  color: var(--color-content-onbrand);
+}
+
+.btn-primary:hover {
+  background: var(--color-bg-brand-hover);
+}
+
+.btn-primary:active {
+  background: var(--color-bg-brand-pressed);
+}
+
+.btn-primary:disabled {
+  background: var(--color-bg-secondary);
+  color: var(--color-content-disabled);
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: var(--color-bg-default);
+  color: var(--color-content-default);
+  border: 1px solid var(--color-border-default);
+}
+
+.btn-secondary:hover {
+  background: var(--color-bg-tertiary);
+}
+
+.btn-text {
+  background: none;
+  color: var(--color-content-secondary);
+  text-decoration: underline;
+  width: auto;
+  padding: var(--space-1);
+}
+
+.ajustes-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  text-align: left;
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--color-border-secondary);
+  border-radius: 0;
+}
+
+.ajustes-item-icon {
+  flex-shrink: 0;
+  color: var(--color-content-secondary);
+}
+
+/* ==========================================================================
+   Controles Demo — separados visualmente, fáciles de eliminar
+   ========================================================================== */
+
+.demo-btn {
+  border: 1px dashed var(--color-border-danger-strong);
+  background: var(--color-bg-warning);
+  color: var(--color-content-danger);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-3);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  width: 100%;
+  text-transform: uppercase;
+}
+
+.demo-btn:hover {
+  background: var(--color-bg-danger);
+  color: var(--color-content-onbrand);
+}
+
+.demo-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.demo-btn:disabled:hover {
+  background: var(--color-bg-warning);
+  color: var(--color-content-danger);
+}
+
+.demo-block {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* ==========================================================================
+   Componentes específicos del flujo 1-1
+   ========================================================================== */
+
+/* Envuelve tabs + paneles para centrarlos en el espacio restante,
+   dejando el título "Conecta con tu compañero" fijo arriba */
+.qr-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-4);
+}
+
+.tabs {
+  display: flex;
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.tab-btn {
+  flex: 1;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: var(--space-4) var(--space-3);
+  font-family: var(--font-family-base);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--color-content-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.tab-btn:first-child {
+  border-right: 1px solid var(--color-border-default);
+}
+
+.tab-btn.is-active {
+  font-weight: 800;
+  color: var(--color-content-brand);
+}
+
+.tab-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.tab-panel[hidden] {
+  display: none;
+}
+
+.viewfinder {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  margin: 0 auto;
+  background: var(--color-bg-brand);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.viewfinder-icon {
+  font-size: 40px;
+  opacity: 0.7;
+  visibility: hidden;
+}
+
+.viewfinder-corner {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border-color: var(--color-content-onbrand);
+  border-style: solid;
+  border-width: 0;
+}
+
+.corner-tl {
+  top: var(--space-3);
+  left: var(--space-3);
+  border-top-width: 3px;
+  border-left-width: 3px;
+  border-radius: 4px 0 0 0;
+}
+
+.corner-tr {
+  top: var(--space-3);
+  right: var(--space-3);
+  border-top-width: 3px;
+  border-right-width: 3px;
+  border-radius: 0 4px 0 0;
+}
+
+.corner-bl {
+  bottom: var(--space-3);
+  left: var(--space-3);
+  border-bottom-width: 3px;
+  border-left-width: 3px;
+  border-radius: 0 0 0 4px;
+}
+
+.corner-br {
+  bottom: var(--space-3);
+  right: var(--space-3);
+  border-bottom-width: 3px;
+  border-right-width: 3px;
+  border-radius: 0 0 4px 0;
+}
+
+.qr-box {
+  width: 220px;
+  height: 220px;
+  margin: 0 auto;
+  background: var(--color-bg-default);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3);
+}
+
+.qr-fallback {
+  text-align: center;
+  color: var(--color-content-tertiary);
+}
+
+.partner-card {
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+#modal-confirmar .partner-card {
+  background: none;
+  padding: 0;
+  gap: 8px;
+}
+
+.partner-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-brand-secondary);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.partner-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Chip verde de nivel (Chill/Pro) bajo el nombre del compañero */
+.partner-level-chip {
+  background: var(--color-bg-brand-secondary);
+  border-radius: var(--radius-pill);
+  padding: 4px var(--space-3);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: 700;
+  color: var(--color-content-default);
+}
+
+.partner-level-chip-btn {
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-family-base);
+}
+
+.partner-level-chip-icon {
+  width: 44px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+/* Fila de chips secundarios (puntos / racha) */
+.partner-chip-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.partner-chip {
+  background: none;
+  border-radius: var(--radius-pill);
+  padding: 0 var(--space-1);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 800;
+  color: var(--color-content-default);
+}
+
+.partner-chip-icon {
+  width: 35px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.partner-level-chip-chevron {
+  width: 12px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* Contenedor gris del QR y del visor de cámara */
+.qr-scan-container {
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-xsm);
+  padding: 20px var(--space-5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+/* Texto de instrucción centrado bajo el QR o el visor */
+.qr-scan-label {
+  font-size: 14px;
+  line-height: 26px;
+  font-weight: 400;
+  color: var(--color-content-secondary);
+  text-align: center;
+  margin: 0;
+}
+
+/* Icono SVG dentro de los tab buttons */
+.tab-btn svg {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  color: inherit;
+}
+
+.banner-active {
+  background: var(--color-bg-success);
+  border: 1px solid var(--color-border-success);
+  color: var(--color-content-success);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
+
+/* ==========================================================================
+   Componentes específicos del flujo 1-3 — Recibir info de puntos
+   ========================================================================== */
+
+.retos-entry {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-end;
+  width: 64px;
+  height: 64px;
+  background: #ffc244;
+  border: none;
+  border-radius: var(--radius-full);
+  padding: 0;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  font-family: var(--font-family-base);
+}
+
+.retos-entry:hover {
+  background: #f0b53d;
+}
+
+.retos-entry-icon {
+  width: 44px;
+  height: 41px;
+  object-fit: contain;
+}
+
+.retos-badge-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-danger);
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}
+
+.retos-badge-dot[hidden] {
+  display: none;
+}
+
+.toast-notification {
+  position: absolute;
+  top: var(--space-3);
+  left: var(--space-3);
+  right: var(--space-3);
+  z-index: 20;
+  transform: translateY(-12px);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.toast-notification.is-visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.toast-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  background: var(--color-bg-default);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.16);
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-family-base);
+}
+
+.toast-icon {
+  width: 44px;
+  height: 41px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.toast-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.toast-title {
+  font-weight: 700;
+}
+
+.prototype-note {
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  color: var(--color-content-tertiary);
+}
+
+/* ==========================================================================
+   Componentes específicos del flujo 1-2 — Reto Activo
+   ========================================================================== */
+
+.reto-description {
+  background: var(--color-bg-tertiary);
+  color: var(--color-content-default);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* padding-top:0 a propósito: mismo offset vertical que el resto de los
+   títulos de pantalla (ver .reto-heading-row) */
+.bienvenido-hero {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0 var(--space-4) var(--space-4);
+  border-bottom: 1px solid var(--color-border-secondary);
+  flex-shrink: 0;
+}
+
+/* #home-no-reto / #home-reto-activo deben ser contenedores flex para que su
+   .content interno pueda recibir flex:1 + min-height:0 (altura fija compartida).
+   :not([hidden]) es necesario: un selector de ID por sí solo tiene más
+   especificidad que la regla [hidden]{display:none} del navegador y la
+   pisaría, dejando visible el bloque que debería estar oculto. */
+#home-no-reto:not([hidden]),
+#home-reto-activo:not([hidden]) {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+#home-no-reto .content,
+#home-reto-activo .content {
+  flex: 1;
+  min-height: 0;
+}
+
+.bienvenido-hero-icon {
+  width: 122.667px;
+  height: 111.516px;
+}
+
+/* Foto hero de bienvenida (pantalla de entrada Retos, sin reto activo) —
+   Figma 14518:5739. Statusbar y flecha van superpuestos sobre la foto. */
+.bienvenido-hero-photo {
+  position: relative;
+  height: 308px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.bienvenido-hero-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bienvenido-hero-wave {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 40px;
+  color: var(--color-bg-default);
+}
+
+.bienvenido-hero-statusbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding-top: var(--space-2);
+}
+
+.bienvenido-hero-back {
+  position: absolute;
+  top: 44px;
+  left: var(--space-4);
+}
+
+/* Contenido de bienvenida: mismo pt reducido que el resto de pantallas con
+   hero, y gap de 8px entre el bloque de título y el de bullets (Figma) */
+#home-no-reto .content {
+  padding-top: var(--space-1);
+  gap: 16px;
+}
+
+.bienvenido-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bienvenido-como-funciona {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bienvenido-bullets {
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.bienvenido-bullet-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bienvenido-bullet-icon {
+  width: 30.6px;
+  height: 30.6px;
+  flex-shrink: 0;
+}
+
+/* icono-puntos-sm: la imagen nativa (47.7557x45.8244) es más grande que su
+   caja visible (38x34) — Figma la centra y recorta el sobrante (overflow
+   clip), no la reescala. Replicado igual para no encoger el glifo.
+   Caja e imagen nativa reducidas un 10% junto con los otros 2 iconos. */
+.bienvenido-bullet-icon-frame {
+  width: 34.2px;
+  height: 30.6px;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  display: block;
+}
+
+.bienvenido-bullet-icon-native {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 42.98px;
+  height: 41.24px;
+  transform: translate(-50%, -50%);
+}
+
+/* Barra info compartida (puntos/racha/estado) — componente Figma 14453:122534,
+   reproducido tal cual: altura fija 65px, padding solo horizontal. */
+.reto-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 65px;
+  padding: 0 var(--space-1);
+  background: var(--color-bg-default);
+  flex-shrink: 0;
+}
+
+/* Agrupa los tres chips en un solo hijo de .reto-topbar, para que
+   justify-content:space-between reparta el espacio solo entre esto y el
+   botón de volver. Fila plana, gap único de 4px entre los tres chips
+   (tal como el componente de Figma: no hay agrupación anidada). */
+.reto-topbar-chips {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.reto-topbar-chips .partner-chip {
+  height: 40px;
+}
+
+/* icono-puntos-sm agrandado para que pese visualmente similar al trofeo
+   de al lado (su dibujo nativo es mucho más grande que el box anterior) */
+.reto-topbar-chips .partner-chip-icon {
+  width: 40px;
+  height: 38px;
+}
+
+.reto-topbar-chips .partner-level-chip {
+  height: 40px;
+  padding: 0 var(--space-1);
+}
+
+/* Botón fijo "Premios" de la barra: amarillo, no verde Chill/Pro */
+.reto-topbar-chips .partner-level-chip-btn {
+  background: #ffbf41;
+}
+
+.reto-topbar-chips .partner-level-chip-icon {
+  width: 28.43px;
+  height: 25.85px;
+}
+
+/* ==========================================================================
+   Pantalla — Empieza el reto (screen-minijuego-inicio)
+   ========================================================================== */
+
+.minijuego-inicio-title-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: var(--space-4) var(--space-4) 0;
+  flex-shrink: 0;
+}
+
+.minijuego-inicio-cards-wrap {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  overflow: hidden;
+}
+
+/* Envuelve solo la imagen para poder anclar el título del juego pendiente
+   con position:absolute, sin afectar el flujo/centrado de .minijuego-inicio-cards-wrap */
+.minijuego-inicio-cards-img-wrap {
+  position: relative;
+}
+
+.conexion-timer-row {
+  display: flex;
+  justify-content: center;
+}
+
+.conexion-timer-badge {
+  background: #b5f0df;
+  color: #035949;
+  border-radius: 4px;
+  padding: 4px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.minijuego-inicio-cards-titulo {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 8px;
+  color: var(--color-content-default);
+  white-space: nowrap;
+}
+
+.minijuego-inicio-cards-img {
+  width: 318px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 16px;
+}
+
+.minijuego-inicio-rival-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.minijuego-inicio-rival-label {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--color-content-default);
+}
+
+/* bg literal de Figma (primitive/brand/400): no hay token equivalente en la escala */
+.minijuego-inicio-rival-chip {
+  background: none;
+  border-radius: 8px;
+  padding: 8px 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.minijuego-inicio-rival-avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.minijuego-inicio-rival-nombre {
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: 700;
+  color: var(--color-content-default);
+}
+
+/* padding-top:0 a propósito: el título debe arrancar pegado a la barra info
+   en todas las pantallas, igual que en Recompensas (mismo offset vertical) */
+.reto-heading-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: 0 var(--space-4) var(--space-4);
+  border-bottom: 1px solid var(--color-border-secondary);
+  flex-shrink: 0;
+}
+
+.reto-heading-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.reto-countdown {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--color-content-brand);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.reto-countdown svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: inherit;
+}
+
+.reto-copy {
+  color: var(--color-content-default);
+  margin: 0;
+}
+
+.reto-orders-card {
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-xsm);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.reto-orders-total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pedido-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  /* Sin límite propio: el tope de 5 filas es un límite de datos (JS), no de altura/scroll */
+  height: auto;
+}
+
+.pedido-list.is-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+.pedido-list-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.pedido-list-empty-illustration {
+  width: 218.89px;
+  height: 138.48px;
+}
+
+.pedido-list-empty-text {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  color: var(--color-content-tertiary);
+  text-align: center;
+  margin: 0;
+}
+
+.pedido-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: 4px var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-tertiary);
+  border: 1px solid transparent;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.pedido-item.is-nuevo {
+  background: var(--color-bg-default);
+  border-color: var(--color-border-brand);
+}
+
+.pedido-item.pedido-enter {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+
+.pedido-item.pedido-enter.pedido-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.pedido-item-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.pedido-cliente {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-content-tertiary);
+}
+
+.pedido-item.is-nuevo .pedido-cliente {
+  color: var(--color-content-default);
+}
+
+.pedido-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.pedido-item-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.pedido-rider-label {
+  font-size: 10px;
+  line-height: 12px;
+  font-weight: 700;
+  color: var(--color-content-tertiary);
+}
+
+.pedido-rider-label.is-tu {
+  color: var(--color-content-brand);
+}
+
+.pedido-empty {
+  text-align: center;
+  color: var(--color-content-tertiary);
+  padding: var(--space-4) 0;
+}
+
+/* ==========================================================================
+   Modal — Confirmar conexión
+   ========================================================================== */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 17, 17, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  z-index: 10;
+}
+
+.modal-overlay[hidden] {
+  display: none;
+}
+
+.modal-card {
+  background: var(--color-bg-default);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+#modal-confirmar .footer {
+  gap: 8px;
+}
+
+/* ==========================================================================
+   Pantalla — Reto Finalizado
+   ========================================================================== */
+
+/* #ffbf41 no tiene token correspondiente en el Design System (escala Orange
+   comprobada: 100/300/500/600/700, ninguno coincide). Valor literal a petición. */
+#screen-reto-finalizado.is-ganado {
+  background: #ffbf41;
+}
+
+#screen-reto-finalizado.is-perdido {
+  background: var(--color-border-default);
+}
+
+#screen-reto-finalizado.is-ganado .reto-topbar {
+  background: #ffbf41;
+}
+
+#screen-reto-finalizado.is-perdido .reto-topbar {
+  background: var(--color-border-default);
+}
+
+/* Centrado visual fijo en el centro exacto de la pantalla, independiente
+   de cuánto ocupen la barra/fotos de arriba o el footer de abajo */
+#screen-reto-finalizado {
+  position: relative;
+}
+
+#screen-reto-finalizado .content {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding-left: var(--space-4);
+  padding-right: var(--space-4);
+}
+
+#screen-reto-finalizado .footer {
+  margin-top: auto;
+}
+
+.reto-finalizado-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+}
+
+.reto-finalizado-trophy {
+  width: 122.667px;
+  height: 111.516px;
+}
+
+/* Estado "Has perdido": no hay trofeo en el Figma */
+#screen-reto-finalizado.is-perdido #final-trofeo {
+  display: none;
+}
+
+/* Avatares + puntuación de partida (17p/9p), encima del trofeo/título.
+   Valores fijos: siempre 17p para quien gana, 9p para quien pierde
+   (son la puntuación de la partida, no las monedas +15/+10 de abajo). */
+.reto-finalizado-avatares {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 10px;
+}
+
+.reto-finalizado-avatares-img {
+  width: 133px;
+  height: auto;
+  display: none;
+}
+
+#screen-reto-finalizado.is-ganado #final-avatares-ganado {
+  display: block;
+}
+
+#screen-reto-finalizado.is-perdido #final-avatares-perdido {
+  display: block;
+}
+
+.reto-finalizado-rows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: 100%;
+}
+
+.reto-finalizado-row-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.reto-finalizado-row {
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-md);
+  height: 48px;
+  padding: 0 var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Fila del ganador: más alta y con borde de acento, como en el Figma.
+   El orden visual (order) y esta clase los asigna terminarMinijuego()
+   según quién gane, no según "tú/compañero". */
+.reto-finalizado-row.is-ganador {
+  height: 56px;
+  border: 2px solid #58cfba;
+}
+
+.reto-finalizado-rank {
+  font-size: 22px;
+  line-height: 30px;
+  font-weight: 700;
+  color: var(--color-content-default);
+  flex-shrink: 0;
+}
+
+.reto-finalizado-row-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.reto-finalizado-row-coin {
+  width: 38px;
+  height: 34px;
+  flex-shrink: 0;
+}
+
+.reto-finalizado-row-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.reto-finalizado-row-person {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.reto-finalizado-row-label {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.reto-finalizado-row-tu {
+  font-weight: 800;
+  color: var(--color-content-brand);
+}
+
+.reto-finalizado-row-partner {
+  font-weight: 500;
+  color: var(--color-content-tertiary);
+}
+
+.reto-finalizado-total {
+  background: var(--color-bg-brand-secondary);
+  border-radius: var(--radius-md);
+  height: 41px;
+  padding: 0 var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* No aparece en ninguno de los dos estados del Figma (ganado/perdido) */
+#final-row-total {
+  display: none;
+}
+
+/* Secuencia de entrada — elementos ya están en su posición final,
+   solo se anima la aparición (opacity, y escala para el trofeo). */
+.finalizado-fade {
+  opacity: 0;
+  transition: opacity 0.4s ease-out;
+}
+
+.finalizado-fade.is-visible {
+  opacity: 1;
+}
+
+.finalizado-fade-scale {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+
+.finalizado-fade-scale.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ==========================================================================
+   Pantalla — Racha Pro alcanzada
+   ========================================================================== */
+
+#screen-racha-pro {
+  background: #ffbf41;
+}
+
+#screen-racha-pro .reto-topbar {
+  background: #ffbf41;
+}
+
+#screen-racha-pro .content {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+/* Gap de 8px entre icono/título/subtítulo: literal de Figma, no hay token
+   en la escala de espaciado que lo cubra */
+#screen-racha-pro .reto-finalizado-hero {
+  gap: 8px;
+}
+
+/* Icono grande de racha (176x161), propio de esta pantalla — no reutiliza
+   el tamaño de .reto-finalizado-trophy (usado en Reto Finalizado) */
+.racha-pro-trophy {
+  width: 176px;
+  height: 161px;
+}
+
+#racha-pro-subtitulo {
+  max-width: 240px;
+}
+
+/* ==========================================================================
+   Componentes específicos del flujo 2-1 — Recompensas (nivel Chill)
+   ========================================================================== */
+
+.racha-status {
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
+
+/* Agrupa el heading "Tu racha" y el box gris con un gap propio de 8px,
+   distinto del gap de 16px que separa el resto de secciones de .content */
+.recompensas-racha-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Box "Tu racha": siempre visible (Chill y Pro), sustituye al chip de racha
+   que había en la barra superior */
+.racha-box {
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.racha-box-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.racha-box-icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+.racha-box-dias {
+  font-size: 28px;
+  line-height: 42px;
+  font-weight: 700;
+  color: var(--color-content-default);
+}
+
+/* Fila "Acceso bloqueado/exclusivo" junto al lock icon, a la derecha del heading "Liga pro" */
+.recompensas-liga-pro {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.recompensas-liga-pro[hidden] {
+  display: none;
+}
+
+.mis-premios-link.recompensas-liga-pro {
+  color: var(--color-neutral-500);
+}
+
+.recompensas-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.recompensas-section-heading-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mis-premios-link {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: 700;
+  color: var(--color-content-brand);
+}
+
+/* Chip de nivel Chill/Pro en el header de Recompensas: verde por defecto (Chill),
+   naranja #ffbf41 cuando es Pro — el mismo literal sin token ya usado en Reto Finalizado */
+.partner-level-chip.is-pro {
+  background: var(--color-bg-brand-secondary);
+}
+
+/* En la pantalla de Recompensas el tag Chill/Pro es siempre amarillo,
+   independientemente del estado */
+#recompensas-nivel-chip,
+#recompensas-nivel-chip.is-pro,
+#mis-premios-nivel-chip,
+#mis-premios-nivel-chip.is-pro,
+#detalle-nivel-chip,
+#detalle-nivel-chip.is-pro {
+  background: #ffbf41;
+}
+
+.recompensas-pro-heading {
+  color: var(--color-content-default);
+}
+
+.recompensas-pro-heading.is-locked {
+  color: var(--color-neutral-500);
+}
+
+.recompensas-lock-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: inherit;
+}
+
+/* Badge "Exclusivo": bg/texto literales de Figma (brand/400 y brand/900),
+   no hay token equivalente en el Design System */
+.recompensas-exclusivo-badge {
+  background: #b5f0df;
+  color: #035949;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.reward-list {
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-2);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.reward-list::-webkit-scrollbar {
+  display: none;
+}
+
+.reward-list-vertical {
+  flex-direction: column;
+  overflow-x: visible;
+}
+
+/* En "Mis premios" (lista vertical) la card ocupa el ancho completo del
+   contenido, como en la pantalla de detalle de recompensa, en vez del
+   ancho fijo de 358px pensado para el carrusel horizontal de "Elige tu
+   recompensa" */
+.reward-list-vertical .reward-card {
+  width: 100%;
+}
+
+.reward-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 358px;
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
+  font-family: var(--font-family-base);
+}
+
+.reward-card:disabled {
+  cursor: default;
+}
+
+.reward-card-image-wrap {
+  position: relative;
+  display: block;
+  line-height: 0;
+}
+
+.reward-card-image {
+  /* 18px confirmado por el usuario como radio "md" real de la Design Library */
+  width: 100%;
+  height: 164px;
+  border-radius: 18px;
+  object-fit: cover;
+  display: block;
+}
+
+.reward-card-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.reward-card-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.reward-card-name-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.reward-card-nombre {
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: 700;
+  color: var(--color-content-default);
+  margin: 0;
+}
+
+.reward-card:disabled .reward-card-nombre {
+  color: var(--color-neutral-500);
+}
+
+.reward-card-descripcion {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  color: var(--color-content-tertiary);
+  margin: 0;
+}
+
+.reward-card-price {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #ffffff;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16);
+}
+
+.reward-card-price-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.reward-card-vercodigo {
+  flex-shrink: 0;
+  padding: var(--space-1) var(--space-2);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.reward-card:disabled .reward-card-price {
+  color: var(--color-neutral-500);
+  z-index: 2;
+}
+
+.badge-canjeada {
+  display: inline-block;
+  background: var(--color-bg-success);
+  color: var(--color-content-success);
+  border: 1px solid var(--color-border-success);
+  border-radius: var(--radius-full);
+  padding: 2px var(--space-2);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   Componentes específicos del flujo 2-3 — Detalle / canje de recompensa
+   ========================================================================== */
+
+.detalle-title-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+#detalle-precio-chip,
+#sheet-precio-chip {
+  width: fit-content;
+  align-self: flex-start;
+}
+
+/* En Figma el body arranca pegado al heading-row (gap 0), no con el
+   padding-top de var(--space-6) que usa .content por defecto */
+#screen-recompensa-detalle .content {
+  padding-top: 0;
+  flex: 1;
+  min-height: 0;
+}
+
+#screen-mis-premios .content {
+  padding-top: 0;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.reward-code-box {
+  margin-top: var(--space-1);
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* Se reproduce automáticamente cada vez que el bloque pasa de display:none a
+   visible (hidden -> hidden=false), mismo timing que .pedido-enter */
+@keyframes detalle-canjeada-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#detalle-canjeada:not([hidden]) {
+  animation: detalle-canjeada-fade-in 0.4s ease-out;
+}
+
+.reward-code-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.reward-code-value {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.reward-copy-btn {
+  width: auto;
+  flex-shrink: 0;
+}
+
+.bottom-sheet-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 17, 17, 0.5);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.bottom-sheet-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.bottom-sheet {
+  width: 100%;
+  max-width: 420px;
+  background: var(--color-bg-default);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  padding: var(--space-5) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  transform: translateY(100%);
+  transition: transform 0.25s ease;
+}
+
+.bottom-sheet-overlay.is-open .bottom-sheet {
+  transform: translateY(0);
+}
+
+.bottom-sheet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bottom-sheet-close {
+  border: none;
+  background: none;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--color-content-default);
+  padding: var(--space-1);
+  border-radius: var(--radius-lg);
+}
+
+.bottom-sheet-close:hover {
+  background: var(--color-bg-tertiary);
+}
+
+/* ==========================================================================
+   Home de Glovo Courier (pantalla 0) — mapa vectorial decorativo + acciones
+   ========================================================================== */
+
+.map-screen-area {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+}
+
+.glovo-home-map {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.home-statusbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2) var(--space-4) 0;
+  font-family: var(--font-family-base);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-content-default);
+}
+
+.home-topbar-decor {
+  position: absolute;
+  top: 36px;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+}
+
+.home-icon-btn {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-default);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-content-default);
+  flex-shrink: 0;
+}
+
+.home-status-pill {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: 41px;
+  background: var(--color-bg-default);
+  border-radius: var(--radius-full);
+  padding: 0 var(--space-4);
+}
+
+.home-status-pill-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.home-status-pill-label {
+  font-size: 10px;
+  line-height: 11.5px;
+  color: var(--color-content-tertiary);
+}
+
+.home-status-pill-value {
+  font-size: 13px;
+  line-height: 14.95px;
+  font-weight: 700;
+  color: var(--color-content-default);
+}
+
+.home-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-brand-secondary);
+}
+
+.map-overlay-content {
+  position: absolute;
+  top: 112px;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.home-bottom-sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  background: var(--color-bg-default);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  padding: var(--space-3) var(--space-4) var(--space-4);
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.home-bottom-sheet-handle {
+  width: 36px;
+  height: 4px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-secondary);
+  margin: 0 auto var(--space-3);
+}
+
+.home-bottom-sheet-info {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.home-bottom-sheet-title {
+  font-family: var(--font-family-base);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-content-default);
+  margin: 0 0 2px;
+}
+
+.home-bottom-sheet-sub,
+.home-bottom-sheet-address {
+  font-family: var(--font-family-base);
+  font-size: 13px;
+  color: var(--color-content-tertiary);
+  margin: 0;
+}
+
+.home-bottom-sheet-address {
+  margin-top: 2px;
+}
+
+.home-bottom-sheet-phone {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border-brand);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+  color: var(--color-content-brand);
+}
+
+.home-demo-overlay {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  text-align: center;
+}
+
+.home-demo-buttons {
+  display: flex;
+  gap: var(--space-2);
+  width: 100%;
+}
+
+.home-demo-buttons .demo-btn {
+  flex: 1;
+}
+
+/* Demo button versión neutra — solo en pantalla QR */
+#screen-qr .demo-btn {
+  border-color: var(--color-border-default);
+  background: var(--color-bg-default);
+  color: var(--color-content-tertiary);
+  border-radius: var(--radius-lg);
+}
+
+#screen-qr .demo-btn:hover {
+  background: var(--color-bg-tertiary);
+  color: var(--color-content-default);
+}
+
+/* Demo button versión neutra dashed — solo en pantalla Reto Activo */
+#screen-reto .demo-btn {
+  border-color: var(--color-neutral-500);
+  background: var(--color-bg-tertiary);
+  color: var(--color-content-default);
+  border-radius: var(--radius-lg);
+}
+
+#screen-reto .demo-btn:hover {
+  background: var(--color-bg-secondary);
+}
+
+/* Demo buttons versión neutra dashed — solo en pantalla Home de Glovo Courier */
+#screen-glovo-home .demo-btn {
+  border-color: var(--color-content-secondary);
+  background: var(--color-bg-secondary);
+  color: var(--color-content-secondary);
+  border-radius: var(--radius-lg);
+}
+
+#screen-glovo-home .demo-btn:hover {
+  background: var(--color-bg-tertiary);
+}
+
+/* En Figma la primera heading ("Recompensas Chill") arranca pegada al header
+   de chips (gap 0), no con el padding-top de var(--space-6) que usa .content */
+#screen-recompensas .content {
+  padding-top: 0;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+#screen-recompensas .content::-webkit-scrollbar {
+  display: none;
+}
+
+#screen-qr .content {
+  padding-top: 0;
+}
+
+/* Demo buttons versión neutra dashed — solo en pantalla Recompensas */
+#screen-recompensas .demo-btn {
+  border-color: var(--color-neutral-500);
+  background: var(--color-bg-tertiary);
+  color: var(--color-content-default);
+  border-radius: var(--radius-lg);
+}
+
+#screen-recompensas .demo-btn:hover {
+  background: var(--color-bg-secondary);
+}
+
+/* Esqueleto compartido de las pantallas del reto: altura fija al viewport (nunca
+   una pantalla más alta/baja que otra) y árbol flex contenido con min-height:0
+   para que sea .content quien absorba el espacio, no la pantalla la que crezca. */
+#screen-home,
+#screen-reto,
+#screen-reto-finalizado,
+#screen-racha-pro,
+#screen-recompensas,
+#screen-recompensa-detalle,
+#screen-mis-premios,
+#screen-minijuego-inicio {
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+/* El Figma de Reto Activo usa un inset vertical de 8px bajo la heading-row, distinto del --space-6
+   que usan las demás pantallas bajo un .topbar simple */
+#screen-reto .content {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  flex: 1;
+  min-height: 0;
+}
+
+#screen-reto .reto-copy {
+  flex-shrink: 0;
+}
+
+/* Única franja realmente flexible: absorbe el espacio disponible. Sin scroll propio —
+   el tope de 4 filas por datos (JS) ya garantiza que el contenido siempre cabe. */
+#screen-reto .reto-orders-card {
+  flex: 1;
+  min-height: 0;
+}
+
+#screen-reto .pedido-list {
+  flex: 1;
+  min-height: 0;
+}
+
+#screen-reto .reto-orders-total {
+  flex-shrink: 0;
+}
+
+#screen-reto .demo-block {
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Ruleta de selección de juego (previa al minijuego) — puramente estética
+   ========================================================================== */
+
+.ruleta-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+}
+
+.ruleta-reel {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+}
+
+.ruleta-track {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  transform: translateY(0);
+  transition: transform 2.4s cubic-bezier(0.15, 0.7, 0.2, 1);
+}
+
+.ruleta-card {
+  flex-shrink: 0;
+  width: 180px;
+  height: 64px;
+  border-radius: var(--radius-md);
+  background: var(--color-neutral-500);
+}
+
+.ruleta-card--tier-0 {
+  background: var(--color-bg-tertiary);
+}
+
+.ruleta-card--tier-1 {
+  background: var(--color-bg-secondary);
+}
+
+.ruleta-card--tier-2 {
+  background: var(--color-border-default);
+}
+
+#ruleta-reel { position: relative; overflow: hidden; }
+#ruleta-reel .wcard { position: absolute; left: 50%; top: 50%; display: flex; align-items: center; justify-content: center; border-radius: 16px; transform-origin: center; box-shadow: 0 10px 22px rgba(0,0,0,.18); }
+#ruleta-reel .wcard { background: transparent; overflow: hidden; }
+#ruleta-reel .wcard img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 16px; }
+
+.ruleta-buscando {
+  color: var(--color-content-default);
+  text-align: center;
+  margin: 0;
+}
+
+.ruleta-encontrado {
+  text-align: center;
+}
+
+.ruleta-encontrado .text-heading-md {
+  margin: 0 0 var(--space-1);
+}
+
+.ruleta-encontrado .text-body-sm {
+  color: var(--color-content-tertiary);
+  margin: 0;
+}
+
+/* Minijuegos: solo se ve el activo, centrado y a pantalla */
+.reto-orders-card { padding: 0; overflow: hidden; }
+.reto-orders-card .mj-game { display: none; max-width: 100%; max-height: 72vh; height: auto; margin: 0 auto; }
+.reto-orders-card .mj-game:not([hidden]) { display: block; }
+
+/* cada juego cabe en pantalla */
+.reto-orders-card .mj-game { max-width: 100%; max-height: 72vh; height: auto; margin: 0 auto; }
+
+/* ====== Minijuego a pantalla completa ====== */
+#screen-minijuego { background: #00A082; position: relative; }
+#mj-countdown { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: #00A082; z-index: 30; }
+#mj-countdown[hidden] { display: none; }
+#mj-countdown-num { font-size: 92px; font-weight: 800; color: #FFBF41; }
+@keyframes mjpop { 0% { transform: scale(.5); opacity: 0; } 40% { transform: scale(1.1); opacity: 1; } 100% { transform: scale(1); } }
+#mj-puntuacion { position:absolute; inset:0; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:4px; background:#00A082; z-index:30; }
+#mj-puntuacion[hidden] { display:none; }
+#mj-puntuacion-num { font-size:88px; font-weight:800; color:#FFBF41; animation:mjpop .5s ease; }
+#mj-puntuacion-lbl { font-size:20px; font-weight:500; color:#fff; }
+#mj-puntuacion-titulo { font-size:22px; font-weight:800; color:#fff; }
+#screen-minijuego .content { padding: 0; justify-content: center; align-items: center; }
+#screen-minijuego .reto-orders-card {
+  background: transparent; padding: 0; border-radius: 0;
+  min-height: 0 !important; width: 100%; gap: 0;
+}
+#screen-minijuego .mj-game {
+  width: auto !important; height: auto !important;
+  max-width: 100% !important; max-height: 100dvh !important;
+  margin: 0 auto; display: block;
+}
+#screen-minijuego .mj-game[hidden] { display: none !important; }
+
+.mj-score {
+  position: absolute; top: 10px; left: 50%; transform: translateX(-50%); z-index: 5;
+  background: rgba(0,0,0,.28); color: #fff; font-weight: 500; font-size: 15px;
+  padding: 6px 14px; border-radius: 999px; pointer-events: none;
+}
+
+/* El marcador solo se ve si su canvas hermano está activo (no [hidden]) */
+.mj-wrap canvas[hidden] + .mj-score { display: none; }
+
+
+
+#screen-minijuego #mj-memoria { width:100% !important; max-width:270px !important; height:auto !important; aspect-ratio:auto !important; margin:0 auto; }
+#mj-memoria:not([hidden]) { display:grid !important; }
+#mj-memoria { grid-template-columns:repeat(3,1fr); gap:12px; }
+#mj-memoria .card { aspect-ratio:1; perspective:700px; }
+#mj-memoria .inner { position:relative; width:100%; height:100%; transition:transform .34s ease; transform-style:preserve-3d; }
+#mj-memoria .card.flipped .inner, #mj-memoria .card.matched .inner { transform:rotateY(180deg); }
+#mj-memoria .face { position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden; border-radius:14px; display:flex; align-items:center; justify-content:center; }
+#mj-memoria .back { background:#FFBF41; }
+#mj-memoria .back::after { content:""; width:38%; height:38%; border-radius:50%; background:#FEDE86; }
+#mj-memoria .front { background:#B5F0DF; transform:rotateY(180deg); }
+#mj-memoria .front img { width:80%; height:80%; object-fit:contain; }
+#mj-memoria .card.matched .front { background:#FEDE86; }

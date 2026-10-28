@@ -1,0 +1,2622 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Glovo Retos — Prototipo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" onload="window.__qrLibLoaded=true" onerror="window.__qrLibLoaded=false"></script>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ============================================================
+       PANTALLA 0 — Home de Glovo Courier (HDU 1.3)
+       Punto de entrada real de la app: acceso a Retos + control demo
+       "Simular entrega pedido".
+       ============================================================ -->
+  <main class="screen" id="screen-glovo-home" data-screen="glovo-home" style="position: relative;">
+    <div class="map-screen-area">
+      <img class="glovo-home-map" src="glovo-home.jpeg" alt="" aria-hidden="true" />
+
+      <div class="home-statusbar" aria-hidden="true">
+        <span class="home-statusbar-time">15:30</span>
+        <span class="home-statusbar-icons">5G  ●●●  🔋 83%</span>
+      </div>
+
+      <div class="home-topbar-decor" aria-hidden="true">
+        <span class="home-icon-btn">
+          <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="15.425" y="17.755" width="18.647" height="2.016" rx="1.008" fill="currentColor"/>
+            <rect x="15.425" y="24.055" width="15.623" height="2.016" rx="1.008" fill="currentColor"/>
+            <rect x="15.425" y="30.355" width="18.647" height="2.016" rx="1.008" fill="currentColor"/>
+          </svg>
+        </span>
+        <span class="home-status-pill">
+          <span class="home-status-pill-text">
+            <span class="home-status-pill-label">Estado</span>
+            <span class="home-status-pill-value">En línea</span>
+          </span>
+          <span class="home-status-dot"></span>
+        </span>
+        <span class="home-icon-btn">
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M41.3111 30.6367C41.2808 29.6136 40.7668 21.1619 32.2444 21.1619C23.7221 21.1619 22.82 29.1601 22.6889 30.5359C22.6889 30.5511 22.6889 30.5611 22.6889 30.5712C22.6839 30.6166 22.6789 30.6519 22.6789 30.6771C22.6738 30.7174 22.6738 30.7375 22.6738 30.7375V38.2972C22.6738 38.4384 22.7041 38.5694 22.7545 38.6904C22.8553 38.9323 23.0518 39.1238 23.2937 39.2296C23.4147 39.28 23.5457 39.3103 23.6868 39.3103H27.7187C28.2731 39.3103 28.7266 38.8567 28.7266 38.3023V32.2545C28.7266 31.7001 28.2731 31.2465 27.7187 31.2465H24.6948V30.7426C24.6948 30.6569 24.6847 30.5763 24.6646 30.5007C24.8006 29.2105 25.8035 23.1828 32.1991 23.1828C38.5946 23.1828 39.2649 29.0744 39.3506 30.4553C39.3254 30.546 39.3103 30.6418 39.3103 30.7426V31.2465H36.2864C35.732 31.2465 35.2784 31.7001 35.2784 32.2545V38.3023C35.2784 38.8567 35.732 39.3103 36.2864 39.3103H39.3103V40.8222H33.2625C32.7081 40.8222 32.2545 41.2758 32.2545 41.8302C32.2545 42.3845 32.7081 42.8381 33.2625 42.8381H40.3182C40.8726 42.8381 41.3262 42.3845 41.3262 41.8302V30.7426C41.3262 30.7426 41.3262 30.7073 41.3211 30.6418L41.3111 30.6367ZM24.6847 33.2574H26.7006V37.2893H24.6847V33.2574ZM39.3002 37.2893H37.2842V33.2574H39.3002V37.2893Z" fill="currentColor"/>
+          </svg>
+        </span>
+      </div>
+
+      <div class="map-overlay-content">
+        <button class="retos-entry" id="btn-retos-entry" type="button" aria-label="Retos">
+          <img class="retos-entry-icon" src="icons/icono-combos-entry.svg" alt="" />
+          <span class="retos-badge-dot" id="retos-badge-dot" hidden></span>
+        </button>
+      </div>
+
+      <div class="home-bottom-sheet">
+        <div class="home-bottom-sheet-handle" aria-hidden="true"></div>
+        <div class="home-bottom-sheet-info" aria-hidden="true">
+          <div>
+            <p class="home-bottom-sheet-title">Lin Sushi Poker Bar</p>
+            <p class="home-bottom-sheet-sub">1 pedido</p>
+            <p class="home-bottom-sheet-address">C. Del Cine 43</p>
+          </div>
+          <span class="home-bottom-sheet-phone">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M3.54 2C3.6 2.89 3.75 3.76 3.99 4.59L2.79 5.79C2.38 4.59 2.12 3.32 2.03 2H3.54ZM13.4 14.02C14.25 14.26 15.12 14.41 16 14.47V15.96C14.68 15.87 13.41 15.61 12.2 15.21L13.4 14.02ZM4.5 0H1C0.45 0 0 0.45 0 1C0 10.39 7.61 18 17 18C17.55 18 18 17.55 18 17V13.51C18 12.96 17.55 12.51 17 12.51C15.76 12.51 14.55 12.31 13.43 11.94C13.331 11.903 13.2256 11.886 13.12 11.89C12.86 11.89 12.61 11.99 12.41 12.18L10.21 14.38C7.37547 12.9303 5.06967 10.6245 3.62 7.79L5.82 5.59C6.1 5.31 6.18 4.92 6.07 4.57C5.69132 3.41789 5.4989 2.21274 5.5 1C5.5 0.45 5.05 0 4.5 0Z" fill="currentColor"/>
+            </svg>
+          </span>
+        </div>
+        <div class="home-demo-overlay" hidden>
+          <div class="home-demo-buttons">
+            <button class="demo-btn" id="btn-demo-pedido" type="button" hidden>Haz un pedido</button>
+            <button class="demo-btn" id="btn-demo-pedido-ana" type="button" hidden>Simula pedido de Ana</button>
+          </div>
+          <p class="text-body-xs" id="demo-pedido-help" style="color: var(--color-content-tertiary);" hidden></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast-notification" id="toast-notificacion">
+      <button class="toast-btn" id="btn-toast" type="button">
+        <img class="toast-icon" src="icons/icono-combos.png" alt="" aria-hidden="true" />
+        <span class="toast-text">
+          <span class="text-body-sm toast-title">¡Has ganados puntos!</span>
+          <span class="text-body-xs toast-body" id="toast-mensaje"></span>
+        </span>
+      </button>
+    </div>
+
+    <div class="toast-notification" id="toast-notificacion-ana">
+      <button class="toast-btn" id="btn-toast-ana" type="button">
+        <img class="toast-icon" src="icons/icono-combos.png" alt="" aria-hidden="true" />
+        <span class="toast-text">
+          <span class="text-body-sm toast-title">¡Ana ha entregado un nuevo pedido!</span>
+          <span class="text-body-xs toast-body" id="toast-mensaje-ana"></span>
+        </span>
+      </button>
+    </div>
+  </main>
+
+  <!-- ============================================================
+       PANTALLA — Home de Retos (HDU 1.4)
+       Punto de entrada a la sección. Dos estados: sin reto activo / con reto activo.
+       ============================================================ -->
+  <main class="screen" id="screen-home" data-screen="home" hidden>
+    <div class="bienvenido-hero-photo">
+      <img class="bienvenido-hero-photo-img" src="icons/Gemini_Generated_Image_3dppxr3dppxr3dpp.png" alt="" />
+      <svg class="bienvenido-hero-wave" viewBox="0 0 390 40" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,14 C120,50 260,-10 390,10 L390,40 L0,40 Z" fill="currentColor" />
+      </svg>
+      <div class="fake-statusbar bienvenido-hero-statusbar" aria-hidden="true">
+        <span class="fake-statusbar-time">15:30</span>
+        <span class="fake-statusbar-icons">
+          <span>5G</span>
+          <span class="fake-statusbar-dots">•••</span>
+          <svg class="fake-statusbar-battery" width="22" height="11" viewBox="0 0 22 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0.5" y="0.5" width="19" height="10" rx="2.5" stroke="currentColor" />
+            <rect x="2" y="2" width="14" height="7" rx="1" fill="#00A082" />
+            <rect x="20" y="3.5" width="1.5" height="4" rx="0.75" fill="currentColor" />
+          </svg>
+          <span>83%</span>
+        </span>
+      </div>
+      <button class="topbar-back bienvenido-hero-back" id="btn-back-home" type="button" aria-label="Volver">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M18.6602 8.68104H4.55995L11.0727 2.25182C11.5925 1.73868 11.5925 0.904803 11.0727 0.386717C10.5529 -0.131369 9.7082 -0.126436 9.18338 0.386717L0.391367 9.0659C0.331387 9.12511 0.276406 9.19418 0.226423 9.2682C0.20643 9.30274 0.186437 9.33728 0.171442 9.37181C0.151449 9.41129 0.121459 9.45076 0.106464 9.49517C0.0864706 9.53958 0.076474 9.58398 0.0664774 9.6284C0.0564808 9.66786 0.0414859 9.7024 0.0314893 9.74188C-0.00349881 9.91457 -0.00349881 10.0873 0.0314893 10.26C0.0414859 10.2994 0.0514825 10.334 0.0664774 10.3735C0.0814723 10.4179 0.0914689 10.4622 0.106464 10.5066C0.126457 10.5511 0.151449 10.5906 0.171442 10.63C0.191435 10.6646 0.20643 10.6991 0.226423 10.7337C0.276406 10.8076 0.331387 10.8718 0.391367 10.936L9.18338 19.6151C9.7032 20.1283 10.5479 20.1283 11.0727 19.6151C11.5975 19.102 11.5925 18.2681 11.0727 17.75L4.55995 11.3209H18.6602C19.4 11.3209 19.9948 10.7288 19.9948 10.0034C19.9948 9.27807 19.395 8.68597 18.6602 8.68597V8.68104V8.68104" fill="currentColor"/>
+        </svg>
+      </button>
+    </div>
+
+    <div id="home-no-reto">
+      <div class="content">
+        <div class="bienvenido-heading">
+          <h1 class="text-heading-md">Bienvenido a Glovo Duo</h1>
+          <p class="text-body-md">Conéctate con tus compañeros y compite contra ellos para ganar premios!</p>
+        </div>
+        <div class="bienvenido-como-funciona">
+          <h2 class="text-heading-xsm">Como funciona</h2>
+          <div class="bienvenido-bullets">
+            <div class="bienvenido-bullet-row">
+              <span class="bienvenido-bullet-icon-frame">
+                <img class="bienvenido-bullet-icon-native" src="icons/icono-puntos-sm.svg" alt="" />
+              </span>
+              <p class="text-body-md">Colecciona puntos en cada juego</p>
+            </div>
+            <div class="bienvenido-bullet-row">
+              <img class="bienvenido-bullet-icon" src="icons/iconio-racha-sm.svg" alt="" />
+              <p class="text-body-md">Cuánto más juegas, mejores premios</p>
+            </div>
+            <div class="bienvenido-bullet-row">
+              <img class="bienvenido-bullet-icon" src="icons/icono-premios-sm.svg" alt="" />
+              <p class="text-body-md">Canjea premios de tus tiendas favoritas</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="home-reto-activo" hidden>
+      <div class="content">
+        <h1 class="text-heading-md">Retos</h1>
+        <div class="reto-description">
+          <p class="text-body-sm">Conéctate con otro rider y, hoy, cada pedido que hagas vale 10 puntos.</p>
+        </div>
+        <div class="banner-active">
+          <p class="text-body-sm" style="margin-bottom: var(--space-1);" id="home-countdown"></p>
+          <p class="text-body-lg" id="home-partner-nombre" style="font-weight: 700;"></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <button class="btn btn-primary" id="btn-empezar" type="button">Empezar</button>
+      <button class="btn btn-primary" id="btn-ver-reto-home" type="button" hidden>Ver Reto</button>
+      <button class="btn btn-text" id="btn-ver-retos-pasados" type="button">Ver Retos Pasados</button>
+    </div>
+  </main>
+
+  <!-- ============================================================
+       PANTALLA 1 — Scanea/enseña QR
+       ============================================================ -->
+  <main class="screen" id="screen-qr" data-screen="qr" hidden>
+    <div class="fake-statusbar" aria-hidden="true">
+      <span class="fake-statusbar-time">15:30</span>
+      <span class="fake-statusbar-icons">
+        <span>5G</span>
+        <span class="fake-statusbar-dots">•••</span>
+        <svg class="fake-statusbar-battery" width="22" height="11" viewBox="0 0 22 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0.5" y="0.5" width="19" height="10" rx="2.5" stroke="currentColor" />
+          <rect x="2" y="2" width="14" height="7" rx="1" fill="#00A082" />
+          <rect x="20" y="3.5" width="1.5" height="4" rx="0.75" fill="currentColor" />
+        </svg>
+        <span>83%</span>
+      </span>
+    </div>
+
+    <div class="reto-topbar">
+      <button class="topbar-back" id="btn-back-qr" type="button" aria-label="Volver">
+        <svg width="20" height="20" viewBox="0 0 19.9963 20.0068" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M18.6613 8.68399H4.55625L11.0712 2.25259C11.5912 1.73927 11.5912 0.905111 11.0712 0.386848C10.5512 -0.131414 9.70625 -0.126479 9.18125 0.386848L0.38625 9.06898C0.32625 9.12821 0.27125 9.19731 0.22125 9.27135C0.20125 9.3059 0.18125 9.34045 0.16625 9.375C0.14625 9.41449 0.11625 9.45397 0.10125 9.4984C0.08125 9.54282 0.07125 9.58724 0.06125 9.63167C0.05125 9.67115 0.03625 9.7057 0.02625 9.74519C-0.00875 9.91794 -0.00875 10.0907 0.02625 10.2635C0.03625 10.3029 0.04625 10.3375 0.06125 10.377C0.07625 10.4214 0.08625 10.4658 0.10125 10.5102C0.12125 10.5547 0.14625 10.5942 0.16625 10.6336C0.18625 10.6682 0.20125 10.7027 0.22125 10.7373C0.27125 10.8113 0.32625 10.8755 0.38625 10.9397L9.18125 19.6218C9.70125 20.1351 10.5462 20.1351 11.0712 19.6218C11.5962 19.1085 11.5912 18.2743 11.0712 17.756L4.55625 11.3247H18.6613C19.4013 11.3247 19.9963 10.7324 19.9963 10.0068C19.9963 9.28122 19.3963 8.68892 18.6613 8.68892V8.68399Z" fill="currentColor"/>
+        </svg>
+      </button>
+      <div class="reto-topbar-chips">
+        <div class="partner-chip">
+          <img class="partner-chip-icon" src="icons/icono-puntos-sm.svg" alt="" />
+          <span id="qr-header-puntos"></span>
+        </div>
+        <button class="partner-level-chip partner-level-chip-btn" id="qr-nivel-chip" type="button">
+          <img class="partner-level-chip-icon" src="icons/icono-premios-sm.svg" alt="" />
+          <span>Premios</span>
+          <img class="partner-level-chip-chevron" src="icons/icono-chevron-right.svg" alt="" />
+        </button>
+      </div>
+    </div>
+
+    <div class="content">
+      <!-- Título como heading en el content, no en el topbar -->
+      <h1 class="text-heading-md">Conecta con tu compañero</h1>
+
+      <div class="qr-body">
+      <!-- Tabs con iconos SVG -->
+      <div class="tabs">
+        <button class="tab-btn is-active" id="tab-btn-qrcode" type="button" data-tab="qrcode">
+          <svg width="24" height="24" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M0 7V1C0 0.716667 0.0960001 0.479333 0.288 0.288C0.48 0.0966668 0.717333 0.000666667 1 0H7C7.28333 0 7.521 0.0960001 7.713 0.288C7.905 0.48 8.00067 0.717333 8 1V7C8 7.28333 7.904 7.521 7.712 7.713C7.52 7.905 7.28267 8.00067 7 8H1C0.716667 8 0.479333 7.904 0.288 7.712C0.0966668 7.52 0.000666667 7.28267 0 7ZM2 6H6V2H2V6ZM0 17V11C0 10.7167 0.0960001 10.4793 0.288 10.288C0.48 10.0967 0.717333 10.0007 1 10H7C7.28333 10 7.521 10.096 7.713 10.288C7.905 10.48 8.00067 10.7173 8 11V17C8 17.2833 7.904 17.521 7.712 17.713C7.52 17.905 7.28267 18.0007 7 18H1C0.716667 18 0.479333 17.904 0.288 17.712C0.0966668 17.52 0.000666667 17.2827 0 17ZM2 16H6V12H2V16ZM10 7V1C10 0.716667 10.096 0.479333 10.288 0.288C10.48 0.0966668 10.7173 0.000666667 11 0H17C17.2833 0 17.521 0.0960001 17.713 0.288C17.905 0.48 18.0007 0.717333 18 1V7C18 7.28333 17.904 7.521 17.712 7.713C17.52 7.905 17.2827 8.00067 17 8H11C10.7167 8 10.4793 7.904 10.288 7.712C10.0967 7.52 10.0007 7.28267 10 7ZM12 6H16V2H12V6ZM16 18V16H18V18H16ZM10 12V10H12V12H10ZM12 14V12H14V14H12ZM10 16V14H12V16H10ZM12 18V16H14V18H12ZM14 16V14H16V16H14ZM14 12V10H16V12H14ZM16 14V12H18V14H16Z" fill="currentColor"/>
+          </svg>
+          QR Code
+        </button>
+        <button class="tab-btn" id="tab-btn-scan" type="button" data-tab="scan">
+          <svg width="24" height="24" viewBox="0 0 18 20.814" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M1 12C1.24493 12 1.48134 12.09 1.66437 12.2527C1.84741 12.4155 1.96434 12.6397 1.993 12.883L2 13V16H6C6.25488 16.0003 6.50003 16.0979 6.68537 16.2728C6.8707 16.4478 6.98224 16.687 6.99717 16.9414C7.01211 17.1958 6.92933 17.4464 6.76574 17.6418C6.60215 17.8373 6.3701 17.9629 6.117 17.993L6 18H2C1.49542 18.0002 1.00943 17.8096 0.639452 17.4665C0.269471 17.1234 0.0428433 16.6532 0.00500011 16.15L0 16V13C0 12.7348 0.105357 12.4804 0.292893 12.2929C0.48043 12.1054 0.734784 12 1 12ZM17 12C17.2652 12 17.5196 12.1054 17.7071 12.2929C17.8946 12.4804 18 12.7348 18 13V16C18 16.5304 17.7893 17.0391 17.4142 17.4142C17.0391 17.7893 16.5304 18 16 18H12C11.7348 18 11.4804 17.8946 11.2929 17.7071C11.1054 17.5196 11 17.2652 11 17C11 16.7348 11.1054 16.4804 11.2929 16.2929C11.4804 16.1054 11.7348 16 12 16H16V13C16 12.7348 16.1054 12.4804 16.2929 12.2929C16.4804 12.1054 16.7348 12 17 12ZM17 8C17.2549 8.00028 17.5 8.09788 17.6854 8.27285C17.8707 8.44782 17.9822 8.68695 17.9972 8.94139C18.0121 9.19584 17.9293 9.44638 17.7657 9.64183C17.6021 9.83729 17.3701 9.9629 17.117 9.993L17 10H1C0.74512 9.99972 0.499968 9.90212 0.314632 9.72715C0.129296 9.55218 0.017765 9.31305 0.00282788 9.05861C-0.0121092 8.80416 0.0706746 8.55362 0.234265 8.35817C0.397855 8.16271 0.629904 8.0371 0.883 8.007L1 8H17ZM6 0C6.26522 0 6.51957 0.105357 6.70711 0.292893C6.89464 0.48043 7 0.734784 7 1C7 1.26522 6.89464 1.51957 6.70711 1.70711C6.51957 1.89464 6.26522 2 6 2H2V5C2 5.26522 1.89464 5.51957 1.70711 5.70711C1.51957 5.89464 1.26522 6 1 6C0.734784 6 0.48043 5.89464 0.292893 5.70711C0.105357 5.51957 0 5.26522 0 5V2C0 1.46957 0.210714 0.960859 0.585786 0.585786C0.960859 0.210714 1.46957 0 2 0H6ZM16 0C16.5304 0 17.0391 0.210714 17.4142 0.585786C17.7893 0.960859 18 1.46957 18 2V5C18 5.26522 17.8946 5.51957 17.7071 5.70711C17.5196 5.89464 17.2652 6 17 6C16.7348 6 16.4804 5.89464 16.2929 5.70711C16.1054 5.51957 16 5.26522 16 5V2H12C11.7348 2 11.4804 1.89464 11.2929 1.70711C11.1054 1.51957 11 1.26522 11 1C11 0.734784 11.1054 0.48043 11.2929 0.292893C11.4804 0.105357 11.7348 0 12 0H16Z" fill="currentColor"/>
+          </svg>
+          Escanea
+        </button>
+      </div>
+
+      <!-- Panel QR Code -->
+      <div class="tab-panel" id="tab-panel-qrcode">
+        <div class="qr-scan-container">
+          <div class="qr-box" id="qr-box">
+            <div class="qr-fallback" id="qr-fallback" hidden>
+              <p class="text-body-sm">QR no disponible</p>
+              <p class="text-body-xs">Usa el botón de demo para continuar</p>
+            </div>
+          </div>
+          <p class="qr-scan-label">Enséñale este código a tu compañero para que te escanee.</p>
+        </div>
+      </div>
+
+      <!-- Panel Escanea -->
+      <div class="tab-panel" id="tab-panel-scan" hidden>
+        <div class="qr-scan-container">
+          <div class="viewfinder">
+            <div class="viewfinder-icon">📷</div>
+            <div class="viewfinder-corner corner-tl"></div>
+            <div class="viewfinder-corner corner-tr"></div>
+            <div class="viewfinder-corner corner-bl"></div>
+            <div class="viewfinder-corner corner-br"></div>
+          </div>
+          <p class="qr-scan-label">Apunta la cámara al QR de tu compañero para conectar.</p>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <button class="demo-btn" id="btn-demo-skip" type="button">Demo: Skip</button>
+    </div>
+  </main>
+
+  <!-- ============================================================
+       PANTALLA 4 (HDU 1.2) — Reto Activo
+       ============================================================ -->
+  <main class="screen" id="screen-reto" data-screen="reto" hidden>
+    <div class="fake-statusbar" aria-hidden="true">
+      <span class="fake-statusbar-time">15:30</span>
+      <span class="fake-statusbar-icons">
+        <span>5G</span>
+        <span class="fake-statusbar-dots">•••</span>
+        <svg class="fake-statusbar-battery" width="22" height="11" viewBox="0 0 22 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0.5" y="0.5" width="19" height="10" rx="2.5" stroke="currentColor" />
+          <rect x="2" y="2" width="14" height="7" rx="1" fill="#00A082" />
+          <rect x="20" y="3.5" width="1.5" height="4" rx="0.75" fill="currentColor" />
+        </svg>
+        <span>83%</span>
+      </span>
+    </div>
+    <div class="reto-topbar">
+      <button class="topbar-back" id="btn-back-reto" type="button" aria-label="Volver">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M18.6602 8.68104H4.55995L11.0727 2.25182C11.5925 1.73868 11.5925 0.904803 11.0727 0.386717C10.5529 -0.131369 9.7082 -0.126436 9.18338 0.386717L0.391367 9.0659C0.331387 9.12511 0.276406 9.19418 0.226423 9.2682C0.20643 9.30274 0.186437 9.33728 0.171442 9.37181C0.151449 9.41129 0.121459 9.45076 0.106464 9.49517C0.0864706 9.53958 0.076474 9.58398 0.0664774 9.6284C0.0564808 9.66786 0.0414859 9.7024 0.0314893 9.74188C-0.00349881 9.91457 -0.00349881 10.0873 0.0314893 10.26C0.0414859 10.2994 0.0514825 10.334 0.0664774 10.3735C0.0814723 10.4179 0.0914689 10.4622 0.106464 10.5066C0.126457 10.5511 0.151449 10.5906 0.171442 10.63C0.191435 10.6646 0.20643 10.6991 0.226423 10.7337C0.276406 10.8076 0.331387 10.8718 0.391367 10.936L9.18338 19.6151C9.7032 20.1283 10.5479 20.1283 11.0727 19.6151C11.5975 19.102 11.5925 18.2681 11.0727 17.75L4.55995 11.3209H18.6602C19.4 11.3209 19.9948 10.7288 19.9948 10.0034C19.9948 9.27807 19.395 8.68597 18.6602 8.68597V8.68104V8.68104" fill="currentColor"/>
+        </svg>
+      </button>
+      <div class="reto-topbar-chips">
+        <div class="partner-chip">
+          <img class="partner-chip-icon" src="icons/icono-puntos-sm.svg" alt="" />
+          <span id="reto-header-puntos"></span>
+        </div>
+        <button class="partner-level-chip partner-level-chip-btn" id="reto-nivel-chip" type="button">
+          <img class="partner-level-chip-icon" src="icons/icono-premios-sm.svg" alt="" />
+          <span>Premios</span>
+          <img class="partner-level-chip-chevron" src="icons/icono-chevron-right.svg" alt="" />
+        </button>
+      </div>
+    </div>
+
+    <div class="reto-heading-row">
+      <div class="reto-heading-text">
+        <h1 class="text-heading-sm">Reto Activo</h1>
+        <p class="reto-countdown">
+          <svg viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M0.75 0H11.25C11.4489 2.96403e-09 11.6397 0.0790177 11.7803 0.21967C11.921 0.360322 12 0.551088 12 0.75C12 0.948912 11.921 1.13968 11.7803 1.28033C11.6397 1.42098 11.4489 1.5 11.25 1.5H10.5V2.75C10.5 3.48741 10.3283 4.2147 9.99853 4.87426C9.66875 5.53383 9.18993 6.10755 8.6 6.55L8.267 6.8C8.23595 6.82329 8.21075 6.85348 8.19339 6.8882C8.17604 6.92291 8.167 6.96119 8.167 7C8.167 7.03881 8.17604 7.07709 8.19339 7.1118C8.21075 7.14652 8.23595 7.17671 8.267 7.2L8.6 7.45C9.18993 7.89245 9.66875 8.46617 9.99853 9.12574C10.3283 9.7853 10.5 10.5126 10.5 11.25V12.5H11.25C11.4489 12.5 11.6397 12.579 11.7803 12.7197C11.921 12.8603 12 13.0511 12 13.25C12 13.4489 11.921 13.6397 11.7803 13.7803C11.6397 13.921 11.4489 14 11.25 14H0.75C0.551088 14 0.360322 13.921 0.21967 13.7803C0.0790175 13.6397 0 13.4489 0 13.25C0 13.0511 0.0790175 12.8603 0.21967 12.7197C0.360322 12.579 0.551088 12.5 0.75 12.5H1.5V11.25C1.5 10.5126 1.67169 9.7853 2.00147 9.12574C2.33125 8.46617 2.81007 7.89245 3.4 7.45L3.733 7.2C3.76405 7.17671 3.78925 7.14652 3.80661 7.1118C3.82396 7.07709 3.833 7.03881 3.833 7C3.833 6.96119 3.82396 6.92291 3.80661 6.8882C3.78925 6.85348 3.76405 6.82329 3.733 6.8L3.4 6.55C2.81007 6.10755 2.33125 5.53383 2.00147 4.87426C1.67169 4.2147 1.5 3.48741 1.5 2.75V1.5H0.75C0.551088 1.5 0.360322 1.42098 0.21967 1.28033C0.0790175 1.13968 0 0.948912 0 0.75C0 0.551088 0.0790175 0.360322 0.21967 0.21967C0.360322 0.0790177 0.551088 2.96403e-09 0.75 0ZM9 1.5H3V2.75C3 3.773 3.482 4.736 4.3 5.35L4.633 5.6C5.567 6.3 5.567 7.7 4.633 8.4L4.3 8.65C3.89636 8.95273 3.56875 9.34528 3.34311 9.79656C3.11747 10.2478 3 10.7455 3 11.25V12.5H9V11.25C9 10.7455 8.88253 10.2478 8.65689 9.79656C8.43125 9.34528 8.10364 8.95273 7.7 8.65L7.367 8.4C7.1493 8.23724 6.97255 8.02595 6.8508 7.78292C6.72905 7.53989 6.66566 7.27182 6.66566 7C6.66566 6.72818 6.72905 6.46011 6.8508 6.21708C6.97255 5.97405 7.1493 5.76276 7.367 5.6L7.7 5.35C8.10364 5.04727 8.43125 4.65472 8.65689 4.20344C8.88253 3.75216 9 3.25455 9 2.75V1.5Z" fill="currentColor"/>
+          </svg>
+          <span id="reto-countdown-text"></span>
+        </p>
+      </div>
+      <button class="topbar-settings" id="btn-ajustes" type="button" aria-label="Ajustes">
+        <svg width="24" height="24" viewBox="0 0 19.6489 20.0027" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M18.0435 10.6614C17.8831 10.4789 17.7947 10.2443 17.7947 10.0014C17.7947 9.75845 17.8831 9.52385 18.0435 9.34136L19.3235 7.90136C19.4645 7.74403 19.5521 7.54606 19.5736 7.33587C19.5952 7.12567 19.5496 6.91405 19.4435 6.73136L17.4435 3.27136C17.3384 3.08888 17.1783 2.94424 16.9862 2.85805C16.7941 2.77186 16.5796 2.74852 16.3735 2.79136L14.4935 3.17136C14.2542 3.22079 14.0052 3.18095 13.7933 3.05936C13.5815 2.93777 13.4214 2.74284 13.3435 2.51136L12.7335 0.68136C12.6664 0.482739 12.5386 0.310225 12.3681 0.188202C12.1976 0.0661789 11.9931 0.000818796 11.7835 0.00135996H7.78345C7.56538 -0.0100221 7.34959 0.0502863 7.16902 0.173074C6.98845 0.295862 6.85303 0.474379 6.78345 0.68136L6.22345 2.51136C6.14545 2.74284 5.98542 2.93777 5.77356 3.05936C5.5617 3.18095 5.31267 3.22079 5.07345 3.17136L3.14345 2.79136C2.948 2.76374 2.74875 2.79458 2.5708 2.88C2.39285 2.96542 2.24415 3.10159 2.14345 3.27136L0.143451 6.73136C0.034611 6.91201 -0.0143269 7.12245 0.00363355 7.33258C0.021594 7.54272 0.105533 7.7418 0.243451 7.90136L1.51345 9.34136C1.67377 9.52385 1.76219 9.75845 1.76219 10.0014C1.76219 10.2443 1.67377 10.4789 1.51345 10.6614L0.243451 12.1014C0.105533 12.2609 0.021594 12.46 0.00363355 12.6701C-0.0143269 12.8803 0.034611 13.0907 0.143451 13.2714L2.14345 16.7314C2.24855 16.9138 2.40857 17.0585 2.6007 17.1447C2.79284 17.2309 3.00728 17.2542 3.21345 17.2114L5.09345 16.8314C5.33267 16.7819 5.5817 16.8218 5.79356 16.9434C6.00542 17.0649 6.16545 17.2599 6.24345 17.4914L6.85345 19.3214C6.92303 19.5283 7.05845 19.7069 7.23902 19.8296C7.41959 19.9524 7.63538 20.0127 7.85345 20.0014H11.8535C12.0631 20.0019 12.2676 19.9365 12.4381 19.8145C12.6086 19.6925 12.7364 19.52 12.8035 19.3214L13.4135 17.4914C13.4915 17.2599 13.6515 17.0649 13.8633 16.9434C14.0752 16.8218 14.3242 16.7819 14.5635 16.8314L16.4435 17.2114C16.6496 17.2542 16.8641 17.2309 17.0562 17.1447C17.2483 17.0585 17.4084 16.9138 17.5135 16.7314L19.5135 13.2714C19.6196 13.0887 19.6652 12.877 19.6436 12.6669C19.6221 12.4567 19.5345 12.2587 19.3935 12.1014L18.0435 10.6614ZM16.5535 12.0014L17.3535 12.9014L16.0735 15.1214L14.8935 14.8814C14.1732 14.7341 13.424 14.8565 12.788 15.2252C12.1521 15.5938 11.6736 16.1832 11.4435 16.8814L11.0635 18.0014H8.50345L8.14345 16.8614C7.91331 16.1632 7.43483 15.5738 6.79886 15.2052C6.16288 14.8365 5.41367 14.7141 4.69345 14.8614L3.51345 15.1014L2.21345 12.8914L3.01345 11.9914C3.50541 11.4413 3.77738 10.7293 3.77738 9.99136C3.77738 9.25343 3.50541 8.54138 3.01345 7.99136L2.21345 7.09136L3.49345 4.89136L4.67345 5.13136C5.39367 5.27858 6.14288 5.15624 6.77886 4.78756C7.41483 4.41888 7.89331 3.82952 8.12345 3.13136L8.50345 2.00136H11.0635L11.4435 3.14136C11.6736 3.83952 12.1521 4.42888 12.788 4.79756C13.424 5.16624 14.1732 5.28858 14.8935 5.14136L16.0735 4.90136L17.3535 7.12136L16.5535 8.02136C16.067 8.57012 15.7984 9.27804 15.7984 10.0114C15.7984 10.7447 16.067 11.4526 16.5535 12.0014ZM9.78345 6.00136C8.99233 6.00136 8.21897 6.23596 7.56117 6.67548C6.90337 7.11501 6.39068 7.73972 6.08793 8.47063C5.78518 9.20153 5.70597 10.0058 5.86031 10.7817C6.01465 11.5576 6.39561 12.2704 6.95502 12.8298C7.51443 13.3892 8.22717 13.7702 9.00309 13.9245C9.77901 14.0788 10.5833 13.9996 11.3142 13.6969C12.0451 13.3941 12.6698 12.8814 13.1093 12.2236C13.5489 11.5658 13.7835 10.7925 13.7835 10.0014C13.7835 8.94049 13.362 7.92308 12.6119 7.17293C11.8617 6.42279 10.8443 6.00136 9.78345 6.00136ZM9.78345 12.0014C9.38789 12.0014 9.00121 11.8841 8.67231 11.6643C8.34341 11.4445 8.08707 11.1322 7.93569 10.7667C7.78432 10.4013 7.74471 9.99914 7.82188 9.61118C7.89905 9.22322 8.08953 8.86685 8.36924 8.58715C8.64894 8.30744 9.00531 8.11696 9.39327 8.03979C9.78123 7.96262 10.1834 8.00223 10.5488 8.1536C10.9143 8.30498 11.2266 8.56132 11.4464 8.89022C11.6662 9.21912 11.7835 9.6058 11.7835 10.0014C11.7835 10.5318 11.5727 11.0405 11.1977 11.4156C10.8226 11.7906 10.3139 12.0014 9.78345 12.0014Z" fill="currentColor"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="content">
+      <p class="text-body-sm reto-copy" id="reto-copy"></p>
+
+      <div class="reto-orders-card">
+        <div class="pedido-list" id="reto-pedido-list"></div>
+        <div class="reto-orders-total">
+          <span class="text-heading-sm">Total</span>
+          <span class="text-heading-sm" id="reto-total-valor"></span>
+        </div>
+      </div>
+
+      <div class="demo-block">
+        <button class="demo-btn" id="btn-demo-finalizar" type="button">Demo: Finalizar reto</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- ============================================================
+       PANTALLA — Reto Finalizado (pantalla completa, no modal)
+       ============================================================ -->
+  <main class="screen" id="screen-reto-finalizado" data-screen="reto-finalizado" hidden>
+    <div class="fake-statusbar" aria-hidden="true">
+      <span class="fake-statusbar-time">15:30</span>
+      <span class="fake-statusbar-icons">
+        <span>5G</span>
+        <span class="fake-statusbar-dots">•••</span>
+        <svg class="fake-statusbar-battery" width="22" height="11" viewBox="0 0 22 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0.5" y="0.5" width="19" height="10" rx="2.5" stroke="currentColor" />
+          <rect x="2" y="2" width="14" height="7" rx="1" fill="#00A082" />
+          <rect x="20" y="3.5" width="1.5" height="4" rx="0.75" fill="currentColor" />
+        </svg>
+        <span>83%</span>
+      </span>
+    </div>
+
+    <div class="reto-topbar">
+      <button class="topbar-back" id="btn-back-reto-finalizado" type="button" aria-label="Volver">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M18.6602 8.68104H4.55995L11.0727 2.25182C11.5925 1.73868 11.5925 0.904803 11.0727 0.386717C10.5529 -0.131369 9.7082 -0.126436 9.18338 0.386717L0.391367 9.0659C0.331387 9.12511 0.276406 9.19418 0.226423 9.2682C0.20643 9.30274 0.186437 9.33728 0.171442 9.37181C0.151449 9.41129 0.121459 9.45076 0.106464 9.49517C0.0864706 9.53958 0.076474 9.58398 0.0664774 9.6284C0.0564808 9.66786 0.0414859 9.7024 0.0314893 9.74188C-0.00349881 9.91457 -0.00349881 10.0873 0.0314893 10.26C0.0414859 10.2994 0.0514825 10.334 0.0664774 10.3735C0.0814723 10.4179 0.0914689 10.4622 0.106464 10.5066C0.126457 10.5511 0.151449 10.5906 0.171442 10.63C0.191435 10.6646 0.20643 10.6991 0.226423 10.7337C0.276406 10.8076 0.331387 10.8718 0.391367 10.936L9.18338 19.6151C9.7032 20.1283 10.5479 20.1283 11.0727 19.6151C11.5975 19.102 11.5925 18.2681 11.0727 17.75L4.55995 11.3209H18.6602C19.4 11.3209 19.9948 10.7288 19.9948 10.0034C19.9948 9.27807 19.395 8.68597 18.6602 8.68597V8.68104V8.68104" fill="currentColor"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="reto-finalizado-avatares">
+      <img class="reto-finalizado-avatares-img" id="final-avatares-ganado" src="icons/has ganado.png" alt="" />
+      <img class="reto-finalizado-avatares-img" id="final-avatares-perdido" src="icons/has perdido.png" alt="" />
+    </div>
+
+    <div class="content">
+      <div class="reto-finalizado-hero">
+        <img class="reto-finalizado-trophy finalizado-fade-scale" id="final-trofeo" src="icons/icono-premios.png" alt="" />
+        <h1 class="text-heading-xlg finalizado-fade" id="final-titulo">Reto finalizado!</h1>
+      </div>
+
+      <div class="reto-finalizado-rows">
+        <div class="reto-finalizado-row-list">
+          <div class="reto-finalizado-row finalizado-fade" id="final-row-tu">
+            <div class="reto-finalizado-row-left">
+              <span class="reto-finalizado-rank" id="final-rank-tu"></span>
+              <div class="reto-finalizado-row-person">
+                <img class="pedido-avatar" src="icons/avatar-rider.png" alt="" />
+                <span class="reto-finalizado-row-label reto-finalizado-row-tu">Tú</span>
+              </div>
+            </div>
+            <span class="reto-finalizado-row-right">
+              <span class="text-heading-xsm" id="final-puntos-tu"></span>
+              <img class="reto-finalizado-row-coin" src="icons/icono-puntos-sm.svg" alt="" />
+            </span>
+          </div>
+          <div class="reto-finalizado-row finalizado-fade" id="final-row-partner">
+            <div class="reto-finalizado-row-left">
+              <span class="reto-finalizado-rank" id="final-rank-partner"></span>
+              <div class="reto-finalizado-row-person">
+                <img class="pedido-avatar" src="icons/confirm-avatar-ana.png" alt="" />
+                <span class="reto-finalizado-row-label reto-finalizado-row-partner" id="final-partner-nombre"></span>
+              </div>
+            </div>
+            <span class="reto-finalizado-row-right">
+              <span class="text-heading-xsm" id="final-puntos-partner"></span>
+              <img class="reto-finalizado-row-coin" src="icons/icono-puntos-sm.svg" alt="" />
+            </span>
+          </div>
+        </div>
+        <div class="reto-finalizado-total" id="final-row-total">
+          <span class="text-heading-sm">Total</span>
+          <span class="text-heading-xsm" id="final-puntos-totales"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer finalizado-fade" id="final-footer">
+      <button class="btn btn-primary" id="btn-ir-premios" type="button">Ir a los premios</button>
+    </div>
+  </main>
+
+  <!-- ============================================================
+       PANTALLA — Inicia minijuego (previa al minijuego placeholder)
+       ============================================================ -->
+  <main class="screen" id="screen-minijuego-inicio" data-screen="minijuego-inicio" hidden>
+    <div class="fake-statusbar" aria-hidden="true">
+      <span class="fake-statusbar-time">15:30</span>
+      <span class="fake-statusbar-icons">
+        <span>5G</span>
+        <span class="fake-statusbar-dots">•••</span>
+        <svg class="fake-statusbar-battery" width="22" height="11" viewBox="0 0 22 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0.5" y="0.5" width="19" height="10" rx="2.5" stroke="currentColor" />
+          <rect x="2" y="2" width="14" height="7" rx="1" fill="#00A082" />
+          <rect x="20" y="3.5" width="1.5" height="4" rx="0.75" fill="currentColor" />
+        </svg>
+        <span>83%</span>
+      </span>
+    </div>
+    <div class="reto-topbar">
+      <button class="topbar-back" id="btn-back-minijuego-inicio" type="button" aria-label="Volver">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M18.6602 8.68104H4.55995L11.0727 2.25182C11.5925 1.73868 11.5925 0.904803 11.0727 0.386717C10.5529 -0.131369 9.7082 -0.126436 9.18338 0.386717L0.391367 9.0659C0.331387 9.12511 0.276406 9.19418 0.226423 9.2682C0.20643 9.30274 0.186437 9.33728 0.171442 9.37181C0.151449 9.41129 0.121459 9.45076 0.106464 9.49517C0.0864706 9.53958 0.076474 9.58398 0.0664774 9.6284C0.0564808 9.66786 0.0414859 9.7024 0.0314893 9.74188C-0.00349881 9.91457 -0.00349881 10.0873 0.0314893 10.26C0.0414859 10.2994 0.0514825 10.334 0.0664774 10.3735C0.0814723 10.4179 0.0914689 10.4622 0.106464 10.5066C0.126457 10.5511 0.151449 10.5906 0.171442 10.63C0.191435 10.6646 0.20643 10.6991 0.226423 10.7337C0.276406 10.8076 0.331387 10.8718 0.391367 10.936L9.18338 19.6151C9.7032 20.1283 10.5479 20.1283 11.0727 19.6151C11.5975 19.102 11.5925 18.2681 11.0727 17.75L4.55995 11.3209H18.6602C19.4 11.3209 19.9948 10.7288 19.9948 10.0034C19.9948 9.27807 19.395 8.68597 18.6602 8.68597V8.68104V8.68104" fill="currentColor"/>
+        </svg>
+      </button>
+      <div class="reto-topbar-chips">
+        <div class="partner-chip">
+          <img class="partner-chip-icon" src="icons/icono-puntos-sm.svg" alt="" />
+          <span id="minijuego-inicio-header-puntos"></span>
+        </div>
+        <button class="partner-level-chip partner-level-chip-btn" id="minijuego-inicio-nivel-chip" type="button">
+          <img class="partner-level-chip-icon" src="icons/icono-premios-sm.svg" alt="" />
+          <span>Premios</span>
+          <img class="partner-level-chip-chevron" src="icons/icono-chevron-right.svg" alt="" />
+        </button>
+      </div>
+    </div>
+
+    <div class="minijuego-inicio-title-row">
+      <h1 class="text-heading-md">Empieza el reto</h1>
+      <p class="text-body-md">¡Sortea un juego y desafía a tu rival!</p>
+    </div>
+
+    <div class="minijuego-inicio-cards-wrap">
+      <div class="minijuego-inicio-cards-img-wrap">
+        <h2 class="text-heading-sm minijuego-inicio-cards-titulo" id="minijuego-inicio-cards-titulo"></h2>
+        <img class="minijuego-inicio-cards-img finalizado-fade" id="minijuego-inicio-cards-img" src="icons/cards_sorteo.png" alt="" />
+      </div>
+      <div class="minijuego-inicio-rival-row finalizado-fade" id="minijuego-inicio-rival-row">
+        <span class="minijuego-inicio-rival-label">Juegas contra</span>
+        <div class="minijuego-inicio-rival-chip">
+          <img class="minijuego-inicio-rival-avatar" src="icons/confirm-avatar-ana.png" alt="" />
+          <span class="minijuego-inicio-rival-nombre" id="minijuego-inicio-rival-nombre"></span>
+        </div>
+      </div>
+      <span class="conexion-timer-badge" id="minijuego-inicio-timer">Quedan 60 minutos</span>
+    </div>
+
+    <div class="footer">
+      <button class="btn btn-primary" id="btn-jugar-minijuego" type="button">¡Vamos!</button>
+    </div>
+  </main>
+
+  <!-- ============================================================
+       PANTALLA — Ruleta de selección de juego (puramente estética)
+       ============================================================ -->
+  <main class="screen" id="screen-ruleta" data-screen="ruleta" hidden>
+    <div class="fake-statusbar" aria-hidden="true">
+      <span class="fake-statusbar-time">15:30</span>
+      <span class="fake-statusbar-icons">
+        <span>5G</span>
+        <span class="fake-statusbar-dots">•••</span>
+        <svg class="fake-statusbar-battery" width="22" height="11" viewBox="0 0 22 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0.5" y="0.5" width="19" height="10" rx="2.5" stroke="currentColor" />
+          <rect x="2" y="2" width="14" height="7" rx="1" fill="#00A082" />
+          <rect x="20" y="3.5" width="1.5" height="4" rx="0.75" fill="currentColor" />
+        </svg>
+        <span>83%</span>
+      </span>
+    </div>
+    <div class="reto-topbar finalizado-fade" id="ruleta-topbar" hidden>
+      <button class="topbar-back" id="btn-back-ruleta" type="button" aria-label="Volver">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M18.6602 8.68104H4.55995L11.0727 2.25182C11.5925 1.73868 11.5925 0.904803 11.0727 0.386717C10.5529 -0.131369 9.7082 -0.126436 9.18338 0.386717L0.391367 9.0659C0.331387 9.12511 0.276406 9.19418 0.226423 9.2682C0.20643 9.30274 0.186437 9.33728 0.171442 9.37181C0.151449 9.41129 0.121459 9.45076 0.106464 9.49517C0.0864706 9.53958 0.076474 9.58398 0.0664774 9.6284C0.0564808 9.66786 0.0414859 9.7024 0.0314893 9.74188C-0.00349881 9.91457 -0.00349881 10.0873 0.0314893 10.26C0.0414859 10.2994 0.0514825 10.334 0.0664774 10.3735C0.0814723 10.4179 0.0914689 10.4622 0.106464 10.5066C0.126457 10.5511 0.151449 10.5906 0.171442 10.63C0.191435 10.6646 0.20643 10.6991 0.226423 10.7337C0.276406 10.8076 0.331387 10.8718 0.391367 10.936L9.18338 19.6151C9.7032 20.1283 10.5479 20.1283 11.0727 19.6151C11.5975 19.102 11.5925 18.2681 11.0727 17.75L4.55995 11.3209H18.6602C19.4 11.3209 19.9948 10.7288 19.9948 10.0034C19.9948 9.27807 19.395 8.68597 18.6602 8.68597V8.68104V8.68104" fill="currentColor"/>
+        </svg>
+      </button>
+    </div>
+    <div class="content ruleta-content">
+      <div class="ruleta-reel" id="ruleta-reel">
+        <div class="ruleta-track" id="ruleta-track"></div>
+      </div>
+      <p class="text-body-lg-bold ruleta-buscando" id="ruleta-buscando">Buscando juego…</p>
+
+      <div class="ruleta-encontrado" id="ruleta-encontrado" hidden>
+        <h1 class="text-heading-md" id="ruleta-juego-titulo">Flappy Bird</h1>
+        <p class="text-body-md" id="ruleta-juego-desc">Esquiva los obstáculos y consigue la mayor puntuación posible.</p>
+      </div>
+    </div>
+    <div class="footer finalizado-fade" id="ruleta-footer" hidden>
+      <button class="btn btn-primary" id="btn-jugar" type="button">Jugar</button>
+    </div>
+  </main>
+
+  <!-- ============================================================
+       PANTALLA — Minijuego (placeholder, tap para saltar)
+       ============================================================ -->
+  <main class="screen" id="screen-minijuego" data-screen="minijuego" hidden>
+    <div id="mj-countdown" hidden><span id="mj-countdown-num">3</span></div>
+    <div id="mj-puntuacion" hidden>
+      <span id="mj-puntuacion-titulo">Tu puntuación</span>
+      <span id="mj-puntuacion-num">38</span>
+      <span id="mj-puntuacion-lbl">puntos</span>
+    </div>
+    <div class="content">
+      <div class="reto-orders-card" style="display:flex; align-items:center; justify-content:center; min-height: 300px;">
+        <div class="mj-wrap" style="position:relative; display:inline-block;">
+          <canvas id="minijuego-canvas" class="mj-game" style="width:300px; max-width:100%; height:auto; border-radius:16px;"></canvas>
+          <div class="mj-score" id="score-flappy">0</div>
+        </div>
+        <div    id="mj-memoria" class="mj-game" hidden></div>
+        <div class="mj-wrap" style="position:relative; display:inline-block;">
+          <canvas id="mj-tetris"  class="mj-game" hidden></canvas>
+          <div class="mj-score" id="score-tetris">0</div>
+        </div>
+        <div class="mj-wrap" style="position:relative; display:inline-block;">
+          <canvas id="mj-crossy"  class="mj-game" hidden></canvas>
+          <div class="mj-score" id="score-crossy">0</div>
+        </div>
+        <div class="mj-wrap" style="position:relative; display:inline-block;">
+          <canvas id="mj-snake"   class="mj-game" hidden></canvas>
+          <div class="mj-score" id="score-snake">0</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ============================================================
+       PANTALLA — Racha Pro alcanzada (6 días de racha)
+       ============================================================ -->
+  <main class="screen" id="screen-racha-pro" data-screen="racha-pro" hidden>
+    <div class="fake-statusbar" aria-hidden="true">
+      <span class="fake-statusbar-time">15:30</span>
+      <span class="fake-statusbar-icons">
+        <span>5G</span>
+        <span class="fake-statusbar-dots">•••</span>
+        <svg class="fake-statusbar-battery" width="22" height="11" viewBox="0 0 22 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0.5" y="0.5" width="19" height="10" rx="2.5" stroke="currentColor" />
+          <rect x="2" y="2" width="14" height="7" rx="1" fill="#00A082" />
+          <rect x="20" y="3.5" width="1.5" height="4" rx="0.75" fill="currentColor" />
+        </svg>
+        <span>83%</span>
+      </span>
+    </div>
+
+    <div class="reto-topbar">
+      <button class="topbar-back" id="btn-back-racha-pro" type="button" aria-label="Volver">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M18.6602 8.68104H4.55995L11.0727 2.25182C11.5925 1.73868 11.5925 0.904803 11.0727 0.386717C10.5529 -0.131369 9.7082 -0.126436 9.18338 0.386717L0.391367 9.0659C0.331387 9.12511 0.276406 9.19418 0.226423 9.2682C0.20643 9.30274 0.186437 9.33728 0.171442 9.37181C0.151449 9.41129 0.121459 9.45076 0.106464 9.49517C0.0864706 9.53958 0.076474 9.58398 0.0664774 9.6284C0.0564808 9.66786 0.0414859 9.7024 0.0314893 9.74188C-0.00349881 9.91457 -0.00349881 10.0873 0.0314893 10.26C0.0414859 10.2994 0.0514825 10.334 0.0664774 10.3735C0.0814723 10.4179 0.0914689 10.4622 0.106464 10.5066C0.126457 10.5511 0.151449 10.5906 0.171442 10.63C0.191435 10.6646 0.20643 10.6991 0.226423 10.7337C0.276406 10.8076 0.331387 10.8718 0.391367 10.936L9.18338 19.6151C9.7032 20.1283 10.5479 20.1283 11.0727 19.6151C11.5975 19.102 11.5925 18.2681 11.0727 17.75L4.55995 11.3209H18.6602C19.4 11.3209 19.9948 10.7288 19.9948 10.0034C19.9948 9.27807 19.395 8.68597 18.6602 8.68597V8.68104V8.68104" fill="currentColor"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="content">
+      <div class="reto-finalizado-hero">
+        <img class="racha-pro-trophy finalizado-fade-scale" id="racha-pro-icono" src="icons/icono-racha.png" alt="" />
+        <h1 class="text-heading-xlg finalizado-fade" id="racha-pro-titulo-anim"><span id="racha-pro-titulo"></span></h1>
+        <p class="text-body-lg-semibold finalizado-fade" id="racha-pro-subtitulo" style="color: var(--color-content-default);">Subes a nivel pro y disfruta de premios exclusivos.</p>
+      </div>
+    </div>
+
+    <div class="footer finalizado-fade" id="racha-pro-footer">
+      <button class="btn btn-primary" id="btn-racha-pro-ir-premios" type="button">Ir a los premios</button>
+    </div>
+  </main>
+
+  <!-- ============================================================
+       MODAL — Confirmar conexión (overlay sobre screen-qr)
+       ============================================================ -->
+  <div class="modal-overlay" id="modal-confirmar" hidden>
+    <div class="modal-card">
+      <h2 class="text-heading-sm" id="confirm-title" style="text-align: center;">¿Conectar con?</h2>
+      <div class="partner-card">
+        <div class="partner-avatar" id="confirm-avatar">
+          <img class="partner-avatar-img" id="confirm-avatar-img" src="icons/confirm-avatar-ana.png" alt="" />
+        </div>
+        <p class="text-body-lg" id="confirm-nombre" style="font-weight: 700;"></p>
+      </div>
+      <div class="footer" style="padding: 0;">
+        <button class="btn btn-primary" id="btn-confirmar" type="button">Conectar</button>
+        <button class="btn btn-secondary" id="btn-cancelar" type="button">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       PANTALLA 5 (HDU 2.1 / 2.2) — Recompensas, nivel Chill o Pro
+       El nivel se calcula dinámicamente a partir de la racha (PRO si
+       racha >= 6); esta misma pantalla cubre ambos estados.
+       ============================================================ -->
+  <main class="screen" id="screen-recompensas" data-screen="recompensas" hidden>
+    <div class="fake-statusbar" aria-hidden="true">
+      <span class="fake-statusbar-time">15:30</span>
+      <span class="fake-statusbar-icons">
+        <span>5G</span>
+        <span class="fake-statusbar-dots">•••</span>
+        <svg class="fake-statusbar-battery" width="22" height="11" viewBox="0 0 22 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0.5" y="0.5" width="19" height="10" rx="2.5" stroke="currentColor" />
+          <rect x="2" y="2" width="14" height="7" rx="1" fill="#00A082" />
+          <rect x="20" y="3.5" width="1.5" height="4" rx="0.75" fill="currentColor" />
+        </svg>
+        <span>83%</span>
+      </span>
+    </div>
+    <div class="reto-topbar">
+      <button class="topbar-back" id="btn-back-recompensas" type="button" aria-label="Volver">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M18.6602 8.68104H4.55995L11.0727 2.25182C11.5925 1.73868 11.5925 0.904803 11.0727 0.386717C10.5529 -0.131369 9.7082 -0.126436 9.18338 0.386717L0.391367 9.0659C0.331387 9.12511 0.276406 9.19418 0.226423 9.2682C0.20643 9.30274 0.186437 9.33728 0.171442 9.37181C0.151449 9.41129 0.121459 9.45076 0.106464 9.49517C0.0864706 9.53958 0.076474 9.58398 0.0664774 9.6284C0.0564808 9.66786 0.0414859 9.7024 0.0314893 9.74188C-0.00349881 9.91457 -0.00349881 10.0873 0.0314893 10.26C0.0414859 10.2994 0.0514825 10.334 0.0664774 10.3735C0.0814723 10.4179 0.0914689 10.4622 0.106464 10.5066C0.126457 10.5511 0.151449 10.5906 0.171442 10.63C0.191435 10.6646 0.20643 10.6991 0.226423 10.7337C0.276406 10.8076 0.331387 10.8718 0.391367 10.936L9.18338 19.6151C9.7032 20.1283 10.5479 20.1283 11.0727 19.6151C11.5975 19.102 11.5925 18.2681 11.0727 17.75L4.55995 11.3209H18.6602C19.4 11.3209 19.9948 10.7288 19.9948 10.0034C19.9948 9.27807 19.395 8.68597 18.6602 8.68597V8.68104V8.68104" fill="currentColor"/>
+        </svg>
+      </button>
+      <div class="reto-topbar-chips">
+        <div class="partner-chip">
+          <img class="partner-chip-icon" src="icons/icono-puntos-sm.svg" alt="" />
+          <span id="recompensas-header-puntos"></span>
+        </div>
+        <div class="partner-level-chip" id="recompensas-nivel-chip">
+          <img class="partner-level-chip-icon" src="icons/icono-premios-sm.svg" alt="" />
+          <span id="recompensas-nivel-label"></span>
+        </div>
+      </div>
+    </div>
+    <div class="content">
+
+      <div class="recompensas-racha-group">
+      <div class="recompensas-section-heading-row">
+        <h2 class="text-body-lg-bold">Tu racha</h2>
+        <span class="mis-premios-link" id="btn-ver-mis-premios" role="button" tabindex="0">Mis premios</span>
+      </div>
+
+      <div class="racha-box">
+        <div class="racha-box-row">
+          <img class="racha-box-icon" src="icons/iconio-racha-sm.svg" alt="" />
+          <span class="racha-box-dias" id="recompensas-racha-dias"></span>
+        </div>
+        <p class="text-body-sm" id="recompensas-racha-status"></p>
+      </div>
+      </div>
+
+      <div class="recompensas-section">
+        <div class="recompensas-section-heading-row">
+          <h2 class="text-heading-sm">Elige tu recompensa</h2>
+        </div>
+        <div class="reward-list" id="lista-recompensas-chill"></div>
+      </div>
+
+      <div class="recompensas-section">
+        <div class="recompensas-section-heading-row">
+          <h2 class="text-heading-sm recompensas-pro-heading" id="recompensas-pro-heading">Liga Pro</h2>
+          <span class="mis-premios-link recompensas-liga-pro" id="recompensas-liga-pro">
+            <svg class="recompensas-lock-icon" id="recompensas-lock-icon" width="20" height="20" viewBox="0 0 15.5 19.5" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M3.75 7.75V4.75C3.75 2.54 5.54 0.75 7.75 0.75C9.96 0.75 11.75 2.54 11.75 4.75V7.75M7.75 12.75C8.01522 12.75 8.26957 12.6446 8.45711 12.4571C8.64464 12.2696 8.75 12.0152 8.75 11.75C8.75 11.4848 8.64464 11.2304 8.45711 11.0429C8.26957 10.8554 8.01522 10.75 7.75 10.75C7.48478 10.75 7.23043 10.8554 7.04289 11.0429C6.85536 11.2304 6.75 11.4848 6.75 11.75C6.75 12.0152 6.85536 12.2696 7.04289 12.4571C7.23043 12.6446 7.48478 12.75 7.75 12.75ZM7.75 12.75V15.75M2.35 7.75H13.15C14.03 7.75 14.75 8.47 14.75 9.35V16.35C14.75 17.67 13.67 18.75 12.35 18.75H3.15C1.83 18.75 0.75 17.67 0.75 16.35V9.35C0.75 8.47 1.47 7.75 2.35 7.75Z" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span id="recompensas-pro-heading-text">Acceso bloqueado</span>
+          </span>
+          <span class="recompensas-exclusivo-badge" id="recompensas-exclusivo-badge" hidden>Exclusivo</span>
+        </div>
+        <div class="reward-list" id="lista-recompensas-pro"></div>
+      </div>
+
+    </div>
+    <div class="footer">
+      <button class="demo-btn" id="btn-demo-forzar-pro" type="button">Demo: Forzar racha</button>
+      <button class="demo-btn" id="btn-demo-romper-racha" type="button" hidden>Demo: Romper racha</button>
+    </div>
+  </main>
+
+  <!-- ============================================================
+       PANTALLA — Mis premios (premios ya canjeados)
+       ============================================================ -->
+  <main class="screen" id="screen-mis-premios" data-screen="mis-premios" hidden>
+    <div class="fake-statusbar" aria-hidden="true">
+      <span class="fake-statusbar-time">15:30</span>
+      <span class="fake-statusbar-icons">
+        <span>5G</span>
+        <span class="fake-statusbar-dots">•••</span>
+        <svg class="fake-statusbar-battery" width="22" height="11" viewBox="0 0 22 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0.5" y="0.5" width="19" height="10" rx="2.5" stroke="currentColor" />
+          <rect x="2" y="2" width="14" height="7" rx="1" fill="#00A082" />
+          <rect x="20" y="3.5" width="1.5" height="4" rx="0.75" fill="currentColor" />
+        </svg>
+        <span>83%</span>
+      </span>
+    </div>
+    <div class="reto-topbar">
+      <button class="topbar-back" id="btn-back-mis-premios" type="button" aria-label="Volver">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M18.6602 8.68104H4.55995L11.0727 2.25182C11.5925 1.73868 11.5925 0.904803 11.0727 0.386717C10.5529 -0.131369 9.7082 -0.126436 9.18338 0.386717L0.391367 9.0659C0.331387 9.12511 0.276406 9.19418 0.226423 9.2682C0.20643 9.30274 0.186437 9.33728 0.171442 9.37181C0.151449 9.41129 0.121459 9.45076 0.106464 9.49517C0.0864706 9.53958 0.076474 9.58398 0.0664774 9.6284C0.0564808 9.66786 0.0414859 9.7024 0.0314893 9.74188C-0.00349881 9.91457 -0.00349881 10.0873 0.0314893 10.26C0.0414859 10.2994 0.0514825 10.334 0.0664774 10.3735C0.0814723 10.4179 0.0914689 10.4622 0.106464 10.5066C0.126457 10.5511 0.151449 10.5906 0.171442 10.63C0.191435 10.6646 0.20643 10.6991 0.226423 10.7337C0.276406 10.8076 0.331387 10.8718 0.391367 10.936L9.18338 19.6151C9.7032 20.1283 10.5479 20.1283 11.0727 19.6151C11.5975 19.102 11.5925 18.2681 11.0727 17.75L4.55995 11.3209H18.6602C19.4 11.3209 19.9948 10.7288 19.9948 10.0034C19.9948 9.27807 19.395 8.68597 18.6602 8.68597V8.68104V8.68104" fill="currentColor"/>
+        </svg>
+      </button>
+      <div class="reto-topbar-chips">
+        <div class="partner-chip">
+          <img class="partner-chip-icon" src="icons/icono-puntos-sm.svg" alt="" />
+          <span id="mis-premios-header-puntos"></span>
+        </div>
+        <div class="partner-level-chip" id="mis-premios-nivel-chip">
+          <img class="partner-level-chip-icon" src="icons/icono-premios-sm.svg" alt="" />
+          <span id="mis-premios-nivel-label"></span>
+        </div>
+      </div>
+    </div>
+    <div class="reto-heading-row">
+      <h1 class="text-heading-md">Mis premios</h1>
+    </div>
+    <div class="content">
+      <div class="reward-list reward-list-vertical" id="lista-mis-premios"></div>
+    </div>
+  </main>
+
+  <!-- ============================================================
+       PANTALLA — Detalle de recompensa (HDU 2.3)
+       Dos vistas dentro de la misma pantalla: pendiente de canjear
+       y canjeada. La flecha ← vuelve siempre a Recompensas (2-1/2-2).
+       ============================================================ -->
+  <main class="screen" id="screen-recompensa-detalle" data-screen="recompensa-detalle" hidden>
+    <div class="fake-statusbar" aria-hidden="true">
+      <span class="fake-statusbar-time">15:30</span>
+      <span class="fake-statusbar-icons">
+        <span>5G</span>
+        <span class="fake-statusbar-dots">•••</span>
+        <svg class="fake-statusbar-battery" width="22" height="11" viewBox="0 0 22 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0.5" y="0.5" width="19" height="10" rx="2.5" stroke="currentColor" />
+          <rect x="2" y="2" width="14" height="7" rx="1" fill="#00A082" />
+          <rect x="20" y="3.5" width="1.5" height="4" rx="0.75" fill="currentColor" />
+        </svg>
+        <span>83%</span>
+      </span>
+    </div>
+    <div class="reto-topbar">
+      <button class="topbar-back" id="btn-back-detalle" type="button" aria-label="Volver">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M18.6602 8.68104H4.55995L11.0727 2.25182C11.5925 1.73868 11.5925 0.904803 11.0727 0.386717C10.5529 -0.131369 9.7082 -0.126436 9.18338 0.386717L0.391367 9.0659C0.331387 9.12511 0.276406 9.19418 0.226423 9.2682C0.20643 9.30274 0.186437 9.33728 0.171442 9.37181C0.151449 9.41129 0.121459 9.45076 0.106464 9.49517C0.0864706 9.53958 0.076474 9.58398 0.0664774 9.6284C0.0564808 9.66786 0.0414859 9.7024 0.0314893 9.74188C-0.00349881 9.91457 -0.00349881 10.0873 0.0314893 10.26C0.0414859 10.2994 0.0514825 10.334 0.0664774 10.3735C0.0814723 10.4179 0.0914689 10.4622 0.106464 10.5066C0.126457 10.5511 0.151449 10.5906 0.171442 10.63C0.191435 10.6646 0.20643 10.6991 0.226423 10.7337C0.276406 10.8076 0.331387 10.8718 0.391367 10.936L9.18338 19.6151C9.7032 20.1283 10.5479 20.1283 11.0727 19.6151C11.5975 19.102 11.5925 18.2681 11.0727 17.75L4.55995 11.3209H18.6602C19.4 11.3209 19.9948 10.7288 19.9948 10.0034C19.9948 9.27807 19.395 8.68597 18.6602 8.68597V8.68104V8.68104" fill="currentColor"/>
+        </svg>
+      </button>
+      <div class="reto-topbar-chips">
+        <div class="partner-chip">
+          <img class="partner-chip-icon" src="icons/icono-puntos-sm.svg" alt="" />
+          <span id="detalle-header-puntos"></span>
+        </div>
+        <div class="partner-level-chip" id="detalle-nivel-chip">
+          <img class="partner-level-chip-icon" src="icons/icono-premios-sm.svg" alt="" />
+          <span id="detalle-nivel-label"></span>
+        </div>
+      </div>
+    </div>
+    <div class="reto-heading-row">
+      <h1 class="text-heading-md" hidden>Premio</h1>
+    </div>
+    <div class="content">
+
+      <img class="reward-card-image" id="detalle-imagen" alt="" />
+
+      <div class="partner-chip reward-card-price" id="detalle-precio-chip">
+        <img class="partner-chip-icon" src="icons/icono-puntos-sm.svg" alt="" />
+        <span id="detalle-coste"></span>
+      </div>
+
+      <div class="detalle-title-block">
+        <h2 class="text-heading-sm" id="detalle-nombre"></h2>
+        <p class="text-body-md" id="detalle-descripcion" style="color: var(--color-content-secondary);"></p>
+      </div>
+
+      <div id="detalle-canjeada" hidden>
+        <div class="reward-code-box">
+          <p class="text-body-xs" style="color: var(--color-content-tertiary);">Código</p>
+          <div class="reward-code-row">
+            <span class="reward-code-value" id="detalle-codigo"></span>
+            <button class="btn btn-secondary reward-copy-btn" id="btn-copiar-codigo" type="button">Copiar</button>
+          </div>
+          <p class="text-body-xs" id="detalle-validez" style="color: var(--color-content-tertiary);"></p>
+        </div>
+      </div>
+
+    </div>
+    <div class="footer" id="detalle-footer">
+      <button class="btn btn-primary" id="btn-abrir-canjear" type="button">Canjear</button>
+    </div>
+  </main>
+
+  <!-- ============================================================
+       BOTTOM SHEET — Confirmar canje (HDU 2.3)
+       ============================================================ -->
+  <div class="bottom-sheet-overlay" id="sheet-canjear">
+    <div class="bottom-sheet">
+      <div class="bottom-sheet-header">
+        <span class="text-heading-sm" id="sheet-titulo"></span>
+        <button class="bottom-sheet-close" id="btn-cerrar-sheet" type="button" aria-label="Cerrar">✕</button>
+      </div>
+      <div class="partner-chip reward-card-price" id="sheet-precio-chip">
+        <img class="partner-chip-icon" src="icons/icono-puntos-sm.svg" alt="" />
+        <span id="sheet-precio"></span>
+      </div>
+      <p class="text-body-sm" style="color: var(--color-content-secondary);">Se descontarán tus puntos y recibirás un código para canjear tu premio. Esta acción es definitiva.</p>
+      <div class="footer" style="padding: 0;">
+        <button class="btn btn-primary" id="btn-sheet-canjear" type="button">Canjear</button>
+        <button class="btn btn-secondary" id="btn-sheet-volver" type="button">Volver</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       PANTALLA — Ajustes del reto
+       ============================================================ -->
+  <main class="screen" id="screen-ajustes" data-screen="ajustes" hidden>
+    <div class="fake-statusbar" aria-hidden="true">
+      <span class="fake-statusbar-time">15:30</span>
+      <span class="fake-statusbar-icons">
+        <span>5G</span>
+        <span class="fake-statusbar-dots">•••</span>
+        <svg class="fake-statusbar-battery" width="22" height="11" viewBox="0 0 22 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0.5" y="0.5" width="19" height="10" rx="2.5" stroke="currentColor" />
+          <rect x="2" y="2" width="14" height="7" rx="1" fill="#00A082" />
+          <rect x="20" y="3.5" width="1.5" height="4" rx="0.75" fill="currentColor" />
+        </svg>
+        <span>83%</span>
+      </span>
+    </div>
+    <div class="topbar">
+      <button class="topbar-back" id="btn-back-ajustes" type="button" aria-label="Volver"><svg width="20" height="20" viewBox="0 0 19.9963 20.0068" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M18.6613 8.68399H4.55625L11.0712 2.25259C11.5912 1.73927 11.5912 0.905111 11.0712 0.386848C10.5512 -0.131414 9.70625 -0.126479 9.18125 0.386848L0.38625 9.06898C0.32625 9.12821 0.27125 9.19731 0.22125 9.27135C0.20125 9.3059 0.18125 9.34045 0.16625 9.375C0.14625 9.41449 0.11625 9.45397 0.10125 9.4984C0.08125 9.54282 0.07125 9.58724 0.06125 9.63167C0.05125 9.67115 0.03625 9.7057 0.02625 9.74519C-0.00875 9.91794 -0.00875 10.0907 0.02625 10.2635C0.03625 10.3029 0.04625 10.3375 0.06125 10.377C0.07625 10.4214 0.08625 10.4658 0.10125 10.5102C0.12125 10.5547 0.14625 10.5942 0.16625 10.6336C0.18625 10.6682 0.20125 10.7027 0.22125 10.7373C0.27125 10.8113 0.32625 10.8755 0.38625 10.9397L9.18125 19.6218C9.70125 20.1351 10.5462 20.1351 11.0712 19.6218C11.5962 19.1085 11.5912 18.2743 11.0712 17.756L4.55625 11.3247H18.6613C19.4013 11.3247 19.9963 10.7324 19.9963 10.0068C19.9963 9.28122 19.3963 8.68892 18.6613 8.68892V8.68399Z" fill="currentColor"/></svg></button>
+      <span class="text-heading-sm topbar-title">Ajustes del reto</span>
+    </div>
+    <div class="content">
+      <button class="btn btn-text ajustes-item" id="btn-historial" type="button">
+        <svg class="ajustes-item-icon" width="20" height="20" viewBox="0 0 19.5005 19.4998" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M2.82934 2.81902C6.62434 -0.970979 12.7943 -0.930979 16.6123 2.88802C20.4323 6.70802 20.4723 12.881 16.6763 16.676C12.8803 20.471 6.70834 20.432 2.88834 16.612C1.81371 15.542 1.00177 14.2375 0.516293 12.8008C0.0308133 11.3642 -0.114988 9.83453 0.0903395 8.33202C0.117259 8.13483 0.221409 7.95641 0.379877 7.83602C0.538345 7.71562 0.738151 7.6631 0.93534 7.69002C1.13253 7.71694 1.31095 7.82109 1.43134 7.97956C1.55174 8.13803 1.60426 8.33783 1.57734 8.53502C1.40302 9.80833 1.52642 11.1047 1.93782 12.3223C2.34923 13.5399 3.03744 14.6454 3.94834 15.552C7.19334 18.796 12.4163 18.815 15.6163 15.616C18.8153 12.416 18.7963 7.19302 15.5523 3.94802C12.3093 0.706021 7.08934 0.685022 3.88934 3.88002L4.63734 3.88302C4.73583 3.88348 4.83327 3.90334 4.92409 3.94145C5.0149 3.97957 5.09733 4.0352 5.16664 4.10517C5.23596 4.17514 5.29082 4.25807 5.32809 4.34924C5.36536 4.44041 5.3843 4.53803 5.38384 4.63652C5.38338 4.73501 5.36353 4.83245 5.32541 4.92327C5.28729 5.01409 5.23166 5.09651 5.16169 5.16583C5.09173 5.23515 5.00879 5.29 4.91762 5.32727C4.82645 5.36454 4.72883 5.38348 4.63034 5.38302L2.08434 5.37102C1.88664 5.36997 1.69735 5.2909 1.55765 5.15101C1.41795 5.01112 1.33913 4.82172 1.33834 4.62402L1.32534 2.08002C1.32481 1.98153 1.34369 1.8839 1.3809 1.7927C1.4181 1.70151 1.47291 1.61854 1.54218 1.54852C1.61145 1.4785 1.69384 1.42282 1.78463 1.38464C1.87542 1.34647 1.97285 1.32655 2.07134 1.32602C2.16983 1.3255 2.26746 1.34438 2.35866 1.38158C2.44985 1.41879 2.53283 1.47359 2.60284 1.54286C2.67286 1.61214 2.72854 1.69452 2.76672 1.78531C2.80489 1.87611 2.82481 1.97353 2.82534 2.07202L2.82934 2.81902ZM9.74934 4.99902C9.94825 4.99902 10.139 5.07804 10.2797 5.21869C10.4203 5.35934 10.4993 5.55011 10.4993 5.74902V9.43902L12.7803 11.719C12.852 11.7882 12.9092 11.8709 12.9485 11.9624C12.9879 12.0539 13.0086 12.1523 13.0095 12.2519C13.0104 12.3514 12.9915 12.4502 12.9538 12.5424C12.9162 12.6346 12.8605 12.7184 12.7901 12.7888C12.7198 12.8593 12.636 12.915 12.5439 12.9527C12.4517 12.9905 12.353 13.0095 12.2534 13.0087C12.1538 13.0079 12.0554 12.9872 11.9639 12.948C11.8723 12.9087 11.7896 12.8516 11.7203 12.78L9.00034 10.06V5.75002C9.00034 5.55111 9.07936 5.36034 9.22001 5.21969C9.36066 5.07904 9.55143 5.00002 9.75034 5.00002" fill="currentColor"/>
+        </svg>
+        Historial del reto
+      </button>
+      <button class="btn btn-text ajustes-item" id="btn-abandonar" type="button">
+        <svg class="ajustes-item-icon" width="20" height="20" viewBox="0 0 16.8278 20.814" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M8 0C8.25488 0.000282707 8.50003 0.0978791 8.68537 0.272848C8.8707 0.447818 8.98224 0.686953 8.99717 0.941395C9.01211 1.19584 8.92933 1.44638 8.76574 1.64183C8.60215 1.83729 8.3701 1.9629 8.117 1.993L8 2H3C2.75507 2.00003 2.51866 2.08996 2.33563 2.25272C2.15259 2.41547 2.03566 2.63975 2.007 2.883L2 3V15C2.00003 15.2449 2.08996 15.4813 2.25272 15.6644C2.41547 15.8474 2.63975 15.9643 2.883 15.993L3 16H7.5C7.75488 16.0003 8.00003 16.0979 8.18537 16.2728C8.3707 16.4478 8.48224 16.687 8.49717 16.9414C8.51211 17.1958 8.42933 17.4464 8.26574 17.6418C8.10215 17.8373 7.8701 17.9629 7.617 17.993L7.5 18H3C2.23479 18 1.49849 17.7077 0.941739 17.1827C0.384993 16.6578 0.0498925 15.9399 0.00500012 15.176L4.66045e-09 15V3C-4.26217e-05 2.23479 0.292325 1.49849 0.817284 0.941739C1.34224 0.384993 2.06011 0.0498925 2.824 0.00500011L3 0H8ZM13.707 5.464L16.535 8.293C16.7225 8.48053 16.8278 8.73484 16.8278 9C16.8278 9.26516 16.7225 9.51947 16.535 9.707L13.707 12.536C13.5194 12.7235 13.2649 12.8288 12.9996 12.8287C12.7344 12.8286 12.48 12.7231 12.2925 12.5355C12.105 12.3479 11.9997 12.0934 11.9998 11.8281C11.9999 11.5629 12.1054 11.3085 12.293 11.121L13.414 10H8C7.73478 10 7.48043 9.89464 7.29289 9.70711C7.10536 9.51957 7 9.26522 7 9C7 8.73478 7.10536 8.48043 7.29289 8.29289C7.48043 8.10536 7.73478 8 8 8H13.414L12.293 6.879C12.1054 6.69149 11.9999 6.43712 11.9998 6.17185C11.9997 5.90658 12.105 5.65214 12.2925 5.4645C12.48 5.27686 12.7344 5.17139 12.9996 5.1713C13.2649 5.1712 13.5194 5.27649 13.707 5.464Z" fill="currentColor"/>
+        </svg>
+        Abandonar reto
+      </button>
+    </div>
+  </main>
+
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var STORAGE_KEY = "glovoRetosState";
+
+  function defaultState() {
+    return {
+      rider: { nombre: "Tú", puntos: 450, racha: 3 },
+      partner: { nombre: "Ana", racha: 5, puntos: 320 },
+      retoActivo: null,
+      canjes: {}
+    };
+  }
+
+  function loadState() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return defaultState();
+      var parsed = JSON.parse(raw);
+      var merged = Object.assign(defaultState(), parsed);
+      if (merged.retoActivo) {
+        merged.retoActivo.pedidos = merged.retoActivo.pedidos || [];
+        merged.retoActivo.partnerPedidos = merged.retoActivo.partnerPedidos || [];
+        merged.retoActivo.puntosReto = merged.retoActivo.puntosReto || 0;
+        merged.retoActivo.partnerPuntosReto = merged.retoActivo.partnerPuntosReto || 0;
+      }
+      merged.canjes = merged.canjes || {};
+      return merged;
+    } catch (e) {
+      return defaultState();
+    }
+  }
+
+  function saveState() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+
+  var state = loadState();
+
+  var CATALOGO_CHILL = [
+    { id: "chill-decathlon", nombre: "10% de descuento en Decathlon", descripcion: "Descuento del 10% en tu próxima compra en Decathlon.", coste: 100, icono: "🏃", imagen: "icons/reward-decathlon.png", codigo: "#A020VG" },
+    { id: "chill-popeyes", nombre: "2x1 en Popeyes", descripcion: "Llévate dos productos por el precio de uno en Popeyes.", coste: 200, icono: "🍗", imagen: "icons/reward-popeyes.png", codigo: "#B114KT" },
+    { id: "chill-hundred", nombre: "2x1 Menú en The Hundred", descripcion: "Llévate dos Menú por el precio de uno en The Hundred.", coste: 300, icono: "👕", imagen: "icons/reward-hundred.png", codigo: "#C238PL" },
+    { id: "chill-patinetes", nombre: "10% en MyUrbanScoot", descripcion: "Descuento del 10% en tu próxima compra en la Tienda de Patinetes.", coste: 400, icono: "🛴", imagen: "icons/reward-patinetes.png", codigo: "#D356QX" }
+  ];
+
+  var CATALOGO_PRO = [
+    { id: "pro-sprinter", nombre: "Tarjeta regalo Sprinter (20€)", descripcion: "Tarjeta regalo de 20€ para usar en Sprinter.", coste: 800, icono: "🎁", imagen: "icons/reward-sprinter.png", codigo: "#E472RM" },
+    { id: "pro-panaria", nombre: "10% de descuento en Panaria", descripcion: "Descuento del 10% en tu próxima compra en Panaria.", coste: 900, icono: "🥐", imagen: "icons/reward-panaria.png", codigo: "#F591SN" },
+    { id: "pro-decathlon30", nombre: "30% en Decathlon", descripcion: "Descuento del 30% en tu próxima compra en Decathlon.", coste: 1000, icono: "🏃", imagen: "icons/reward-decathlon30.png", codigo: "#G610TZ" }
+  ];
+
+  var detallePremioActual = null;
+  var detalleOrigenScreen = "screen-recompensas";
+
+  var RACHA_PRO_MINIMA = 6;
+  var recompensasOrigen = "home";
+
+  var NOMBRES_CLIENTES = ["Laura", "Carlos", "Marta", "David", "Sofía", "Javier", "Elena", "Pablo", "Lucía", "Diego", "Marina", "Hugo"];
+
+  function randomCliente() {
+    return NOMBRES_CLIENTES[Math.floor(Math.random() * NOMBRES_CLIENTES.length)];
+  }
+
+  function hayPedidosNoVistos() {
+    var reto = state.retoActivo;
+    if (!reto) return false;
+    var todos = reto.pedidos.concat(reto.partnerPedidos);
+    return todos.some(function (p) { return !p.visto; });
+  }
+
+  function navigate(screenId) {
+    var screens = document.querySelectorAll(".screen");
+    for (var i = 0; i < screens.length; i++) {
+      screens[i].hidden = screens[i].id !== screenId;
+    }
+    window.scrollTo(0, 0);
+  }
+
+  function navegarConSlideIn(screenId) {
+    navigate(screenId);
+    var el = document.getElementById(screenId);
+    el.classList.remove("screen-slide-in");
+    void el.offsetWidth;
+    el.classList.add("screen-slide-in");
+  }
+
+  function renderGlovoHome() {
+    document.getElementById("retos-badge-dot").hidden = !hayPedidosNoVistos();
+
+    var demoBtn = document.getElementById("btn-demo-pedido");
+    var demoBtnAna = document.getElementById("btn-demo-pedido-ana");
+    var help = document.getElementById("demo-pedido-help");
+    if (state.retoActivo) {
+      demoBtn.disabled = false;
+      demoBtnAna.disabled = false;
+      help.textContent = "";
+    } else {
+      demoBtn.disabled = true;
+      demoBtnAna.disabled = true;
+      help.textContent = "Necesitas un reto activo para simular un pedido.";
+    }
+  }
+
+  var toastTimeoutId = null;
+  var toastAnaTimeoutId = null;
+  var toastZIndexCounter = 20;
+
+  function traerToastAlFrente(id) {
+    toastZIndexCounter += 1;
+    document.getElementById(id).style.zIndex = toastZIndexCounter;
+  }
+
+  function mostrarToast(mensaje) {
+    document.getElementById("toast-mensaje").textContent = mensaje;
+    document.getElementById("toast-notificacion").classList.add("is-visible");
+    traerToastAlFrente("toast-notificacion");
+    clearTimeout(toastTimeoutId);
+    toastTimeoutId = setTimeout(ocultarToast, 3000);
+  }
+
+  function ocultarToast() {
+    clearTimeout(toastTimeoutId);
+    document.getElementById("toast-notificacion").classList.remove("is-visible");
+  }
+
+  function mostrarToastAna(mensaje) {
+    document.getElementById("toast-mensaje-ana").textContent = mensaje;
+    document.getElementById("toast-notificacion-ana").classList.add("is-visible");
+    traerToastAlFrente("toast-notificacion-ana");
+    clearTimeout(toastAnaTimeoutId);
+    toastAnaTimeoutId = setTimeout(ocultarToastAna, 3000);
+  }
+
+  function ocultarToastAna() {
+    clearTimeout(toastAnaTimeoutId);
+    document.getElementById("toast-notificacion-ana").classList.remove("is-visible");
+  }
+
+  function simularEntregaPedido() {
+    // Dormiente: las consegne ya no asignan puntos (los puntos vienen del minijuego).
+    return;
+  }
+
+  function simularEntregaPedidoAna() {
+    // Dormiente: las consegne ya no asignan puntos (los puntos vienen del minijuego).
+    return;
+  }
+
+  function marcarPedidosVistos() {
+    var reto = state.retoActivo;
+    if (!reto) return;
+    reto.pedidos.forEach(function (p) { p.visto = true; });
+    reto.partnerPedidos.forEach(function (p) { p.visto = true; });
+    saveState();
+  }
+
+  function renderHome() {
+    var noReto = document.getElementById("home-no-reto");
+    var conReto = document.getElementById("home-reto-activo");
+
+    document.getElementById("btn-empezar").hidden = false;
+    document.getElementById("btn-ver-reto-home").hidden = true;
+    document.getElementById("btn-ver-retos-pasados").hidden = true;
+
+    noReto.hidden = false;
+    conReto.hidden = true;
+  }
+
+  function mostrarRetosPasadosPlaceholder() {
+    alert("Retos pasados — próximamente.");
+  }
+
+  function buildRewardCard(premio, bloqueado, origenScreen) {
+    var card = document.createElement("button");
+    card.className = "reward-card";
+    card.type = "button";
+    card.disabled = bloqueado;
+
+    var imagenWrap = document.createElement("div");
+    imagenWrap.className = "reward-card-image-wrap";
+
+    var imagen = document.createElement("img");
+    imagen.className = "reward-card-image";
+    imagen.src = premio.imagen;
+    imagen.alt = "";
+    imagenWrap.appendChild(imagen);
+
+    var infoRow = document.createElement("div");
+    infoRow.className = "reward-card-info";
+
+    var text = document.createElement("div");
+    text.className = "reward-card-text";
+
+    var nombreRow = document.createElement("div");
+    nombreRow.className = "reward-card-name-row";
+
+    var nombre = document.createElement("p");
+    nombre.className = "reward-card-nombre";
+    nombre.textContent = premio.nombre;
+    nombreRow.appendChild(nombre);
+
+    var canjeado = !!state.canjes[premio.id];
+
+    var descripcion = document.createElement("p");
+    descripcion.className = "reward-card-descripcion";
+    descripcion.textContent = premio.descripcion;
+
+    text.appendChild(nombreRow);
+    text.appendChild(descripcion);
+
+    infoRow.appendChild(text);
+
+    if (canjeado) {
+      var verCodigo = document.createElement("span");
+      verCodigo.className = "btn btn-secondary reward-copy-btn reward-card-vercodigo";
+      verCodigo.textContent = "Ver código";
+      infoRow.appendChild(verCodigo);
+    } else {
+      var precio = document.createElement("div");
+      precio.className = "reward-card-price";
+
+      var precioValor = document.createElement("span");
+      precioValor.className = "reward-card-price-num";
+      precioValor.textContent = premio.coste;
+
+      var precioIcono = document.createElement("img");
+      precioIcono.className = "reward-card-price-icon";
+      precioIcono.src = "icons/icono-puntos-sm.svg";
+      precioIcono.alt = "";
+
+      precio.appendChild(precioValor);
+      precio.appendChild(precioIcono);
+      imagenWrap.appendChild(precio);
+    }
+
+    card.appendChild(imagenWrap);
+    card.appendChild(infoRow);
+
+    if (!bloqueado) {
+      card.addEventListener("click", function () {
+        abrirDetalleRecompensa(premio, origenScreen);
+      });
+    }
+
+    return card;
+  }
+
+  function renderRewardList(containerId, catalogo, bloqueado) {
+    var container = document.getElementById(containerId);
+    container.innerHTML = "";
+    catalogo.forEach(function (premio) {
+      container.appendChild(buildRewardCard(premio, bloqueado));
+    });
+  }
+
+  function esNivelPro() {
+    return state.rider.racha >= RACHA_PRO_MINIMA;
+  }
+
+  function renderRecompensas() {
+    document.getElementById("recompensas-header-puntos").textContent = state.rider.puntos;
+
+    var esPro = esNivelPro();
+    document.getElementById("recompensas-nivel-label").textContent = esPro ? "Pro" : "Chill";
+    document.getElementById("recompensas-nivel-chip").classList.toggle("is-pro", esPro);
+
+    document.getElementById("recompensas-racha-dias").textContent = state.rider.racha + " días jugando";
+    var faltan = Math.max(0, RACHA_PRO_MINIMA - state.rider.racha);
+    document.getElementById("recompensas-racha-status").textContent = esPro
+      ? "Sigue jugando cada dia para mantener el acceso a premios exclusivos."
+      : "¡Sigue asi! Solo te faltan " + faltan + " día" + (faltan === 1 ? "" : "s") + " para llegar desbloquear los premios de la Liga Pro.";
+
+    document.getElementById("recompensas-pro-heading").classList.toggle("is-locked", !esPro);
+    document.getElementById("recompensas-liga-pro").hidden = esPro;
+    document.getElementById("recompensas-exclusivo-badge").hidden = !esPro;
+
+    renderRewardList("lista-recompensas-chill", CATALOGO_CHILL, false);
+    renderRewardList("lista-recompensas-pro", CATALOGO_PRO, !esPro);
+
+    document.getElementById("btn-demo-forzar-pro").hidden = esPro;
+    document.getElementById("btn-demo-romper-racha").hidden = !esPro;
+  }
+
+  function abrirRecompensas(origen) {
+    recompensasOrigen = origen;
+    renderRecompensas();
+    navigate("screen-recompensas");
+  }
+
+  function renderMisPremios() {
+    document.getElementById("mis-premios-header-puntos").textContent = state.rider.puntos;
+    var esPro = esNivelPro();
+    document.getElementById("mis-premios-nivel-label").textContent = esPro ? "Pro" : "Chill";
+    document.getElementById("mis-premios-nivel-chip").classList.toggle("is-pro", esPro);
+
+    var canjeados = CATALOGO_CHILL.concat(CATALOGO_PRO).filter(function (premio) {
+      return !!state.canjes[premio.id];
+    });
+
+    var container = document.getElementById("lista-mis-premios");
+    container.innerHTML = "";
+    canjeados.forEach(function (premio) {
+      container.appendChild(buildRewardCard(premio, false, "screen-mis-premios"));
+    });
+  }
+
+  function abrirMisPremios() {
+    renderMisPremios();
+    navigate("screen-mis-premios");
+  }
+
+  function renderRachaPro() {
+    document.getElementById("racha-pro-titulo").textContent = "¡" + state.rider.racha + " días de racha!";
+  }
+
+  function abrirRachaPro() {
+    renderRachaPro();
+    navigate("screen-racha-pro");
+    reproducirAnimacionRachaPro();
+  }
+
+  var RACHA_PRO_ANIM_IDS = ["racha-pro-icono", "racha-pro-titulo-anim", "racha-pro-subtitulo", "racha-pro-footer"];
+  var rachaProAnimTimers = [];
+  var rachaProAnimSkipped = false;
+
+  function limpiarTimersRachaPro() {
+    rachaProAnimTimers.forEach(clearTimeout);
+    rachaProAnimTimers = [];
+  }
+
+  function rachaProAnimTimeout(fn, delay) {
+    rachaProAnimTimers.push(setTimeout(fn, delay));
+  }
+
+  function saltarAnimacionRachaPro() {
+    if (rachaProAnimSkipped) return;
+    rachaProAnimSkipped = true;
+    limpiarTimersRachaPro();
+    RACHA_PRO_ANIM_IDS.forEach(function (id) {
+      document.getElementById(id).classList.add("is-visible");
+    });
+  }
+
+  function reproducirAnimacionRachaPro() {
+    rachaProAnimSkipped = false;
+    limpiarTimersRachaPro();
+
+    RACHA_PRO_ANIM_IDS.forEach(function (id) {
+      document.getElementById(id).classList.remove("is-visible");
+    });
+
+    var t = 0;
+    rachaProAnimTimeout(function () {
+      document.getElementById("racha-pro-icono").classList.add("is-visible");
+    }, t);
+
+    t += FINAL_FADE_MS;
+    rachaProAnimTimeout(function () {
+      document.getElementById("racha-pro-titulo-anim").classList.add("is-visible");
+    }, t);
+
+    t += FINAL_FADE_MS + FINAL_PAUSE_MS;
+    rachaProAnimTimeout(function () {
+      document.getElementById("racha-pro-subtitulo").classList.add("is-visible");
+    }, t);
+
+    t += FINAL_FADE_MS;
+    rachaProAnimTimeout(function () {
+      document.getElementById("racha-pro-footer").classList.add("is-visible");
+    }, t);
+  }
+
+  function forzarRachaPro() {
+    state.rider.racha = RACHA_PRO_MINIMA;
+    saveState();
+    renderRecompensas();
+    abrirRachaPro();
+  }
+
+  function romperRacha() {
+    state.rider.racha = 0;
+    saveState();
+    renderRecompensas();
+  }
+
+  function formatFechaCompleta(timestamp) {
+    return new Date(timestamp).toLocaleDateString("es-ES", { day: "2-digit", month: "2-digit", year: "numeric" });
+  }
+
+  function renderDetalleRecompensa(premio) {
+    var canje = state.canjes[premio.id];
+
+    document.getElementById("detalle-header-puntos").textContent = state.rider.puntos;
+    document.getElementById("detalle-nivel-label").textContent = esNivelPro() ? "Pro" : "Chill";
+    document.getElementById("detalle-nivel-chip").classList.toggle("is-pro", esNivelPro());
+
+    document.getElementById("detalle-imagen").src = premio.imagen;
+    document.getElementById("detalle-nombre").textContent = premio.nombre;
+    document.getElementById("detalle-descripcion").textContent = premio.descripcion;
+    document.getElementById("detalle-coste").textContent = premio.coste;
+
+    var canjeada = document.getElementById("detalle-canjeada");
+    var footer = document.getElementById("detalle-footer");
+    var precioChip = document.getElementById("detalle-precio-chip");
+
+    if (canje) {
+      canjeada.hidden = false;
+      footer.hidden = true;
+      precioChip.hidden = true;
+      document.getElementById("detalle-codigo").textContent = premio.codigo;
+      document.getElementById("detalle-validez").textContent =
+        "Válido hasta " + formatFechaCompleta(canje.fecha + 90 * 24 * 60 * 60 * 1000);
+    } else {
+      canjeada.hidden = true;
+      footer.hidden = false;
+      precioChip.hidden = false;
+      var esPro = CATALOGO_PRO.indexOf(premio) !== -1;
+      var bloqueadoPorNivel = esPro && !esNivelPro();
+      var sinSaldo = state.rider.puntos < premio.coste;
+      document.getElementById("btn-abrir-canjear").disabled = bloqueadoPorNivel || sinSaldo;
+    }
+  }
+
+  function abrirDetalleRecompensa(premio, origenScreen) {
+    detallePremioActual = premio;
+    detalleOrigenScreen = origenScreen || "screen-recompensas";
+    renderDetalleRecompensa(premio);
+    navegarConSlideIn("screen-recompensa-detalle");
+  }
+
+  function abrirSheetCanjear() {
+    if (!detallePremioActual) return;
+    document.getElementById("sheet-titulo").textContent = detallePremioActual.nombre;
+    document.getElementById("sheet-precio").textContent = detallePremioActual.coste;
+    document.getElementById("sheet-canjear").classList.add("is-open");
+  }
+
+  function cerrarSheetCanjear() {
+    document.getElementById("sheet-canjear").classList.remove("is-open");
+  }
+
+  function confirmarCanje() {
+    var premio = detallePremioActual;
+    if (!premio) return;
+
+    state.rider.puntos -= premio.coste;
+    state.canjes[premio.id] = { fecha: Date.now() };
+    saveState();
+
+    cerrarSheetCanjear();
+    renderDetalleRecompensa(premio);
+  }
+
+  function copiarCodigo(codigo) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(codigo);
+    }
+    return new Promise(function (resolve, reject) {
+      try {
+        var textarea = document.createElement("textarea");
+        textarea.value = codigo;
+        textarea.style.position = "fixed";
+        textarea.style.opacity = "0";
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+        var ok = document.execCommand("copy");
+        document.body.removeChild(textarea);
+        if (ok) resolve(); else reject(new Error("copy failed"));
+      } catch (e) {
+        reject(e);
+      }
+    });
+  }
+
+  function renderConfirm() {
+    document.getElementById("confirm-title").textContent = "¿Conectar con " + state.partner.nombre + "?";
+    document.getElementById("confirm-nombre").textContent = state.partner.nombre;
+  }
+
+  function horasRestantes(fin) {
+    return Math.max(0, Math.ceil((fin - Date.now()) / (60 * 60 * 1000)));
+  }
+
+  function renderPedidoList(containerId, pedidos) {
+    var container = document.getElementById(containerId);
+    container.innerHTML = "";
+
+    if (pedidos.length === 0) {
+      container.classList.add("is-empty");
+      var empty = document.createElement("div");
+      empty.className = "pedido-list-empty";
+
+      var ilustracion = document.createElement("img");
+      ilustracion.className = "pedido-list-empty-illustration";
+      ilustracion.src = "icons/empty-pedidos.png";
+      ilustracion.alt = "";
+
+      var textoVacio = document.createElement("p");
+      textoVacio.className = "pedido-list-empty-text";
+      textoVacio.textContent = "Aquí aparecerán vuestros pedidos";
+
+      empty.appendChild(ilustracion);
+      empty.appendChild(textoVacio);
+      container.appendChild(empty);
+      return;
+    }
+    container.classList.remove("is-empty");
+
+    var nuevosTotal = pedidos.filter(function (p) { return !p.visto; }).length;
+    var stagger = nuevosTotal > 6 ? 60 : 200;
+    var nuevoIndex = 0;
+
+    pedidos.forEach(function (pedido) {
+      var esNuevo = !pedido.visto;
+      var item = document.createElement("div");
+      item.className = "pedido-item" + (esNuevo ? " is-nuevo" : "");
+
+      var left = document.createElement("div");
+      left.className = "pedido-item-left";
+
+      var puntos = document.createElement("span");
+      puntos.className = "text-heading-xsm";
+      puntos.textContent = "+" + pedido.puntos;
+
+      var cliente = document.createElement("span");
+      cliente.className = "pedido-cliente";
+      cliente.textContent = "Pedido a " + pedido.cliente;
+
+      left.appendChild(puntos);
+      left.appendChild(cliente);
+
+      var esTu = pedido.rider !== "partner";
+
+      var right = document.createElement("div");
+      right.className = "pedido-item-right";
+
+      var avatar = document.createElement("img");
+      avatar.className = "pedido-avatar";
+      avatar.src = esTu ? "icons/avatar-rider.png" : "icons/confirm-avatar-ana.png";
+      avatar.alt = "";
+
+      var riderLabel = document.createElement("span");
+      riderLabel.className = "pedido-rider-label" + (esTu ? " is-tu" : "");
+      riderLabel.textContent = esTu ? "Tú" : state.retoActivo.partnerNombre;
+
+      right.appendChild(avatar);
+      right.appendChild(riderLabel);
+
+      item.appendChild(left);
+      item.appendChild(right);
+
+      if (esNuevo) {
+        item.classList.add("pedido-enter");
+        var delay = nuevoIndex * stagger;
+        nuevoIndex++;
+        container.appendChild(item);
+        setTimeout(function () {
+          item.classList.add("pedido-enter-active");
+        }, delay + 20);
+      } else {
+        container.appendChild(item);
+      }
+    });
+  }
+
+  function animarTotalReto(desde, hasta) {
+    var el = document.getElementById("reto-total-valor");
+    if (desde === hasta) {
+      el.textContent = hasta;
+      return;
+    }
+    var salto = Math.abs(hasta - desde);
+    var duracion = Math.min(2000, Math.max(1200, salto * 40));
+    var inicio = null;
+    function paso(timestamp) {
+      if (inicio === null) inicio = timestamp;
+      var progreso = Math.min((timestamp - inicio) / duracion, 1);
+      var eased = 1 - Math.pow(1 - progreso, 3);
+      el.textContent = Math.round(desde + (hasta - desde) * eased);
+      if (progreso < 1) {
+        requestAnimationFrame(paso);
+      } else {
+        el.textContent = hasta;
+      }
+    }
+    requestAnimationFrame(paso);
+  }
+
+  function renderReto() {
+    var reto = state.retoActivo;
+    if (!reto) return;
+
+    document.getElementById("reto-header-puntos").textContent = state.rider.puntos;
+
+    document.getElementById("reto-copy").textContent =
+      "Hoy, cada pedido suma 10 puntos para ti y para " + reto.partnerNombre + ". Sumáis vuestros puntos hasta completar el reto.";
+
+    document.getElementById("reto-countdown-text").textContent = "Finaliza en " + horasRestantes(reto.fin) + " horas";
+
+    var todos = reto.pedidos.concat(reto.partnerPedidos).sort(function (a, b) {
+      return (a.ts || 0) - (b.ts || 0);
+    });
+    var totalActual = reto.puntosReto + reto.partnerPuntosReto;
+    var puntosNuevos = todos
+      .filter(function (p) { return !p.visto; })
+      .reduce(function (sum, p) { return sum + p.puntos; }, 0);
+
+    var visibles = todos.slice(-4);
+    renderPedidoList("reto-pedido-list", visibles);
+
+    if (puntosNuevos > 0) {
+      animarTotalReto(totalActual - puntosNuevos, totalActual);
+    } else {
+      document.getElementById("reto-total-valor").textContent = totalActual;
+    }
+  }
+
+  function abrirReto(conSlideIn) {
+    renderReto();
+    marcarPedidosVistos();
+    if (conSlideIn) {
+      navegarConSlideIn("screen-reto");
+    } else {
+      navigate("screen-reto");
+    }
+  }
+
+  function finalizarReto() {
+    var reto = state.retoActivo;
+    if (!reto) return;
+
+    var puntosTu = reto.puntosReto;
+    var puntosPartner = reto.partnerPuntosReto;
+
+    state.rider.puntos += puntosTu;
+    state.partner.puntos += puntosPartner;
+    state.retoActivo = null;
+    juegoPendiente = null;
+    resetConexionTimer();
+    saveState();
+
+    document.getElementById("final-partner-nombre").textContent = reto.partnerNombre;
+
+    navigate("screen-reto-finalizado");
+    reproducirAnimacionFinalizado(puntosTu, puntosPartner);
+  }
+
+  var FINAL_FADE_MS = 400;
+  var FINAL_PAUSE_MS = 300;
+  var FINAL_COUNT_MS = 1400;
+  var FINAL_ANIM_IDS = ["final-trofeo", "final-titulo", "final-row-tu", "final-row-partner", "final-footer"];
+
+  var finalAnimTimers = [];
+  var finalAnimSkipped = false;
+  var finalAnimPuntosTu = 0;
+  var finalAnimPuntosPartner = 0;
+
+  function finalAnimTimeout(fn, delay) {
+    finalAnimTimers.push(setTimeout(fn, delay));
+  }
+
+  function limpiarTimersFinalizado() {
+    finalAnimTimers.forEach(clearTimeout);
+    finalAnimTimers = [];
+  }
+
+  function mostrarTodoFinalizado(puntosTu, puntosPartner) {
+    FINAL_ANIM_IDS.forEach(function (id) {
+      document.getElementById(id).classList.add("is-visible");
+    });
+    document.getElementById("final-puntos-tu").textContent = "+" + puntosTu;
+    document.getElementById("final-puntos-partner").textContent = "+" + puntosPartner;
+    document.getElementById("final-puntos-totales").textContent = "+" + (puntosTu + puntosPartner);
+  }
+
+  function saltarAnimacionFinalizado(puntosTu, puntosPartner) {
+    if (finalAnimSkipped) return;
+    finalAnimSkipped = true;
+    limpiarTimersFinalizado();
+    mostrarTodoFinalizado(puntosTu, puntosPartner);
+  }
+
+  function cuentaArribaFinalizado(elId, hasta, prefijo) {
+    var el = document.getElementById(elId);
+    var inicio = null;
+    function paso(timestamp) {
+      if (finalAnimSkipped) return;
+      if (inicio === null) inicio = timestamp;
+      var progreso = Math.min((timestamp - inicio) / FINAL_COUNT_MS, 1);
+      var eased = 1 - Math.pow(1 - progreso, 3);
+      el.textContent = prefijo + Math.round(hasta * eased);
+      if (progreso < 1) {
+        requestAnimationFrame(paso);
+      } else {
+        el.textContent = prefijo + hasta;
+      }
+    }
+    requestAnimationFrame(paso);
+  }
+
+  function reproducirAnimacionFinalizado(puntosTu, puntosPartner) {
+    finalAnimSkipped = false;
+    finalAnimPuntosTu = puntosTu;
+    finalAnimPuntosPartner = puntosPartner;
+    limpiarTimersFinalizado();
+
+    FINAL_ANIM_IDS.forEach(function (id) {
+      document.getElementById(id).classList.remove("is-visible");
+    });
+    document.getElementById("final-puntos-tu").textContent = "+0";
+    document.getElementById("final-puntos-partner").textContent = "+0";
+    document.getElementById("final-puntos-totales").textContent = "+" + (puntosTu + puntosPartner);
+
+    var t = 0;
+    finalAnimTimeout(function () {
+      document.getElementById("final-trofeo").classList.add("is-visible");
+    }, t);
+
+    t += FINAL_FADE_MS;
+    finalAnimTimeout(function () {
+      document.getElementById("final-titulo").classList.add("is-visible");
+    }, t);
+
+    var tuGana = puntosTu >= puntosPartner;
+    var ganadorRowId = tuGana ? "final-row-tu" : "final-row-partner";
+    var perdedorRowId = tuGana ? "final-row-partner" : "final-row-tu";
+    var ganadorPuntosId = tuGana ? "final-puntos-tu" : "final-puntos-partner";
+    var perdedorPuntosId = tuGana ? "final-puntos-partner" : "final-puntos-tu";
+    var ganadorPuntosVal = tuGana ? puntosTu : puntosPartner;
+    var perdedorPuntosVal = tuGana ? puntosPartner : puntosTu;
+
+    t += FINAL_FADE_MS + FINAL_PAUSE_MS;
+    finalAnimTimeout(function () {
+      document.getElementById(ganadorRowId).classList.add("is-visible");
+    }, t);
+
+    t += FINAL_FADE_MS;
+    finalAnimTimeout(function () {
+      cuentaArribaFinalizado(ganadorPuntosId, ganadorPuntosVal, "+");
+    }, t);
+
+    t += FINAL_COUNT_MS;
+    finalAnimTimeout(function () {
+      document.getElementById(perdedorRowId).classList.add("is-visible");
+    }, t);
+
+    t += FINAL_FADE_MS;
+    finalAnimTimeout(function () {
+      cuentaArribaFinalizado(perdedorPuntosId, perdedorPuntosVal, "+");
+    }, t);
+
+    t += FINAL_COUNT_MS;
+    finalAnimTimeout(function () {
+      document.getElementById("final-footer").classList.add("is-visible");
+    }, t);
+  }
+
+  function renderMinijuegoInicio() {
+    document.getElementById("minijuego-inicio-header-puntos").textContent = state.rider.puntos;
+    document.getElementById("minijuego-inicio-rival-nombre").textContent = state.partner.nombre;
+
+    var btnJugar = document.getElementById("btn-jugar-minijuego");
+    var cardsImgEl = document.getElementById("minijuego-inicio-cards-img");
+    var cardsTituloEl = document.getElementById("minijuego-inicio-cards-titulo");
+    if (juegoPendiente !== null) {
+      cardsImgEl.src = RULETA_IMGS[juegoPendiente];
+      btnJugar.textContent = "Jugar";
+      cardsTituloEl.textContent = GAMES[juegoPendiente].title;
+    } else {
+      cardsImgEl.src = "icons/cards_sorteo.png";
+      btnJugar.textContent = "¡Vamos!";
+      cardsTituloEl.textContent = "";
+    }
+
+    var cardsImg = document.getElementById("minijuego-inicio-cards-img");
+    var rivalRow = document.getElementById("minijuego-inicio-rival-row");
+    cardsImg.classList.remove("is-visible");
+    rivalRow.classList.remove("is-visible");
+    requestAnimationFrame(function () {
+      cardsImg.classList.add("is-visible");
+      rivalRow.classList.add("is-visible");
+    });
+
+    pintarConexionTimer();
+    arrancarConexionTimer();
+  }
+
+  var conexionMinutos = 60;
+  var conexionTimerId = null;
+  function pintarConexionTimer() {
+    var el = document.getElementById("minijuego-inicio-timer");
+    if (!el) return;
+    el.textContent = conexionMinutos === 60
+      ? "Queda 1 hora"
+      : "Quedan " + conexionMinutos + " minutos";
+  }
+  function arrancarConexionTimer() {
+    if (conexionTimerId) return;              // ya está corriendo, no reiniciar
+    conexionTimerId = setInterval(function () {
+      if (conexionMinutos > 0) conexionMinutos--;
+      pintarConexionTimer();
+    }, 60000);                                 // 1 minuto real
+  }
+  function resetConexionTimer() {
+    clearInterval(conexionTimerId);
+    conexionTimerId = null;
+    conexionMinutos = 60;
+  }
+
+  var RULETA_IMGS = [
+    "icons/ruleta/snake.png",
+    "icons/ruleta/memory.png",
+    "icons/ruleta/flappy.png",
+    "icons/ruleta/crossy.png",
+    "icons/ruleta/tetris.png"
+  ];
+
+  var _rulPool=null,_rulRaf=null,_rulCY=150,_rulR=100,_rulCW=180,_rulCH=94;
+  var _RUL_STEP=26*Math.PI/180;
+  function _rulEnsure(stage){ if(_rulPool)return; _rulPool=[];
+    for(var i=0;i<11;i++){ var el=document.createElement("div"); el.className="wcard"; el.innerHTML='<img alt="">'; el.style.display="none"; stage.appendChild(el); _rulPool.push(el); } }
+  function _rulRender(p){ var base=Math.floor(p),items=[];
+    for(var j=base-4;j<=base+4;j++){ var th=(j-p)*_RUL_STEP; if(Math.cos(th)<=0.06)continue; items.push({j:j,y:_rulR*Math.sin(th),s:Math.cos(th)}); }
+    items.sort(function(a,b){return a.s-b.s;}); var slot=0;
+    for(var k=0;k<items.length;k++){ var it=items[k],el=_rulPool[slot++]; if(!el)break;
+      var gi = (((it.j % 5) + 5) % 5);
+      el.style.display="flex"; el.className="wcard";
+      var img = el.querySelector("img");
+      if (img && img.getAttribute("src") !== RULETA_IMGS[gi]) img.src = RULETA_IMGS[gi];
+      el.style.width=_rulCW+"px"; el.style.height=_rulCH+"px";
+      el.style.top=(_rulCY+it.y)+"px"; el.style.transform="translate(-50%,-50%) scale("+it.s+")";
+      el.style.opacity=Math.max(.28,Math.min(1,(it.s-.06)/.5)); el.style.zIndex=Math.round(it.s*100); }
+    for(;slot<_rulPool.length;slot++)_rulPool[slot].style.display="none"; }
+  function animarRuleta(indice, onDone){
+    var stage=document.getElementById("ruleta-reel");
+    var H=stage.clientHeight||300, W=stage.clientWidth||220;
+    _rulCY=H/2; _rulR=H*0.34; _rulCW=Math.min(W*0.82,260); _rulCH=_rulCW*0.52;
+    _rulEnsure(stage);
+    var T=3.0,TB=1.8,P_FINAL=25 + (((indice % 5) + 5) % 5),V=P_FINAL/2.4,start=null;
+    function pAt(e){ if(e>=T)return P_FINAL; if(e<=TB)return V*e; var d=e-TB,du=T-TB; return V*TB+V*(d-d*d/(2*du)); }
+    function tick(ts){ if(start===null)start=ts; var e=(ts-start)/1000; _rulRender(pAt(e));
+      if(e<T){ _rulRaf=requestAnimationFrame(tick); } else if(onDone){ onDone(); } }
+    if(_rulRaf)cancelAnimationFrame(_rulRaf);
+    _rulRender(0); _rulRaf=requestAnimationFrame(tick);
+  }
+
+  var GAMES = [
+    {title:"Snake",       desc:"Recoge paquetes sin chocar.",         cont:"mj-snake",         start:function(){startSnakeAnim();},     stop:function(){stopSnakeAnim();}},
+    {title:"Memory",      desc:"Encuentra las parejas de comida.",    cont:"mj-memoria",       start:function(){startMemoriaAnim();},   stop:function(){stopMemoriaAnim();}},
+    {title:"Flappy Bird", desc:"Esquiva las columnas y vuela lejos.", cont:"minijuego-canvas", start:function(){startMinijuegoAnim();}, stop:function(){stopMinijuegoAnim();}},
+    {title:"Crossy Road", desc:"Cruza la calle esquivando coches.",   cont:"mj-crossy",        start:function(){startCrossyAnim();},    stop:function(){stopCrossyAnim();}},
+    {title:"Tetris",      desc:"Encaja las piezas y completa líneas.",cont:"mj-tetris",        start:function(){startTetrisAnim();},    stop:function(){stopTetrisAnim();}}
+  ];
+  var juegoElegido = 0;
+  var juegoPendiente = null;   // índice del juego ya sorteado y aún no jugado
+
+  function abrirRuleta() {
+    juegoElegido = Math.floor(Math.random() * GAMES.length);
+    navigate("screen-ruleta");
+    document.getElementById("ruleta-buscando").hidden = false;
+    document.getElementById("ruleta-encontrado").hidden = true;
+    var footer = document.getElementById("ruleta-footer");
+    footer.hidden = true;
+    footer.classList.remove("is-visible");
+    var topbar = document.getElementById("ruleta-topbar");
+    topbar.hidden = true;
+    topbar.classList.remove("is-visible");
+
+    animarRuleta(juegoElegido, function () {
+      document.getElementById("ruleta-buscando").hidden = true;
+      document.getElementById("ruleta-encontrado").hidden = false;
+      document.getElementById("ruleta-juego-titulo").textContent = GAMES[juegoElegido].title;
+      document.getElementById("ruleta-juego-desc").textContent  = GAMES[juegoElegido].desc;
+      juegoPendiente = juegoElegido;
+      footer.hidden = false;
+      topbar.hidden = false;
+      requestAnimationFrame(function () {
+        footer.classList.add("is-visible");
+        topbar.classList.add("is-visible");
+      });
+    });
+  }
+
+// ===== FLAPPY (estética Glovo) =====
+(function () {
+  var cv = document.getElementById("minijuego-canvas");
+  if (!cv) return;
+  var ctx = cv.getContext("2d");
+  var W = 320, H = 520, GROUND = 18, DPR = 2;
+  cv.width = W * DPR; cv.height = H * DPR;
+  cv.style.width = "100%"; cv.style.maxWidth = W + "px"; cv.style.height = "auto";
+  ctx.scale(DPR, DPR);
+
+  var bike = new Image(); bike.src = "icons/flappy/bici.png";
+  var col  = new Image(); col.src  = "icons/flappy/colonna.png";
+  var CAPF = 0.0578;                    // parte alta de la imagen que es el collarín
+
+  var PIPE_W = 62, GAP_HALF = 76, SPEED = 2.6, SPACING = 200;
+  var BIRD_X = 86, BIRD_W = 66, FIRSTX = 380;
+  var PATTERN = [190, 300, 240, 330, 210, 160, 270], n = PATTERN.length;
+  function gap(k) { return PATTERN[((k % n) + n) % n]; }
+  function gateX(k, s) { return FIRSTX + k * SPACING - s; }
+
+  function pathY(scroll) {
+    var kf = (scroll + BIRD_X - FIRSTX) / SPACING, k1 = Math.floor(kf), tt = kf - k1;
+    var p0 = gap(k1 - 1), p1 = gap(k1), p2 = gap(k1 + 1), p3 = gap(k1 + 2), t2 = tt * tt, t3 = t2 * tt;
+    return 0.5 * ((2 * p1) + (-p0 + p2) * tt + (2 * p0 - 5 * p1 + 4 * p2 - p3) * t2 + (-p0 + 3 * p1 - 3 * p2 + p3) * t3);
+  }
+  // tubo: collarín con proporción fija + cuerpo estirado (no se deforma)
+  function pipe(x, yTop, h, flip) {
+    if (h <= 0 || !col.complete) return;
+    var CW = col.naturalWidth, CH = col.naturalHeight;
+    var capSrcH = CH * CAPF, bodySrcH = CH - capSrcH;
+    var capH = PIPE_W * capSrcH / CW;
+    ctx.save();
+    if (flip) { ctx.translate(x + PIPE_W / 2, yTop + h / 2); ctx.scale(1, -1); ctx.translate(-(x + PIPE_W / 2), -(yTop + h / 2)); }
+    ctx.drawImage(col, 0, 0, CW, capSrcH, x, yTop, PIPE_W, capH);
+    var rest = h - capH;
+    if (rest > 0) ctx.drawImage(col, 0, capSrcH, CW, bodySrcH, x, yTop + capH, PIPE_W, rest);
+    ctx.restore();
+  }
+
+  var raf = null, t = 0, prevDrawn = 240;
+  function frame() {
+    t += 1; var scroll = t * SPEED;
+    ctx.fillStyle = "#00A082"; ctx.fillRect(0, 0, W, H);
+    var kmin = Math.floor((scroll - PIPE_W - FIRSTX) / SPACING);
+    var kmax = Math.ceil((scroll + W - FIRSTX) / SPACING);
+    for (var k = kmin; k <= kmax; k++) {
+      var x = gateX(k, scroll), gy = gap(k);
+      pipe(x, gy + GAP_HALF, (H - GROUND) - (gy + GAP_HALF), false);
+      pipe(x, 0, gy - GAP_HALF, true);
+    }
+    var birdY = pathY(scroll), bob = Math.sin(t * 0.22) * 6, drawnY = birdY + bob;
+    var dy = drawnY - prevDrawn; prevDrawn = drawnY;
+    var ang = Math.max(-0.5, Math.min(0.6, dy * 0.13));
+    if (bike.complete) {
+      var bh = Math.round(BIRD_W * bike.naturalHeight / bike.naturalWidth);
+      ctx.save(); ctx.translate(BIRD_X, drawnY); ctx.rotate(ang);
+      ctx.drawImage(bike, -BIRD_W / 2, -bh / 2, BIRD_W, bh); ctx.restore();
+    }
+    ctx.fillStyle = "#FEC390"; ctx.fillRect(0, H - GROUND, W, GROUND);
+    raf = requestAnimationFrame(frame);
+  }
+  var _scEl, _scFin, _scSuf, _scT0, _scRaf;
+  function _scTick() {
+    var p = Math.min(1, (performance.now() - _scT0) / 5000);
+    _scEl.textContent = Math.round(_scFin * p) + _scSuf;
+    if (p < 1) _scRaf = requestAnimationFrame(_scTick);
+  }
+  window.startMinijuegoAnim = function () {
+    if (raf) cancelAnimationFrame(raf);
+    t = 0; prevDrawn = pathY(SPEED);
+    raf = requestAnimationFrame(frame);
+    _scEl = document.getElementById("score-flappy");
+    _scFin = 38;
+    _scSuf = " pts";
+    _scT0 = performance.now();
+    _scEl.textContent = "0" + _scSuf;
+    if (_scRaf) cancelAnimationFrame(_scRaf);
+    _scRaf = requestAnimationFrame(_scTick);
+  };
+  window.stopMinijuegoAnim = function () {
+    if (raf) { cancelAnimationFrame(raf); raf = null; }
+    if (_scRaf) cancelAnimationFrame(_scRaf);
+  };
+})();
+
+// ===== MEMORY (estética Glovo) =====
+(function () {
+  var board = document.getElementById("mj-memoria");
+  if (!board) return;
+  var IMGS = ["icons/memory/donut.png","icons/memory/hamburguer.png","icons/memory/hotdog.png",
+              "icons/memory/papitas.png","icons/memory/ramen.png","icons/memory/sushi.png"];
+  var DECK = [0,3,1,5, 2,0,4,1, 3,2,5,4];
+  var cards = [];
+  board.innerHTML = "";
+  DECK.forEach(function (food) {
+    var c = document.createElement("div"); c.className = "card";
+    c.innerHTML = '<div class="inner"><div class="face back"></div>' +
+                  '<div class="face front"><img src="' + IMGS[food] + '" alt=""></div></div>';
+    board.appendChild(c); cards.push(c);
+  });
+  var MOVES = [
+    { a:2, b:4,  m:false, t:0.3 },
+    { a:1, b:8,  m:true,  t:1.5 },
+    { a:3, b:7,  m:false, t:2.6 },
+    { a:6, b:11, m:true,  t:3.8 },
+    { a:0, b:5,  m:true,  t:4.6 }
+  ];
+  var EV = [];
+  MOVES.forEach(function (mv) {
+    EV.push({ t: mv.t,       type: "up", p: mv.a });
+    EV.push({ t: mv.t + 0.2, type: "up", p: mv.b });
+    if (mv.m) { EV.push({ t: mv.t + 0.9, type: "match", p: mv.a }); EV.push({ t: mv.t + 0.9, type: "match", p: mv.b }); }
+    else      { EV.push({ t: mv.t + 1.0, type: "down",  p: mv.a }); EV.push({ t: mv.t + 1.0, type: "down",  p: mv.b }); }
+  });
+  EV.sort(function (x, y) { return x.t - y.t; });
+  var idx = 0, startT = null, raf = null;
+  function apply(e) {
+    var c = cards[e.p];
+    if (e.type === "up") c.classList.add("flipped");
+    else if (e.type === "down") c.classList.remove("flipped");
+    else c.classList.add("matched");
+  }
+  function loop(ts) {
+    if (startT === null) startT = ts;
+    var el = (ts - startT) / 1000;
+    while (idx < EV.length && EV[idx].t <= el) { apply(EV[idx]); idx++; }
+    if (el < 5.8) raf = requestAnimationFrame(loop);
+  }
+  window.startMemoriaAnim = function () {
+    if (raf) cancelAnimationFrame(raf);
+    idx = 0; startT = null;
+    cards.forEach(function (c) { c.classList.remove("flipped", "matched"); });
+    raf = requestAnimationFrame(loop);
+  };
+  window.stopMemoriaAnim = function () { if (raf) { cancelAnimationFrame(raf); raf = null; } };
+})();
+
+// ===== TETRIS (estética Glovo) =====
+(function () {
+  var cv = document.getElementById("mj-tetris");
+  if (!cv) return;
+  var ctx = cv.getContext("2d");
+  var COLS = 6, ROWS = 12, CELL = 34, DPR = 2, FALL = 340, GAP = 130, FLASH = 280;
+  cv.width = COLS * CELL * DPR; cv.height = ROWS * CELL * DPR;
+  cv.style.width = "100%"; cv.style.maxWidth = (COLS * CELL) + "px"; cv.style.height = "auto";
+  ctx.scale(DPR, DPR);
+
+  var INK = "#1A1A1A", BG = "#035949";
+  var COL = { I:"#FFBF41", O:"#FEDE86", T:"#B5F0DF", L:"#E27120", J:"#FFBF41", S:"#B5F0DF", Z:"#E27120" };
+  var SHAPE = {
+    I:[[0,1],[1,1],[2,1],[3,1]], O:[[1,0],[2,0],[1,1],[2,1]],
+    T:[[1,0],[0,1],[1,1],[2,1]], L:[[2,0],[0,1],[1,1],[2,1]],
+    J:[[0,0],[0,1],[1,1],[2,1]], S:[[1,0],[2,0],[0,1],[1,1]], Z:[[0,0],[1,0],[1,1],[2,1]]
+  };
+  function norm(c) {
+    var mx = Math.min.apply(null, c.map(function (p) { return p[0]; }));
+    var my = Math.min.apply(null, c.map(function (p) { return p[1]; }));
+    return c.map(function (p) { return [p[0] - mx, p[1] - my]; });
+  }
+  function rot(c, t) {
+    var a = c.map(function (p) { return p.slice(); });
+    for (var i = 0; i < t; i++) {
+      var my = Math.max.apply(null, a.map(function (p) { return p[1]; }));
+      a = norm(a.map(function (p) { return [my - p[1], p[0]]; }));
+    }
+    return a;
+  }
+
+  var PIECES = [{t:"O",r:0,c:0},{t:"O",r:0,c:2},{t:"O",r:0,c:4},
+    {t:"T",r:0,c:1},{t:"L",r:0,c:3},{t:"J",r:0,c:0},{t:"I",r:0,c:1},{t:"S",r:0,c:3},
+    {t:"O",r:0,c:0},{t:"I",r:0,c:1}];
+
+  var board, cur, pi, phase, tStart, flashRows, flashUntil, raf = null;
+  function reset() {
+    board = []; for (var y = 0; y < ROWS; y++) board.push(new Array(COLS).fill(null));
+    pi = 0; flashRows = []; flashUntil = 0; spawn();
+  }
+  function collide(cells, col, row) {
+    for (var i = 0; i < cells.length; i++) {
+      var x = col + cells[i][0], y = row + cells[i][1];
+      if (x < 0 || x >= COLS || y >= ROWS) return true;
+      if (y >= 0 && board[y][x]) return true;
+    }
+    return false;
+  }
+  function landing(cells, col) { var r = -4; while (!collide(cells, col, r + 1)) r++; return r; }
+  function spawn() {
+    if (pi >= PIECES.length) { phase = "done"; return; }
+    var p = PIECES[pi], cells = rot(SHAPE[p.t], p.r);
+    var h = Math.max.apply(null, cells.map(function (c) { return c[1]; })) + 1;
+    cur = { cells: cells, col: p.c, color: COL[p.t], yStart: -h, yEnd: landing(cells, p.c) };
+    phase = "fall"; tStart = performance.now();
+  }
+  function lock() {
+    for (var i = 0; i < cur.cells.length; i++) {
+      var x = cur.col + cur.cells[i][0], y = cur.yEnd + cur.cells[i][1];
+      if (y >= 0) board[y][x] = cur.color;
+    }
+    var full = [];
+    for (var y = 0; y < ROWS; y++) { if (board[y].every(function (v) { return v; })) full.push(y); }
+    if (full.length) { flashRows = full; flashUntil = performance.now() + FLASH; phase = "flash"; }
+    else { pi++; phase = "gap"; setTimeout(spawn, GAP); }
+  }
+  function clearLines() {
+    flashRows.sort(function (a, b) { return a - b; });
+    for (var i = 0; i < flashRows.length; i++) { board.splice(flashRows[i], 1); board.unshift(new Array(COLS).fill(null)); }
+    flashRows = []; pi++; setTimeout(spawn, GAP); phase = "gap";
+  }
+  function cell(cx, cy, color) {
+    var LW = 1.5, pad = LW / 2, r = 4, x = cx * CELL + pad, y = cy * CELL + pad, w = CELL - LW, h = CELL - LW;
+    ctx.beginPath(); ctx.roundRect(x, y, w, h, r);
+    ctx.fillStyle = color; ctx.fill();
+    ctx.lineWidth = LW; ctx.strokeStyle = INK; ctx.lineJoin = "round"; ctx.stroke();
+  }
+  function draw(curY) {
+    ctx.fillStyle = BG; ctx.fillRect(0, 0, COLS * CELL, ROWS * CELL);
+    for (var y = 0; y < ROWS; y++) for (var x = 0; x < COLS; x++) { if (board[y][x]) cell(x, y, board[y][x]); }
+    if (flashRows.length) {
+      for (var i = 0; i < flashRows.length; i++) {
+        ctx.beginPath(); ctx.roundRect(0.75, flashRows[i] * CELL + 0.75, COLS * CELL - 1.5, CELL - 1.5, 4);
+        ctx.fillStyle = "#B5F0DF"; ctx.fill();
+        ctx.lineWidth = 1.5; ctx.strokeStyle = INK; ctx.stroke();
+      }
+    }
+    if (curY != null) { for (var j = 0; j < cur.cells.length; j++) cell(cur.col + cur.cells[j][0], curY + cur.cells[j][1], cur.color); }
+  }
+  var _scEl, _scFin, _scSuf, _scT0, _scRaf;
+  function _scTick() {
+    var p = Math.min(1, (performance.now() - _scT0) / 5000);
+    _scEl.textContent = Math.round(_scFin * p) + _scSuf;
+    if (p < 1) _scRaf = requestAnimationFrame(_scTick);
+  }
+  function frame(ts) {
+    if (phase === "fall") {
+      var p = Math.min(1, (ts - tStart) / FALL);
+      draw(cur.yStart + (cur.yEnd - cur.yStart) * p);
+      if (p >= 1) { phase = "idle"; lock(); }
+    } else if (phase === "flash") {
+      draw(null); if (performance.now() >= flashUntil) clearLines();
+    } else { draw(null); }
+    if (phase !== "done") raf = requestAnimationFrame(frame);
+  }
+  window.startTetrisAnim = function () {
+    if (raf) cancelAnimationFrame(raf); reset(); raf = requestAnimationFrame(frame);
+    _scEl = document.getElementById("score-tetris");
+    _scFin = 38;
+    _scSuf = " pts";
+    _scT0 = performance.now();
+    _scEl.textContent = "0" + _scSuf;
+    if (_scRaf) cancelAnimationFrame(_scRaf);
+    _scRaf = requestAnimationFrame(_scTick);
+  };
+  window.stopTetrisAnim = function () { if (raf) { cancelAnimationFrame(raf); raf = null; } if (_scRaf) cancelAnimationFrame(_scRaf); };
+})();
+
+// ===== CROSSY (estética Glovo) =====
+(function () {
+  var cv = document.getElementById("mj-crossy");
+  if (!cv) return;
+  var ctx = cv.getContext("2d");
+  var W = 320, H = 520, LANE = 58, DPR = 2;
+  cv.width = W * DPR; cv.height = H * DPR;
+  cv.style.width = "100%"; cv.style.maxWidth = W + "px"; cv.style.height = "auto";
+  ctx.scale(DPR, DPR);
+
+  var GRASS_A = "#00A082", GRASS_B = "#0FAF90", ROAD = "#4A4F57", DASH = "#FFFFFF";
+  var charImg = new Image(); charImg.src = "icons/crossyroad/personaggio.png";
+  var CAR_DEFS = [
+    { src: "icons/crossyroad/taxi.png",       faceRight: false },
+    { src: "icons/crossyroad/police.png",     faceRight: true },
+    { src: "icons/crossyroad/coche_azul.png", faceRight: true },
+    { src: "icons/crossyroad/coche_rojo.png", faceRight: true }
+  ];
+  var carImgs = CAR_DEFS.map(function (d) { var i = new Image(); i.src = d.src; return i; });
+
+  var LANES = [
+    { type: "grass" },
+    { type: "road", dir: -1, sp: 74,  cars: [0, 2] },
+    { type: "road", dir: +1, sp: 96,  cars: [1, 3] },
+    { type: "grass" },
+    { type: "road", dir: +1, sp: 82,  cars: [2, 1] },
+    { type: "road", dir: -1, sp: 104, cars: [3, 0] },
+    { type: "grass" },
+    { type: "road", dir: -1, sp: 88,  cars: [0, 1] },
+    { type: "grass" }
+  ];
+  var NL = LANES.length, CX = W / 2;
+  function laneY(i) { return H - (i + 1) * LANE; }
+  function laneCY(i) { return laneY(i) + LANE / 2; }
+
+  function setup() {
+    for (var i = 0; i < NL; i++) {
+      var L = LANES[i]; if (L.type !== "road") continue;
+      L.objs = []; var n = L.cars.length, span = W + 240;
+      for (var k = 0; k < n; k++) {
+        var im = carImgs[L.cars[k]];
+        var iw = im.naturalWidth || 420, ih = im.naturalHeight || 180;
+        var sc = (LANE * 0.62) / ih;
+        L.objs.push({ idx: L.cars[k], w: iw * sc, h: ih * sc, x: k * span / n + (i * 61) % 140 });
+      }
+      L.wrap = span;
+    }
+  }
+  var charLane, hopFrom, hopTo, hopT, hopping, nextHop, finished, raf = null, last;
+  function reset() { setup(); charLane = 0; hopping = false; nextHop = performance.now() + 300; finished = false; last = null; }
+  function laneClear(i) {
+    var L = LANES[i]; if (L.type !== "road") return true;
+    var safe = 46;
+    for (var j = 0; j < L.objs.length; j++) {
+      var o = L.objs[j];
+      for (var t = 0; t < 2; t++) {
+        var dt = t === 0 ? 0 : 0.2;
+        var x = o.x + L.dir * L.sp * dt;
+        if (x + o.w > CX - safe && x < CX + safe) return false;
+      }
+    }
+    return true;
+  }
+  function update(dt, now) {
+    for (var i = 0; i < NL; i++) {
+      var L = LANES[i]; if (L.type !== "road") continue;
+      for (var j = 0; j < L.objs.length; j++) {
+        var o = L.objs[j];
+        o.x += L.dir * L.sp * dt;
+        if (L.dir > 0 && o.x > W + 80) o.x -= L.wrap;
+        if (L.dir < 0 && o.x < -o.w - 80) o.x += L.wrap;
+      }
+    }
+    if (hopping) { hopT += dt / 0.2; if (hopT >= 1) { hopping = false; charLane = hopTo; nextHop = now + (LANES[charLane].type === "grass" ? 240 : 40); } }
+    else if (!finished && now >= nextHop) {
+      var t2 = charLane + 1;
+      if (t2 >= NL) finished = true;
+      else if (laneClear(t2)) { hopFrom = charLane; hopTo = t2; hopT = 0; hopping = true; }
+      else nextHop = now + 50;
+    }
+  }
+  function draw() {
+    for (var i = 0; i < NL; i++) {
+      var L = LANES[i], y = laneY(i);
+      if (L.type === "grass") { ctx.fillStyle = (i % 2 ? GRASS_A : GRASS_B); ctx.fillRect(0, y, W, LANE); }
+      else {
+        ctx.fillStyle = ROAD; ctx.fillRect(0, y, W, LANE);
+        ctx.fillStyle = DASH;
+        for (var x = 8; x < W; x += 38) { ctx.beginPath(); ctx.roundRect(x, y + LANE / 2 - 2, 20, 4, 2); ctx.fill(); }
+      }
+    }
+    for (var i2 = 0; i2 < NL; i2++) {
+      var L2 = LANES[i2]; if (L2.type !== "road") continue;
+      var cy = laneCY(i2);
+      for (var j2 = 0; j2 < L2.objs.length; j2++) {
+        var o = L2.objs[j2], im = carImgs[o.idx]; if (!im.complete) continue;
+        var mirror = (L2.dir > 0) !== CAR_DEFS[o.idx].faceRight;
+        ctx.save(); ctx.translate(o.x + o.w / 2, cy);
+        if (mirror) ctx.scale(-1, 1);
+        ctx.drawImage(im, -o.w / 2, -o.h / 2, o.w, o.h);
+        ctx.restore();
+      }
+    }
+    var cy2 = laneCY(charLane);
+    if (hopping) { var y0 = laneCY(hopFrom), y1 = laneCY(hopTo); cy2 = y0 + (y1 - y0) * hopT - Math.sin(Math.PI * hopT) * 18; }
+    if (charImg.complete) {
+      var sc = (LANE * 0.82) / charImg.naturalHeight, cw = charImg.naturalWidth * sc, ch = charImg.naturalHeight * sc;
+      ctx.save(); ctx.translate(CX, cy2); ctx.drawImage(charImg, -cw / 2, -ch / 2, cw, ch); ctx.restore();
+    }
+  }
+  function frame(ts) {
+    if (last === null) last = ts;
+    var dt = (ts - last) / 1000; last = ts; if (dt > 0.05) dt = 0.05;
+    update(dt, performance.now()); ctx.clearRect(0, 0, W, H); draw();
+    raf = requestAnimationFrame(frame);
+  }
+  var _scEl, _scFin, _scSuf, _scT0, _scRaf;
+  function _scTick() {
+    var p = Math.min(1, (performance.now() - _scT0) / 5000);
+    _scEl.textContent = Math.round(_scFin * p) + _scSuf;
+    if (p < 1) _scRaf = requestAnimationFrame(_scTick);
+  }
+  window.startCrossyAnim = function () {
+    if (raf) cancelAnimationFrame(raf); reset(); raf = requestAnimationFrame(frame);
+    _scEl = document.getElementById("score-crossy");
+    _scFin = 38;
+    _scSuf = " pts";
+    _scT0 = performance.now();
+    _scEl.textContent = "0" + _scSuf;
+    if (_scRaf) cancelAnimationFrame(_scRaf);
+    _scRaf = requestAnimationFrame(_scTick);
+  };
+  window.stopCrossyAnim = function () { if (raf) { cancelAnimationFrame(raf); raf = null; } if (_scRaf) cancelAnimationFrame(_scRaf); };
+})();
+
+// ===== SNAKE (estética Glovo) =====
+(function () {
+  var cv = document.getElementById("mj-snake");
+  if (!cv) return;
+  var ctx = cv.getContext("2d");
+  var W = 320, H = 520, GW = 8, GH = 13, CELL = 34, DPR = 2;
+  var OFX = (W - GW * CELL) / 2, OFY = (H - GH * CELL) / 2;
+  cv.width = W * DPR; cv.height = H * DPR;
+  cv.style.width = "100%"; cv.style.maxWidth = W + "px"; cv.style.height = "auto";
+  ctx.scale(DPR, DPR);
+
+  var moto = new Image(); moto.src = "icons/snake/moto.png";
+  var SRC = ["icons/snake/cuadrado_amarillo.png", "icons/snake/cuadrado_azul.png", "icons/snake/cuadrado_rojo.png"];
+  var tiles = SRC.map(function (s) { var i = new Image(); i.src = s; return i; });
+  var NT = tiles.length;
+  function tileAt(k) { return tiles[((k % NT) + NT) % NT]; }
+
+  var PATH = [
+    [1,9],[2,9],[3,9],[4,9],[5,9],[6,9],
+    [6,8],[6,7],[6,6],
+    [5,6],[4,6],[3,6],[2,6],[1,6],
+    [1,5],[1,4],[1,3],
+    [2,3],[3,3],[4,3],[5,3],[6,3]
+  ];
+  var FOODS = [4, 8, 12, 16, 20], STEP = 0.22;
+  var idx, f, len, foodPtr, finished, raf = null, last;
+  function reset() { idx = 0; f = 0; len = 4; foodPtr = 0; finished = false; last = null; }
+  function cc(col, row) { return [OFX + col * CELL + CELL / 2, OFY + row * CELL + CELL / 2]; }
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function update(dt) {
+    if (finished) return;
+    f += dt / STEP;
+    while (f >= 1) {
+      f -= 1; idx++;
+      if (foodPtr < FOODS.length && idx === FOODS[foodPtr]) { len++; foodPtr++; }
+      if (idx >= PATH.length - 1) { idx = PATH.length - 2; f = 1; finished = true; break; }
+    }
+  }
+  function segPos(s) {
+    var a = Math.max(0, idx - s), b = Math.min(PATH.length - 1, idx - s + 1);
+    var pa = cc(PATH[a][0], PATH[a][1]), pb = cc(PATH[b][0], PATH[b][1]);
+    return [lerp(pa[0], pb[0], f), lerp(pa[1], pb[1], f), PATH[a], PATH[b], a];
+  }
+  function draw() {
+    ctx.fillStyle = "#F5F5F5"; ctx.fillRect(0, 0, W, H);
+    ctx.strokeStyle = "rgba(0,0,0,.07)";
+    for (var x = 0; x <= GW; x++) { ctx.beginPath(); ctx.moveTo(OFX + x * CELL, OFY); ctx.lineTo(OFX + x * CELL, OFY + GH * CELL); ctx.stroke(); }
+    for (var y = 0; y <= GH; y++) { ctx.beginPath(); ctx.moveTo(OFX, OFY + y * CELL); ctx.lineTo(OFX + GW * CELL, OFY + y * CELL); ctx.stroke(); }
+    if (foodPtr < FOODS.length) {
+      var fi = FOODS[foodPtr], fc = PATH[fi], p = cc(fc[0], fc[1]);
+      var sz0 = CELL * 0.78, im0 = tileAt(fi);
+      if (im0.complete) ctx.drawImage(im0, p[0] - sz0 / 2, p[1] - sz0 / 2, sz0, sz0);
+    }
+    var maxSeg = Math.min(len - 1, idx);
+    for (var s = maxSeg; s >= 1; s--) {
+      var r = segPos(s), im = tileAt(r[4]), sz = CELL * 0.78;
+      if (im.complete) ctx.drawImage(im, r[0] - sz / 2, r[1] - sz / 2, sz, sz);
+    }
+    var hr = segPos(0), ca = hr[2], cb = hr[3];
+    var dc = cb[0] - ca[0], dr = cb[1] - ca[1], ang = 0;
+    if (dr < 0) ang = 0; else if (dr > 0) ang = Math.PI; else if (dc > 0) ang = Math.PI / 2; else if (dc < 0) ang = -Math.PI / 2;
+    if (moto.complete) {
+      var sc = (CELL * 1.35) / moto.naturalHeight, mw = moto.naturalWidth * sc, mh = moto.naturalHeight * sc;
+      ctx.save(); ctx.translate(hr[0], hr[1]); ctx.rotate(ang);
+      ctx.drawImage(moto, -mw / 2, -mh / 2, mw, mh); ctx.restore();
+    }
+  }
+  function frame(ts) {
+    if (last === null) last = ts;
+    var dt = (ts - last) / 1000; last = ts; if (dt > 0.05) dt = 0.05;
+    update(dt); draw(); raf = requestAnimationFrame(frame);
+  }
+  var _scEl, _scFin, _scSuf, _scT0, _scRaf;
+  function _scTick() {
+    var p = Math.min(1, (performance.now() - _scT0) / 5000);
+    _scEl.textContent = Math.round(_scFin * p) + _scSuf;
+    if (p < 1) _scRaf = requestAnimationFrame(_scTick);
+  }
+  window.startSnakeAnim = function () {
+    if (raf) cancelAnimationFrame(raf); reset(); raf = requestAnimationFrame(frame);
+    _scEl = document.getElementById("score-snake");
+    _scFin = 38;
+    _scSuf = " pts";
+    _scT0 = performance.now();
+    _scEl.textContent = "0" + _scSuf;
+    if (_scRaf) cancelAnimationFrame(_scRaf);
+    _scRaf = requestAnimationFrame(_scTick);
+  };
+  window.stopSnakeAnim = function () { if (raf) { cancelAnimationFrame(raf); raf = null; } if (_scRaf) cancelAnimationFrame(_scRaf); };
+})();
+  var minijuegoTimeoutId = null;
+  var minijuegoTerminado = false;
+  var minijuegoHasGanado = false;
+
+  var _cdTimers = [];
+  function cuentaAtras(cb) {
+    _cdTimers.forEach(clearTimeout); _cdTimers = [];
+    var ov = document.getElementById("mj-countdown");
+    var num = document.getElementById("mj-countdown-num");
+    if (!ov.dataset.bound) { ov.addEventListener("click", function (e) { e.stopPropagation(); }); ov.dataset.bound = "1"; }
+    ov.hidden = false;
+    var pasos = ["3", "2", "1", "¡YA!"];
+    pasos.forEach(function (txt, i) {
+      _cdTimers.push(setTimeout(function () {
+        num.textContent = txt;
+        num.style.animation = "none"; void num.offsetWidth; num.style.animation = "mjpop .5s ease";
+      }, i * 500));
+    });
+    _cdTimers.push(setTimeout(function () { ov.hidden = true; cb(); }, pasos.length * 500));
+  }
+
+  var _finTimer = null, _partidaFinalizada = false;
+  function finalizarPartida(hasGanado) {
+    if (_partidaFinalizada) return;
+    _partidaFinalizada = true;
+    clearTimeout(minijuegoTimeoutId);
+    GAMES[juegoElegido].stop();                       // para la animación
+    var ov = document.getElementById("mj-puntuacion");
+    ov.hidden = false;
+    _finTimer = setTimeout(function () {
+      ov.hidden = true;
+      terminarMinijuego(hasGanado);                   // el flujo de siempre, intacto
+    }, 2000);
+  }
+
+  function iniciarMinijuego() {
+    minijuegoHasGanado = Math.random() < 0.5;
+    minijuegoTerminado = false;
+    _partidaFinalizada = false;
+    navigate("screen-minijuego");
+    var g = GAMES[juegoElegido];
+    GAMES.forEach(function (x) {
+      var el = document.getElementById(x.cont);
+      if (!el) return;
+      var activo = (x.cont === g.cont);
+      el.hidden = !activo;
+      el.style.display = activo ? "" : "none";
+    });
+    cuentaAtras(function () {
+      g.start();
+      minijuegoTimeoutId = setTimeout(function () {
+        finalizarPartida(minijuegoHasGanado);
+      }, 5000);
+    });
+  }
+
+  function terminarMinijuego(hasGanado) {
+    if (minijuegoTerminado) return;
+    minijuegoTerminado = true;
+    clearTimeout(minijuegoTimeoutId);
+    GAMES[juegoElegido].stop();
+    juegoPendiente = null;
+    resetConexionTimer();
+
+    var puntosTu = hasGanado ? 15 : 10;
+    var puntosPartner = hasGanado ? 10 : 15;
+    state.rider.puntos += puntosTu;
+    state.partner.puntos += puntosPartner;
+    saveState();
+
+    document.getElementById("final-titulo").textContent = hasGanado ? "¡Has ganado!" : "¡Vaya! Has perdido";
+    document.getElementById("final-partner-nombre").textContent = state.partner.nombre;
+
+    document.getElementById("screen-reto-finalizado").classList.toggle("is-ganado", hasGanado);
+    document.getElementById("screen-reto-finalizado").classList.toggle("is-perdido", !hasGanado);
+
+    document.getElementById("final-rank-tu").textContent = hasGanado ? "#1" : "#2";
+    document.getElementById("final-rank-partner").textContent = hasGanado ? "#2" : "#1";
+    document.getElementById("final-row-tu").classList.toggle("is-ganador", hasGanado);
+    document.getElementById("final-row-partner").classList.toggle("is-ganador", !hasGanado);
+    document.getElementById("final-row-tu").style.order = hasGanado ? "1" : "2";
+    document.getElementById("final-row-partner").style.order = hasGanado ? "2" : "1";
+
+    navigate("screen-reto-finalizado");
+    reproducirAnimacionFinalizado(puntosTu, puntosPartner);
+
+    state.retoActivo = null;
+    saveState();
+  }
+
+  function initQR() {
+    document.getElementById("qr-header-puntos").textContent = state.rider.puntos;
+
+    var box = document.getElementById("qr-box");
+    var fallback = document.getElementById("qr-fallback");
+    var libReady = window.__qrLibLoaded === true && typeof QRCode !== "undefined";
+
+    if (!libReady) {
+      fallback.hidden = false;
+      return;
+    }
+
+    box.innerHTML = "";
+    try {
+      new QRCode(box, {
+        text: "glovo-retos-demo-" + state.rider.nombre,
+        width: 200,
+        height: 200,
+        colorDark: "#111111",
+        colorLight: "#ffffff"
+      });
+    } catch (e) {
+      box.innerHTML = "";
+      fallback.hidden = false;
+      box.appendChild(fallback);
+    }
+  }
+
+  function switchTab(tabName) {
+    var isQr = tabName === "qrcode";
+    document.getElementById("tab-btn-qrcode").classList.toggle("is-active", isQr);
+    document.getElementById("tab-btn-scan").classList.toggle("is-active", !isQr);
+    document.getElementById("tab-panel-qrcode").hidden = !isQr;
+    document.getElementById("tab-panel-scan").hidden = isQr;
+  }
+
+  // -------------------- eventos --------------------
+
+  document.getElementById("btn-retos-entry").addEventListener("click", function () {
+    renderHome();
+    navigate("screen-home");
+  });
+
+  document.getElementById("btn-back-home").addEventListener("click", function () {
+    renderGlovoHome();
+    navigate("screen-glovo-home");
+  });
+
+  document.getElementById("btn-demo-pedido").addEventListener("click", function () {
+    simularEntregaPedido();
+  });
+
+  document.getElementById("btn-demo-pedido-ana").addEventListener("click", function () {
+    simularEntregaPedidoAna();
+  });
+
+  document.getElementById("btn-toast").addEventListener("click", function () {
+    ocultarToast();
+    abrirReto();
+  });
+
+  document.getElementById("btn-toast-ana").addEventListener("click", function () {
+    ocultarToastAna();
+    abrirReto();
+  });
+
+  document.getElementById("btn-empezar").addEventListener("click", function () {
+    if (state.retoActivo) {
+      renderMinijuegoInicio();
+      navigate("screen-minijuego-inicio");
+      return;
+    }
+    switchTab("qrcode");
+    navigate("screen-qr");
+    initQR();
+  });
+
+  document.getElementById("btn-back-qr").addEventListener("click", function () {
+    navigate("screen-home");
+  });
+
+  document.getElementById("tab-btn-qrcode").addEventListener("click", function () {
+    switchTab("qrcode");
+  });
+
+  document.getElementById("tab-btn-scan").addEventListener("click", function () {
+    switchTab("scan");
+  });
+
+  document.getElementById("btn-demo-skip").addEventListener("click", function () {
+    renderConfirm();
+    document.getElementById("modal-confirmar").hidden = false;
+  });
+
+  document.getElementById("btn-cancelar").addEventListener("click", function () {
+    document.getElementById("modal-confirmar").hidden = true;
+  });
+
+  document.getElementById("btn-confirmar").addEventListener("click", function () {
+    var inicio = Date.now();
+    state.retoActivo = {
+      partnerNombre: state.partner.nombre,
+      inicio: inicio,
+      fin: inicio + 1 * 24 * 60 * 60 * 1000,
+      puntosReto: 0,
+      pedidos: [],
+      partnerPuntosReto: 0,
+      partnerPedidos: []
+    };
+    resetConexionTimer();
+    state.rider.racha += 1;
+    saveState();
+    document.getElementById("modal-confirmar").hidden = true;
+    renderMinijuegoInicio();
+    navigate("screen-minijuego-inicio");
+  });
+
+  document.getElementById("btn-ver-reto-home").addEventListener("click", function () {
+    abrirReto();
+  });
+
+  document.getElementById("btn-back-reto").addEventListener("click", function () {
+    if (state.retoActivo) {
+      renderGlovoHome();
+      navigate("screen-glovo-home");
+    } else {
+      renderHome();
+      navigate("screen-home");
+    }
+  });
+
+  document.getElementById("btn-ajustes").addEventListener("click", function () {
+    navigate("screen-ajustes");
+  });
+
+  document.getElementById("btn-back-ajustes").addEventListener("click", function () {
+    navigate("screen-reto");
+  });
+
+  document.getElementById("btn-historial").addEventListener("click", function () {
+    alert("Historial completo del reto — próximamente.");
+  });
+
+  document.getElementById("btn-abandonar").addEventListener("click", function () {
+    alert("Abandonar reto — próximamente.");
+  });
+
+  document.getElementById("reto-nivel-chip").addEventListener("click", function () {
+    abrirRecompensas("reto");
+  });
+
+  document.getElementById("qr-nivel-chip").addEventListener("click", function () {
+    abrirRecompensas("qr");
+  });
+
+  document.getElementById("btn-ver-retos-pasados").addEventListener("click", function () {
+    mostrarRetosPasadosPlaceholder();
+  });
+
+  document.getElementById("btn-demo-finalizar").addEventListener("click", function () {
+    finalizarReto();
+  });
+
+  document.getElementById("btn-back-reto-finalizado").addEventListener("click", function () {
+    renderHome();
+    navigate("screen-home");
+  });
+
+  document.getElementById("screen-reto-finalizado").addEventListener("click", function () {
+    saltarAnimacionFinalizado(finalAnimPuntosTu, finalAnimPuntosPartner);
+  });
+
+  document.getElementById("btn-jugar-minijuego").addEventListener("click", function () {
+    if (juegoPendiente !== null) {
+      juegoElegido = juegoPendiente;
+      iniciarMinijuego();
+    } else {
+      abrirRuleta();
+    }
+  });
+
+  document.getElementById("btn-back-minijuego-inicio").addEventListener("click", function () {
+    renderHome();
+    navigate("screen-home");
+  });
+
+  document.getElementById("minijuego-inicio-nivel-chip").addEventListener("click", function () {
+    abrirRecompensas("minijuego-inicio");
+  });
+
+  document.getElementById("btn-jugar").addEventListener("click", function () {
+    iniciarMinijuego();
+  });
+
+  document.getElementById("btn-back-ruleta").addEventListener("click", function () {
+    renderMinijuegoInicio();
+    navigate("screen-minijuego-inicio");
+  });
+
+  document.getElementById("screen-minijuego").addEventListener("click", function () {
+    if (!minijuegoTerminado) {
+      finalizarPartida(minijuegoHasGanado);
+    }
+  });
+
+  document.getElementById("btn-ir-premios").addEventListener("click", function () {
+    abrirRecompensas("home");
+  });
+
+  document.getElementById("btn-back-racha-pro").addEventListener("click", function () {
+    abrirRecompensas(recompensasOrigen);
+  });
+
+  document.getElementById("screen-racha-pro").addEventListener("click", function () {
+    saltarAnimacionRachaPro();
+  });
+
+  document.getElementById("btn-racha-pro-ir-premios").addEventListener("click", function () {
+    abrirRecompensas(recompensasOrigen);
+  });
+
+  document.getElementById("btn-back-recompensas").addEventListener("click", function () {
+    if (recompensasOrigen === "reto") {
+      renderReto();
+      navigate("screen-reto");
+    } else if (recompensasOrigen === "qr") {
+      navigate("screen-qr");
+      initQR();
+    } else if (recompensasOrigen === "minijuego-inicio") {
+      renderMinijuegoInicio();
+      navigate("screen-minijuego-inicio");
+    } else {
+      renderHome();
+      navigate("screen-home");
+    }
+  });
+
+  document.getElementById("btn-ver-mis-premios").addEventListener("click", function () {
+    abrirMisPremios();
+  });
+
+  document.getElementById("btn-back-mis-premios").addEventListener("click", function () {
+    renderRecompensas();
+    navigate("screen-recompensas");
+  });
+
+  document.getElementById("btn-demo-forzar-pro").addEventListener("click", function () {
+    forzarRachaPro();
+  });
+
+  document.getElementById("btn-demo-romper-racha").addEventListener("click", function () {
+    romperRacha();
+  });
+
+  document.getElementById("btn-back-detalle").addEventListener("click", function () {
+    if (detalleOrigenScreen === "screen-mis-premios") {
+      renderMisPremios();
+      navigate("screen-mis-premios");
+    } else {
+      renderRecompensas();
+      navigate("screen-recompensas");
+    }
+  });
+
+  document.getElementById("btn-abrir-canjear").addEventListener("click", function () {
+    abrirSheetCanjear();
+  });
+
+  document.getElementById("btn-cerrar-sheet").addEventListener("click", function () {
+    cerrarSheetCanjear();
+  });
+
+  document.getElementById("btn-sheet-volver").addEventListener("click", function () {
+    cerrarSheetCanjear();
+  });
+
+  document.getElementById("btn-sheet-canjear").addEventListener("click", function () {
+    confirmarCanje();
+  });
+
+  document.getElementById("btn-copiar-codigo").addEventListener("click", function () {
+    if (!detallePremioActual) return;
+    var btn = document.getElementById("btn-copiar-codigo");
+    var original = btn.textContent;
+    copiarCodigo(detallePremioActual.codigo).then(function () {
+      btn.textContent = "¡Copiado!";
+      setTimeout(function () { btn.textContent = original; }, 1500);
+    }).catch(function () {});
+  });
+
+  // -------------------- estado inicial --------------------
+
+  renderGlovoHome();
+  navigate("screen-glovo-home");
+})();
+</script>
+
+</body>
+</html>
