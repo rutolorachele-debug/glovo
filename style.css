@@ -36,6 +36,9 @@
 
   /* Primitivo Gray/500 de la Design Library, sin alias semántico propio */
   --color-neutral-500: #757575;
+  --color-orange-300: #fede86;
+  /* Giallo ufficiale Glovo, unico giallo del prototipo */
+  --color-yellow-brand: #ffc244;
 
   /* Spacing (escala resuelta de la library, no redondear) */
   --space-0: 0px;
@@ -44,7 +47,7 @@
   --space-3: 14px;
   --space-4: 16px;
   --space-5: 18px;
-  --space-6: 32px;
+  --space-9: 32px;
 
   /* Radius */
   --radius-none: 0px;
@@ -64,11 +67,19 @@
 
 html,
 body {
+  height: 100%;
+}
+
+body {
   margin: 0;
-  padding: 0;
+  padding: 24px;
+  overflow: hidden;
   background: var(--color-bg-tertiary);
   font-family: var(--font-family-base);
   color: var(--color-content-default);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 button {
@@ -162,24 +173,24 @@ button {
    Layout — contenedor tipo móvil
    ========================================================================== */
 
+/* Cornice fissa da telefono, come nel prototipo di Pillowtalk: 390x844 */
 .app {
-  max-width: 420px;
-  min-height: 100vh;
-  min-height: 100dvh;
-  margin: 0 auto;
+  width: 390px;
+  height: 844px;
+  flex: none;
   background: var(--color-bg-default);
   display: flex;
   flex-direction: column;
   position: relative;
-  overflow-x: hidden;
-  box-shadow: 0 0 24px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  border-radius: 44px;
+  box-shadow: 0 30px 70px rgba(15, 10, 40, 0.28);
 }
 
 .screen {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  min-height: 100dvh;
+  min-height: 100%;
 }
 
 .screen[hidden] {
@@ -251,32 +262,9 @@ button {
   background: var(--color-bg-tertiary);
 }
 
-.topbar-title {
-  flex: 1;
-}
-
-.topbar-settings {
-  border: none;
-  background: none;
-  font-size: 22px;
-  line-height: 1;
-  color: var(--color-content-default);
-  cursor: pointer;
-  padding: var(--space-1);
-  border-radius: var(--radius-md);
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.topbar-settings:hover {
-  background: var(--color-bg-tertiary);
-}
-
 .content {
   flex: 1;
-  padding: var(--space-6) var(--space-4) var(--space-4);
+  padding: var(--space-9) var(--space-4) var(--space-4);
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
@@ -346,30 +334,6 @@ button {
   background: var(--color-bg-tertiary);
 }
 
-.btn-text {
-  background: none;
-  color: var(--color-content-secondary);
-  text-decoration: underline;
-  width: auto;
-  padding: var(--space-1);
-}
-
-.ajustes-item {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  text-align: left;
-  padding: var(--space-4) 0;
-  border-bottom: 1px solid var(--color-border-secondary);
-  border-radius: 0;
-}
-
-.ajustes-item-icon {
-  flex-shrink: 0;
-  color: var(--color-content-secondary);
-}
-
 /* ==========================================================================
    Controles Demo — separados visualmente, fáciles de eliminar
    ========================================================================== */
@@ -401,13 +365,6 @@ button {
 .demo-btn:disabled:hover {
   background: var(--color-bg-warning);
   color: var(--color-content-danger);
-}
-
-.demo-block {
-  margin-top: auto;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
 }
 
 /* ==========================================================================
@@ -603,13 +560,6 @@ button {
   flex-shrink: 0;
 }
 
-/* Fila de chips secundarios (puntos / racha) */
-.partner-chip-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
 .partner-chip {
   background: none;
   border-radius: var(--radius-pill);
@@ -664,14 +614,6 @@ button {
   color: inherit;
 }
 
-.banner-active {
-  background: var(--color-bg-success);
-  border: 1px solid var(--color-border-success);
-  color: var(--color-content-success);
-  border-radius: var(--radius-md);
-  padding: var(--space-4);
-}
-
 /* ==========================================================================
    Componentes específicos del flujo 1-3 — Recibir info de puntos
    ========================================================================== */
@@ -684,7 +626,7 @@ button {
   align-self: flex-end;
   width: 64px;
   height: 64px;
-  background: #ffc244;
+  background: var(--color-yellow-brand);
   border: none;
   border-radius: var(--radius-full);
   padding: 0;
@@ -702,92 +644,9 @@ button {
   height: 41px;
   object-fit: contain;
 }
-
-.retos-badge-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: var(--radius-full);
-  background: var(--color-bg-danger);
-  position: absolute;
-  top: 4px;
-  right: 4px;
-}
-
-.retos-badge-dot[hidden] {
-  display: none;
-}
-
-.toast-notification {
-  position: absolute;
-  top: var(--space-3);
-  left: var(--space-3);
-  right: var(--space-3);
-  z-index: 20;
-  transform: translateY(-12px);
-  opacity: 0;
-  pointer-events: none;
-  transition: transform 0.25s ease, opacity 0.25s ease;
-}
-
-.toast-notification.is-visible {
-  transform: translateY(0);
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.toast-btn {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  width: 100%;
-  background: var(--color-bg-default);
-  border: 1px solid var(--color-border-default);
-  border-radius: var(--radius-md);
-  padding: var(--space-3) var(--space-4);
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.16);
-  cursor: pointer;
-  text-align: left;
-  font-family: var(--font-family-base);
-}
-
-.toast-icon {
-  width: 44px;
-  height: 41px;
-  object-fit: contain;
-  flex-shrink: 0;
-}
-
-.toast-text {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.toast-title {
-  font-weight: 700;
-}
-
-.prototype-note {
-  background: var(--color-bg-tertiary);
-  border: 1px solid var(--color-border-default);
-  border-radius: var(--radius-md);
-  padding: var(--space-3);
-  color: var(--color-content-tertiary);
-}
-
 /* ==========================================================================
    Componentes específicos del flujo 1-2 — Reto Activo
    ========================================================================== */
-
-.reto-description {
-  background: var(--color-bg-tertiary);
-  color: var(--color-content-default);
-  border-radius: var(--radius-md);
-  padding: var(--space-4);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-}
 
 /* padding-top:0 a propósito: mismo offset vertical que el resto de los
    títulos de pantalla (ver .reto-heading-row) */
@@ -817,11 +676,6 @@ button {
 #home-reto-activo .content {
   flex: 1;
   min-height: 0;
-}
-
-.bienvenido-hero-icon {
-  width: 122.667px;
-  height: 111.516px;
 }
 
 /* Foto hero de bienvenida (pantalla de entrada Retos, sin reto activo) —
@@ -966,7 +820,7 @@ button {
 
 /* Botón fijo "Premios" de la barra: amarillo, no verde Chill/Pro */
 .reto-topbar-chips .partner-level-chip-btn {
-  background: #ffbf41;
+  background: var(--color-yellow-brand);
 }
 
 .reto-topbar-chips .partner-level-chip-icon {
@@ -1002,11 +856,6 @@ button {
    con position:absolute, sin afectar el flujo/centrado de .minijuego-inicio-cards-wrap */
 .minijuego-inicio-cards-img-wrap {
   position: relative;
-}
-
-.conexion-timer-row {
-  display: flex;
-  justify-content: center;
 }
 
 .conexion-timer-badge {
@@ -1089,35 +938,6 @@ button {
   flex-shrink: 0;
 }
 
-.reto-heading-text {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.reto-countdown {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  color: var(--color-content-brand);
-  font-size: 12px;
-  line-height: 16px;
-  font-weight: 600;
-  margin: 0;
-}
-
-.reto-countdown svg {
-  width: 16px;
-  height: 16px;
-  flex-shrink: 0;
-  color: inherit;
-}
-
-.reto-copy {
-  color: var(--color-content-default);
-  margin: 0;
-}
-
 .reto-orders-card {
   background: var(--color-bg-secondary);
   border-radius: var(--radius-xsm);
@@ -1125,93 +945,6 @@ button {
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
-}
-
-.reto-orders-total {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.pedido-list {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  /* Sin límite propio: el tope de 5 filas es un límite de datos (JS), no de altura/scroll */
-  height: auto;
-}
-
-.pedido-list.is-empty {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 200px;
-}
-
-.pedido-list-empty {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-}
-
-.pedido-list-empty-illustration {
-  width: 218.89px;
-  height: 138.48px;
-}
-
-.pedido-list-empty-text {
-  font-size: 12px;
-  line-height: 16px;
-  font-weight: 500;
-  color: var(--color-content-tertiary);
-  text-align: center;
-  margin: 0;
-}
-
-.pedido-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-2);
-  padding: 4px var(--space-4);
-  border-radius: var(--radius-md);
-  background: var(--color-bg-tertiary);
-  border: 1px solid transparent;
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.pedido-item.is-nuevo {
-  background: var(--color-bg-default);
-  border-color: var(--color-border-brand);
-}
-
-.pedido-item.pedido-enter {
-  opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
-}
-
-.pedido-item.pedido-enter.pedido-enter-active {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.pedido-item-left {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-}
-
-.pedido-cliente {
-  font-size: 14px;
-  line-height: 20px;
-  color: var(--color-content-tertiary);
-}
-
-.pedido-item.is-nuevo .pedido-cliente {
-  color: var(--color-content-default);
 }
 
 .pedido-avatar {
@@ -1222,36 +955,12 @@ button {
   flex-shrink: 0;
 }
 
-.pedido-item-right {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-}
-
-.pedido-rider-label {
-  font-size: 10px;
-  line-height: 12px;
-  font-weight: 700;
-  color: var(--color-content-tertiary);
-}
-
-.pedido-rider-label.is-tu {
-  color: var(--color-content-brand);
-}
-
-.pedido-empty {
-  text-align: center;
-  color: var(--color-content-tertiary);
-  padding: var(--space-4) 0;
-}
-
 /* ==========================================================================
    Modal — Confirmar conexión
    ========================================================================== */
 
 .modal-overlay {
-  position: fixed;
+  position: absolute;
   inset: 0;
   background: rgba(17, 17, 17, 0.5);
   display: flex;
@@ -1284,22 +993,22 @@ button {
    Pantalla — Reto Finalizado
    ========================================================================== */
 
-/* #ffbf41 no tiene token correspondiente en el Design System (escala Orange
-   comprobada: 100/300/500/600/700, ninguno coincide). Valor literal a petición. */
+/* Fondo de Reto Finalizado alineado con la Design Library:
+   ganado = primitive/orange/300 (#fede86), perdido = background/default/tertiary (#f5f5f5). */
 #screen-reto-finalizado.is-ganado {
-  background: #ffbf41;
+  background: var(--color-orange-300);
 }
 
 #screen-reto-finalizado.is-perdido {
-  background: var(--color-border-default);
+  background: var(--color-bg-tertiary);
 }
 
 #screen-reto-finalizado.is-ganado .reto-topbar {
-  background: #ffbf41;
+  background: var(--color-orange-300);
 }
 
 #screen-reto-finalizado.is-perdido .reto-topbar {
-  background: var(--color-border-default);
+  background: var(--color-bg-tertiary);
 }
 
 /* Centrado visual fijo en el centro exacto de la pantalla, independiente
@@ -1400,6 +1109,11 @@ button {
   border: 2px solid #58cfba;
 }
 
+/* Con fondo de pantalla tertiary (perdido), las filas pasan a blanco para no confundirse con el fondo. */
+#screen-reto-finalizado.is-perdido .reto-finalizado-row {
+  background: var(--color-bg-default);
+}
+
 .reto-finalizado-rank {
   font-size: 22px;
   line-height: 30px;
@@ -1490,11 +1204,11 @@ button {
    ========================================================================== */
 
 #screen-racha-pro {
-  background: #ffbf41;
+  background: var(--color-yellow-brand);
 }
 
 #screen-racha-pro .reto-topbar {
-  background: #ffbf41;
+  background: var(--color-yellow-brand);
 }
 
 #screen-racha-pro .content {
@@ -1611,7 +1325,7 @@ button {
 }
 
 /* Chip de nivel Chill/Pro en el header de Recompensas: verde por defecto (Chill),
-   naranja #ffbf41 cuando es Pro — el mismo literal sin token ya usado en Reto Finalizado */
+   amarillo (--color-yellow-brand) cuando es Pro */
 .partner-level-chip.is-pro {
   background: var(--color-bg-brand-secondary);
 }
@@ -1624,7 +1338,7 @@ button {
 #mis-premios-nivel-chip.is-pro,
 #detalle-nivel-chip,
 #detalle-nivel-chip.is-pro {
-  background: #ffbf41;
+  background: var(--color-yellow-brand);
 }
 
 .recompensas-pro-heading {
@@ -1767,7 +1481,7 @@ button {
   padding: 4px 10px;
   font-size: 16px;
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--color-content-default);
   line-height: 1;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16);
 }
@@ -1790,18 +1504,6 @@ button {
   z-index: 2;
 }
 
-.badge-canjeada {
-  display: inline-block;
-  background: var(--color-bg-success);
-  color: var(--color-content-success);
-  border: 1px solid var(--color-border-success);
-  border-radius: var(--radius-full);
-  padding: 2px var(--space-2);
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
 /* ==========================================================================
    Componentes específicos del flujo 2-3 — Detalle / canje de recompensa
    ========================================================================== */
@@ -1818,8 +1520,13 @@ button {
   align-self: flex-start;
 }
 
+/* En el bottom sheet el chip va en el flujo, debajo del título, para no tapar la ✕. */
+#sheet-precio-chip {
+  position: static;
+}
+
 /* En Figma el body arranca pegado al heading-row (gap 0), no con el
-   padding-top de var(--space-6) que usa .content por defecto */
+   padding-top de var(--space-9) que usa .content por defecto */
 #screen-recompensa-detalle .content {
   padding-top: 0;
   flex: 1;
@@ -1860,6 +1567,23 @@ button {
   animation: detalle-canjeada-fade-in 0.4s ease-out;
 }
 
+.reward-code-box .reward-code-value,
+.reward-code-box > p {
+  text-align: center;
+}
+
+.reward-qr {
+  align-self: center;
+  background: var(--color-bg-default);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+}
+
+.reward-qr img,
+.reward-qr canvas {
+  display: block;
+}
+
 .reward-code-row {
   display: flex;
   align-items: center;
@@ -1879,7 +1603,7 @@ button {
 }
 
 .bottom-sheet-overlay {
-  position: fixed;
+  position: absolute;
   inset: 0;
   background: rgba(17, 17, 17, 0.5);
   display: flex;
@@ -2102,23 +1826,6 @@ button {
   color: var(--color-content-brand);
 }
 
-.home-demo-overlay {
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  text-align: center;
-}
-
-.home-demo-buttons {
-  display: flex;
-  gap: var(--space-2);
-  width: 100%;
-}
-
-.home-demo-buttons .demo-btn {
-  flex: 1;
-}
-
 /* Demo button versión neutra — solo en pantalla QR */
 #screen-qr .demo-btn {
   border-color: var(--color-border-default);
@@ -2157,7 +1864,7 @@ button {
 }
 
 /* En Figma la primera heading ("Recompensas Chill") arranca pegada al header
-   de chips (gap 0), no con el padding-top de var(--space-6) que usa .content */
+   de chips (gap 0), no con el padding-top de var(--space-9) que usa .content */
 #screen-recompensas .content {
   padding-top: 0;
   flex: 1;
@@ -2199,12 +1906,11 @@ button {
 #screen-recompensa-detalle,
 #screen-mis-premios,
 #screen-minijuego-inicio {
-  height: 100vh;
-  height: 100dvh;
+  height: 100%;
   overflow: hidden;
 }
 
-/* El Figma de Reto Activo usa un inset vertical de 8px bajo la heading-row, distinto del --space-6
+/* El Figma de Reto Activo usa un inset vertical de 8px bajo la heading-row, distinto del --space-9
    que usan las demás pantallas bajo un .topbar simple */
 #screen-reto .content {
   padding-top: 8px;
@@ -2213,28 +1919,11 @@ button {
   min-height: 0;
 }
 
-#screen-reto .reto-copy {
-  flex-shrink: 0;
-}
-
 /* Única franja realmente flexible: absorbe el espacio disponible. Sin scroll propio —
    el tope de 4 filas por datos (JS) ya garantiza que el contenido siempre cabe. */
 #screen-reto .reto-orders-card {
   flex: 1;
   min-height: 0;
-}
-
-#screen-reto .pedido-list {
-  flex: 1;
-  min-height: 0;
-}
-
-#screen-reto .reto-orders-total {
-  flex-shrink: 0;
-}
-
-#screen-reto .demo-block {
-  flex-shrink: 0;
 }
 
 /* ==========================================================================
@@ -2270,26 +1959,6 @@ button {
   transition: transform 2.4s cubic-bezier(0.15, 0.7, 0.2, 1);
 }
 
-.ruleta-card {
-  flex-shrink: 0;
-  width: 180px;
-  height: 64px;
-  border-radius: var(--radius-md);
-  background: var(--color-neutral-500);
-}
-
-.ruleta-card--tier-0 {
-  background: var(--color-bg-tertiary);
-}
-
-.ruleta-card--tier-1 {
-  background: var(--color-bg-secondary);
-}
-
-.ruleta-card--tier-2 {
-  background: var(--color-border-default);
-}
-
 #ruleta-reel { position: relative; overflow: hidden; }
 #ruleta-reel .wcard { position: absolute; left: 50%; top: 50%; display: flex; align-items: center; justify-content: center; border-radius: 16px; transform-origin: center; box-shadow: 0 10px 22px rgba(0,0,0,.18); }
 #ruleta-reel .wcard { background: transparent; overflow: hidden; }
@@ -2316,22 +1985,22 @@ button {
 
 /* Minijuegos: solo se ve el activo, centrado y a pantalla */
 .reto-orders-card { padding: 0; overflow: hidden; }
-.reto-orders-card .mj-game { display: none; max-width: 100%; max-height: 72vh; height: auto; margin: 0 auto; }
+.reto-orders-card .mj-game { display: none; max-width: 100%; max-height: 608px; height: auto; margin: 0 auto; }
 .reto-orders-card .mj-game:not([hidden]) { display: block; }
 
 /* cada juego cabe en pantalla */
-.reto-orders-card .mj-game { max-width: 100%; max-height: 72vh; height: auto; margin: 0 auto; }
+.reto-orders-card .mj-game { max-width: 100%; max-height: 608px; height: auto; margin: 0 auto; }
 
 /* ====== Minijuego a pantalla completa ====== */
 #screen-minijuego { background: #00A082; position: relative; }
 #mj-countdown { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: #00A082; z-index: 30; }
 #mj-countdown[hidden] { display: none; }
-#mj-countdown-num { font-size: 92px; font-weight: 800; color: #FFBF41; }
+#mj-countdown-num { font-size: 92px; font-weight: 800; color: var(--color-yellow-brand); }
 @keyframes mjpop { 0% { transform: scale(.5); opacity: 0; } 40% { transform: scale(1.1); opacity: 1; } 100% { transform: scale(1); } }
 #mj-puntuacion { position:absolute; inset:0; display:flex; flex-direction:column;
   align-items:center; justify-content:center; gap:4px; background:#00A082; z-index:30; }
 #mj-puntuacion[hidden] { display:none; }
-#mj-puntuacion-num { font-size:88px; font-weight:800; color:#FFBF41; animation:mjpop .5s ease; }
+#mj-puntuacion-num { font-size:88px; font-weight:800; color:var(--color-yellow-brand); animation:mjpop .5s ease; }
 #mj-puntuacion-lbl { font-size:20px; font-weight:500; color:#fff; }
 #mj-puntuacion-titulo { font-size:22px; font-weight:800; color:#fff; }
 #screen-minijuego .content { padding: 0; justify-content: center; align-items: center; }
@@ -2341,7 +2010,7 @@ button {
 }
 #screen-minijuego .mj-game {
   width: auto !important; height: auto !important;
-  max-width: 100% !important; max-height: 100dvh !important;
+  max-width: 100% !important; max-height: 100% !important;
   margin: 0 auto; display: block;
 }
 #screen-minijuego .mj-game[hidden] { display: none !important; }
@@ -2355,8 +2024,6 @@ button {
 /* El marcador solo se ve si su canvas hermano está activo (no [hidden]) */
 .mj-wrap canvas[hidden] + .mj-score { display: none; }
 
-
-
 #screen-minijuego #mj-memoria { width:100% !important; max-width:270px !important; height:auto !important; aspect-ratio:auto !important; margin:0 auto; }
 #mj-memoria:not([hidden]) { display:grid !important; }
 #mj-memoria { grid-template-columns:repeat(3,1fr); gap:12px; }
@@ -2364,7 +2031,7 @@ button {
 #mj-memoria .inner { position:relative; width:100%; height:100%; transition:transform .34s ease; transform-style:preserve-3d; }
 #mj-memoria .card.flipped .inner, #mj-memoria .card.matched .inner { transform:rotateY(180deg); }
 #mj-memoria .face { position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden; border-radius:14px; display:flex; align-items:center; justify-content:center; }
-#mj-memoria .back { background:#FFBF41; }
+#mj-memoria .back { background:var(--color-yellow-brand); }
 #mj-memoria .back::after { content:""; width:38%; height:38%; border-radius:50%; background:#FEDE86; }
 #mj-memoria .front { background:#B5F0DF; transform:rotateY(180deg); }
 #mj-memoria .front img { width:80%; height:80%; object-fit:contain; }
